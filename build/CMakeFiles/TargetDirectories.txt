@@ -1,0 +1,11 @@
+/Users/aimac/Development/paintwars/build/CMakeFiles/package.dir
+/Users/aimac/Development/paintwars/build/CMakeFiles/package_source.dir
+/Users/aimac/Development/paintwars/build/CMakeFiles/test.dir
+/Users/aimac/Development/paintwars/build/CMakeFiles/edit_cache.dir
+/Users/aimac/Development/paintwars/build/CMakeFiles/rebuild_cache.dir
+/Users/aimac/Development/paintwars/build/src/CMakeFiles/paintsplash.dir
+/Users/aimac/Development/paintwars/build/src/CMakeFiles/package.dir
+/Users/aimac/Development/paintwars/build/src/CMakeFiles/package_source.dir
+/Users/aimac/Development/paintwars/build/src/CMakeFiles/test.dir
+/Users/aimac/Development/paintwars/build/src/CMakeFiles/edit_cache.dir
+/Users/aimac/Development/paintwars/build/src/CMakeFiles/rebuild_cache.dir
