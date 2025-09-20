@@ -1,4 +1,5 @@
 #include "Logger.h"
+#include "PathUtils.h"
 
 std::ofstream Logger::logFile_;
 LogLevel Logger::currentLevel_ = LogLevel::INFO;
@@ -8,9 +9,23 @@ void Logger::Init(const std::string& logFile)
 {
     if (initialized_) return;
 
-    logFile_.open(logFile, std::ios::out | std::ios::trunc);
+    // If no log file specified, create one next to the executable
+    std::string actualLogFile = logFile;
+    if (actualLogFile.empty() || actualLogFile == "paintsplash.log") {
+        // Get executable directory using our utility
+        std::string exeDir = Utils::GetExecutableDir();
+
+        // Create timestamped log file in executable directory
+        auto now = std::chrono::system_clock::now();
+        auto time = std::chrono::system_clock::to_time_t(now);
+        std::stringstream ss;
+        ss << exeDir << "/paintsplash_" << std::put_time(std::localtime(&time), "%Y%m%d_%H%M%S") << ".log";
+        actualLogFile = ss.str();
+    }
+
+    logFile_.open(actualLogFile, std::ios::out | std::ios::trunc);
     if (!logFile_.is_open()) {
-        std::cerr << "[LOGGER WARNING] Could not open log file: " << logFile << ". Logging to file will be disabled, but the game will continue.\n";
+        std::cerr << "[LOGGER WARNING] Could not open log file: " << actualLogFile << ". Logging to file will be disabled, but the game will continue.\n";
         // Do not set initialized_ to true, but allow the game to continue
         currentLevel_ = LogLevel::DEBUG;
         return;
@@ -18,7 +33,8 @@ void Logger::Init(const std::string& logFile)
     currentLevel_ = LogLevel::DEBUG;  // Enable DEBUG logging for development
     initialized_ = true;
 
-    LOG_INFO("Logger initialized with DEBUG level enabled");
+    LOG_INFO("Logger initialized with DEBUG level enabled - logging to: " + actualLogFile);
+    std::cout << "[LOGGER] Log file created at: " << actualLogFile << std::endl;
 }
 
 void Logger::Shutdown()
@@ -95,7 +111,15 @@ void Logger::WriteToFile(const std::string& message)
 {
     if (logFile_.is_open()) {
         logFile_ << message << std::endl;
-        logFile_.flush();
+        logFile_.flush(); // Ensure immediate write to file
+    } else if (initialized_) {
+        // If file was supposed to be open but isn't, try to reopen it
+        std::string logFile = "paintsplash.log";
+        logFile_.open(logFile, std::ios::out | std::ios::app);
+        if (logFile_.is_open()) {
+            logFile_ << message << std::endl;
+            logFile_.flush();
+        }
     }
 }
 

@@ -14,39 +14,45 @@ texture: skyboxcubemaps/cubemap_cloudy&blue.png 3
 floor: 0.0
 ceiling: 8.0
 
-# Room 1 - Starting area (10x10 units)
+# Room 1 - Starting area (10x10 units, open ceiling)
 # North wall
 surface: -5.0,0.0,-5.0 -5.0,8.0,5.0 8.0 0 135,135,135
 # South wall
 surface: -5.0,0.0,5.0 -5.0,8.0,-5.0 8.0 0 135,135,135
-# East wall
-surface: 5.0,0.0,-5.0 5.0,8.0,5.0 8.0 0 135,135,135
-# West wall (with corridor opening)
-surface: -5.0,0.0,-5.0 5.0,8.0,-5.0 8.0 0 135,135,135
+# East wall (with corridor opening on north side)
+surface: 5.0,0.0,-5.0 5.0,8.0,2.0 8.0 0 135,135,135
+# East wall (south part, no opening)
+surface: 5.0,0.0,2.0 5.0,8.0,5.0 8.0 0 135,135,135
+# West wall
+surface: -5.0,0.0,-5.0 -5.0,8.0,5.0 8.0 0 135,135,135
 # Floor
 surface: -5.0,0.0,-5.0 5.0,0.0,5.0 0.0 1 169,169,169
-# Ceiling
-surface: -5.0,8.0,-5.0 5.0,8.0,5.0 0.0 2 200,200,200
+# NO CEILING - open to sky!
 
-# Corridor (connecting rooms)
-# Left wall
-surface: 5.0,0.0,-2.0 15.0,8.0,-2.0 8.0 0 160,160,160
-# Right wall
+# Corridor (connecting rooms, from X=5 to X=15)
+# North wall (connects to room 1 opening)
+surface: 5.0,0.0,-2.0 5.0,8.0,2.0 8.0 0 160,160,160
+# South wall
+surface: 15.0,0.0,-2.0 15.0,8.0,2.0 8.0 0 160,160,160
+# East wall
 surface: 5.0,0.0,2.0 15.0,8.0,2.0 8.0 0 160,160,160
+# West wall (connects to room 2)
+surface: 5.0,0.0,-2.0 15.0,8.0,-2.0 8.0 0 160,160,160
 # Floor
 surface: 5.0,0.0,-2.0 15.0,0.0,2.0 0.0 1 169,169,169
 # Ceiling
 surface: 5.0,8.0,-2.0 15.0,8.0,2.0 0.0 2 200,200,200
 
-# Room 2 - Destination area (open roof for skybox)
+# Room 2 - Destination area (12x12 units, open roof for skybox)
 # North wall
-surface: 15.0,0.0,-6.0 15.0,8.0,6.0 8.0 0 135,135,135
+surface: 15.0,0.0,-6.0 27.0,8.0,-6.0 8.0 0 135,135,135
 # South wall
-surface: 15.0,0.0,6.0 15.0,8.0,-6.0 8.0 0 135,135,135
+surface: 15.0,0.0,6.0 27.0,8.0,6.0 8.0 0 135,135,135
 # East wall
-surface: 21.0,0.0,-6.0 21.0,8.0,6.0 8.0 0 135,135,135
-# West wall (corridor entrance)
-surface: 15.0,0.0,-6.0 21.0,8.0,-6.0 8.0 0 135,135,135
+surface: 27.0,0.0,-6.0 27.0,8.0,6.0 8.0 0 135,135,135
+# West wall (corridor entrance - opening in middle)
+surface: 15.0,0.0,-6.0 15.0,8.0,-2.0 8.0 0 135,135,135
+surface: 15.0,0.0,2.0 15.0,8.0,6.0 8.0 0 135,135,135
 # Floor
-surface: 15.0,0.0,-6.0 21.0,0.0,6.0 0.0 1 169,169,169
+surface: 15.0,0.0,-6.0 27.0,0.0,6.0 0.0 1 169,169,169
 # No ceiling - open to sky!

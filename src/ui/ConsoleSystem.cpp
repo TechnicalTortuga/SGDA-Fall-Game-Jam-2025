@@ -316,21 +316,30 @@ void ConsoleSystem::CmdRenderBounds(const std::vector<std::string>& args) {
         return;
     }
 
-    // Try to cast to CollisionSystem to access debug bounds toggle
-    // For now, we'll use a simple approach and assume the system has this method
-    bool newState = true; // Default to enabling
+    // Cast to CollisionSystem to access debug bounds toggle
+    auto* collisionSys = dynamic_cast<CollisionSystem*>(collisionSystem_);
+    if (!collisionSys) {
+        LogError("Collision system is not a CollisionSystem instance");
+        return;
+    }
+
+    bool newState = collisionSys->IsDebugBoundsVisible(); // Default to toggling current state
 
     if (!args.empty()) {
         if (args[0] == "1" || args[0] == "true" || args[0] == "on") {
             newState = true;
         } else if (args[0] == "0" || args[0] == "false" || args[0] == "off") {
             newState = false;
+        } else if (args[0] == "toggle") {
+            newState = !collisionSys->IsDebugBoundsVisible();
         }
+    } else {
+        // No args means toggle
+        newState = !collisionSys->IsDebugBoundsVisible();
     }
 
-    // Note: This would need to be properly implemented by adding a method to CollisionSystem
-    // For now, we'll just log the command
-    LogInfo("Render bounds " + std::string(newState ? "enabled" : "disabled"));
+    collisionSys->SetDebugBoundsVisible(newState);
+    LogInfo("Collision bounds rendering " + std::string(newState ? "enabled" : "disabled"));
     LogWarning("Render bounds visualization not yet implemented in CollisionSystem");
 }
 

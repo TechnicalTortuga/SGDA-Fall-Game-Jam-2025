@@ -54,10 +54,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/aimac/Development/paintwars
+CMAKE_SOURCE_DIR = /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/aimac/Development/paintwars/build
+CMAKE_BINARY_DIR = /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -104,14 +104,14 @@ src/clean: src/CMakeFiles/paintsplash.dir/clean
 src/CMakeFiles/paintsplash.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aimac/Development/paintwars/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30 "Built target paintsplash"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 "Built target paintsplash"
 .PHONY : src/CMakeFiles/paintsplash.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/paintsplash.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintwars/build/CMakeFiles 30
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles 31
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/paintsplash.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintwars/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles 0
 .PHONY : src/CMakeFiles/paintsplash.dir/rule
 
 # Convenience name for target.
@@ -121,7 +121,7 @@ paintsplash: src/CMakeFiles/paintsplash.dir/rule
 # codegen rule for target.
 src/CMakeFiles/paintsplash.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aimac/Development/paintwars/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30 "Finished codegen for target paintsplash"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 "Finished codegen for target paintsplash"
 .PHONY : src/CMakeFiles/paintsplash.dir/codegen
 
 # clean rule for target.
@@ -136,7 +136,7 @@ src/CMakeFiles/paintsplash.dir/clean:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -P /Users/aimac/Development/paintwars/build/CMakeFiles/VerifyGlobs.cmake
+	$(CMAKE_COMMAND) -P /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

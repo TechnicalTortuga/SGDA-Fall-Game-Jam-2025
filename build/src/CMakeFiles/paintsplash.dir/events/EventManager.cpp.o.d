@@ -1,7 +1,7 @@
 src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.o: \
-  /Users/aimac/Development/paintwars/src/events/EventManager.cpp \
-  /Users/aimac/Development/paintwars/src/events/EventManager.h \
-  /Users/aimac/Development/paintwars/src/events/Event.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/events/EventManager.cpp \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/events/EventManager.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/events/Event.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/string \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/max.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/comp.h \
@@ -931,7 +931,7 @@ src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_negate.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/queue \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/deque \
-  /Users/aimac/Development/paintwars/src/./utils/Logger.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/./utils/Logger.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ostream \

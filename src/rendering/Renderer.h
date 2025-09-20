@@ -1,10 +1,12 @@
 #pragma once
 
 #include "raylib.h"
+#include "rlgl.h"
 #include <vector>
 #include <memory>
 #include "../world/BSPTree.h"
 #include "../ecs/Components/Collidable.h"
+#include "../ecs/Components/MeshComponent.h"
 
 class Entity;
 class Position;
@@ -18,23 +20,66 @@ enum class RenderType {
     DEBUG           // Debug visualization
 };
 
+// Types of 3D primitives supported by Raylib
+enum class PrimitiveType {
+    CUBE,           // Standard cube
+    SPHERE,         // Sphere with optional rings/slices
+    CYLINDER,       // Cylinder/cone with optional base/end radius
+    CAPSULE,        // Capsule with radius and height
+    PLANE,          // XZ plane
+    TRIANGLE,       // Single triangle
+    LINE,           // 3D line
+    POINT,          // Single point
+    CIRCLE,         // 3D circle
+    RAY             // Ray line
+};
+
 struct RenderCommand {
     Entity* entity;
     Position* position;
     Sprite* sprite;
+    MeshComponent* mesh;
     RenderType type;
     float depth; // For sorting (higher = rendered later)
 
     // 3D primitive properties
     struct {
-        Vector3 size;
+        PrimitiveType type;
+        Vector3 size;           // For cubes, cylinders, etc. (width, height, length)
+        float radius;           // For spheres, cylinders, capsules, circles
+        float topRadius;        // For cylinders/cones (start radius)
+        float bottomRadius;     // For cylinders/cones (end radius)
+        float height;           // For cylinders, capsules
+        int rings;              // For spheres
+        int slices;             // For spheres, cylinders, capsules
+        Vector3 startPos;       // For lines, rays, triangles
+        Vector3 endPos;         // For lines, rays
+        Vector3 v1, v2, v3;     // For triangles
+        Vector3 rotationAxis;   // For circles
+        float rotationAngle;    // For circles
         Color color;
+        bool wireframe;         // Whether to draw wireframe version
     } primitive;
 
-    RenderCommand(Entity* e, Position* p, Sprite* s, RenderType t = RenderType::SPRITE_2D)
-        : entity(e), position(p), sprite(s), type(t), depth(0.0f) {
+    RenderCommand(Entity* e, Position* p, Sprite* s, MeshComponent* m = nullptr, RenderType t = RenderType::SPRITE_2D)
+        : entity(e), position(p), sprite(s), mesh(m), type(t), depth(0.0f) {
+        primitive.type = PrimitiveType::CUBE;
         primitive.size = {1.0f, 1.0f, 1.0f};
+        primitive.radius = 1.0f;
+        primitive.topRadius = 1.0f;
+        primitive.bottomRadius = 1.0f;
+        primitive.height = 1.0f;
+        primitive.rings = 16;
+        primitive.slices = 16;
+        primitive.startPos = {0.0f, 0.0f, 0.0f};
+        primitive.endPos = {0.0f, 0.0f, 0.0f};
+        primitive.v1 = {0.0f, 0.0f, 0.0f};
+        primitive.v2 = {0.0f, 0.0f, 0.0f};
+        primitive.v3 = {0.0f, 0.0f, 0.0f};
+        primitive.rotationAxis = {0.0f, 1.0f, 0.0f};
+        primitive.rotationAngle = 0.0f;
         primitive.color = WHITE;
+        primitive.wireframe = false;
     }
 };
 

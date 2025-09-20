@@ -28,8 +28,8 @@ set_property(GLOBAL PROPERTY _CMAKE_FindGit_GIT_EXECUTABLE_VERSION
 include(ExternalProject)
 ExternalProject_Add(raygui-populate
                      "UPDATE_DISCONNECTED" "False" "GIT_REPOSITORY" "https://github.com/raysan5/raygui.git" "EXTERNALPROJECT_INTERNAL_ARGUMENT_SEPARATOR" "GIT_TAG" "4.0"
-                    SOURCE_DIR          "/Users/aimac/Development/paintwars/build/_deps/raygui-src"
-                    BINARY_DIR          "/Users/aimac/Development/paintwars/build/_deps/raygui-build"
+                    SOURCE_DIR          "/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-src"
+                    BINARY_DIR          "/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-build"
                     CONFIGURE_COMMAND   ""
                     BUILD_COMMAND       ""
                     INSTALL_COMMAND     ""

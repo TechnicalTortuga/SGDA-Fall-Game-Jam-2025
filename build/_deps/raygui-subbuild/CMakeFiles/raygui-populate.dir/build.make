@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild
+CMAKE_SOURCE_DIR = /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild
+CMAKE_BINARY_DIR = /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild
 
 # Utility rule file for raygui-populate.
 
@@ -77,60 +77,60 @@ CMakeFiles/raygui-populate-complete: raygui-populate-prefix/src/raygui-populate-
 CMakeFiles/raygui-populate-complete: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-build
 CMakeFiles/raygui-populate-complete: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-install
 CMakeFiles/raygui-populate-complete: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-test
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Completed 'raygui-populate'"
-	/opt/homebrew/bin/cmake -E make_directory /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles
-	/opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles/raygui-populate-complete
-	/opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-done
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Completed 'raygui-populate'"
+	/opt/homebrew/bin/cmake -E make_directory /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles
+	/opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles/raygui-populate-complete
+	/opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-done
 
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update:
 .PHONY : raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update
 
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-build: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-configure
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "No build step for 'raygui-populate'"
-	cd /Users/aimac/Development/paintwars/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E echo_append
-	cd /Users/aimac/Development/paintwars/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "No build step for 'raygui-populate'"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E echo_append
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-build
 
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-configure: raygui-populate-prefix/tmp/raygui-populate-cfgcmd.txt
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-configure: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-patch
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "No configure step for 'raygui-populate'"
-	cd /Users/aimac/Development/paintwars/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E echo_append
-	cd /Users/aimac/Development/paintwars/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-configure
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "No configure step for 'raygui-populate'"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E echo_append
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-configure
 
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-download: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-gitinfo.txt
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-download: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-mkdir
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Performing download step (git clone) for 'raygui-populate'"
-	cd /Users/aimac/Development/paintwars/build/_deps && /opt/homebrew/bin/cmake -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/tmp/raygui-populate-gitclone.cmake
-	cd /Users/aimac/Development/paintwars/build/_deps && /opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-download
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Performing download step (git clone) for 'raygui-populate'"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps && /opt/homebrew/bin/cmake -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/tmp/raygui-populate-gitclone.cmake
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps && /opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-download
 
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-install: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "No install step for 'raygui-populate'"
-	cd /Users/aimac/Development/paintwars/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E echo_append
-	cd /Users/aimac/Development/paintwars/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-install
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "No install step for 'raygui-populate'"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E echo_append
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-install
 
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-mkdir:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Creating directories for 'raygui-populate'"
-	/opt/homebrew/bin/cmake -Dcfgdir= -P /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/tmp/raygui-populate-mkdirs.cmake
-	/opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-mkdir
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Creating directories for 'raygui-populate'"
+	/opt/homebrew/bin/cmake -Dcfgdir= -P /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/tmp/raygui-populate-mkdirs.cmake
+	/opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-mkdir
 
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-patch: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-patch-info.txt
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-patch: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "No patch step for 'raygui-populate'"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "No patch step for 'raygui-populate'"
 	/opt/homebrew/bin/cmake -E echo_append
-	/opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-patch
+	/opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-patch
 
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update:
 .PHONY : raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update
 
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-test: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-install
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "No test step for 'raygui-populate'"
-	cd /Users/aimac/Development/paintwars/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E echo_append
-	cd /Users/aimac/Development/paintwars/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-test
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "No test step for 'raygui-populate'"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E echo_append
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-build && /opt/homebrew/bin/cmake -E touch /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-test
 
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update: raygui-populate-prefix/tmp/raygui-populate-gitupdate.cmake
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update-info.txt
 raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update: raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-download
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Performing update step for 'raygui-populate'"
-	cd /Users/aimac/Development/paintwars/build/_deps/raygui-src && /opt/homebrew/bin/cmake -Dcan_fetch=YES -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/raygui-populate-prefix/tmp/raygui-populate-gitupdate.cmake
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Performing update step for 'raygui-populate'"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-src && /opt/homebrew/bin/cmake -Dcan_fetch=YES -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/tmp/raygui-populate-gitupdate.cmake
 
 CMakeFiles/raygui-populate.dir/codegen:
 .PHONY : CMakeFiles/raygui-populate.dir/codegen
@@ -157,6 +157,6 @@ CMakeFiles/raygui-populate.dir/clean:
 .PHONY : CMakeFiles/raygui-populate.dir/clean
 
 CMakeFiles/raygui-populate.dir/depend:
-	cd /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild /Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/CMakeFiles/raygui-populate.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles/raygui-populate.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/raygui-populate.dir/depend
 

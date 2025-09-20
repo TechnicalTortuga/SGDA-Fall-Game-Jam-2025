@@ -7,12 +7,12 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/Users/aimac/Development/paintwars/CMakeLists.txt"
+  "/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/CMakeLists.txt"
   "CMakeFiles/4.0.0/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.0.0/CMakeSystem.cmake"
   "CMakeFiles/VerifyGlobs.cmake"
   "CMakeFiles/cmake.verify_globs"
-  "/Users/aimac/Development/paintwars/src/CMakeLists.txt"
+  "/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/CMakeLists.txt"
   "/opt/homebrew/lib/cmake/raylib/raylib-config-version.cmake"
   "/opt/homebrew/lib/cmake/raylib/raylib-config.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeCXXInformation.cmake"

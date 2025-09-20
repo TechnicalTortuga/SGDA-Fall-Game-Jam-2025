@@ -1,7 +1,7 @@
 src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o: \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/RenderSystem.cpp \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/RenderSystem.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../System.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/RenderSystem.cpp \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/RenderSystem.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../System.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_move_common.h \
@@ -931,19 +931,28 @@ src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/pointer_to_binary_function.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_negate.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../../rendering/Renderer.h \
-  /opt/homebrew/include/raylib.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../../rendering/../world/BSPTree.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/Renderer.h \
+  /opt/homebrew/include/raylib.h /opt/homebrew/include/rlgl.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../world/BSPTree.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/cfloat \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/float.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/float.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/float.h \
   /opt/homebrew/include/raymath.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../../rendering/../ecs/Components/Collidable.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../../rendering/../ecs/Components/../Component.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../Components/Velocity.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../Components/../Component.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../Entity.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../../ecs/Components/Position.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../../ecs/Components/../Component.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../../ecs/Components/Sprite.h \
-  /Users/aimac/Development/paintwars/src/ecs/Systems/../../utils/Logger.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../world/Brush.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../world/../math/AABB.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Components/Collidable.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Components/../Component.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Components/../../math/AABB.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Components/MeshComponent.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/Velocity.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/../Component.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Entity.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/Position.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Component.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/Sprite.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/MeshComponent.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../utils/Logger.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ostream \

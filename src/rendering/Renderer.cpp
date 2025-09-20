@@ -2,6 +2,7 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Components/Position.h"
 #include "../ecs/Components/Sprite.h"
+#include "../ecs/Components/MeshComponent.h"
 #include "utils/Logger.h"
 #include <algorithm>
 
@@ -54,8 +55,14 @@ void Renderer::Clear(Color color)
 // Main render command dispatcher - routes to appropriate rendering method
 void Renderer::DrawRenderCommand(const RenderCommand& command)
 {
-    if (!command.sprite || !command.position) {
-        LOG_WARNING("RenderCommand missing sprite or position");
+    if (!command.position) {
+        LOG_WARNING("RenderCommand missing position");
+        return;
+    }
+
+    // For mesh rendering, we don't need a sprite
+    if (command.type != RenderType::MESH_3D && !command.sprite) {
+        LOG_WARNING("RenderCommand missing sprite for non-mesh rendering");
         return;
     }
 
@@ -123,48 +130,221 @@ void Renderer::DrawSprite2D(const RenderCommand& command)
     }
 }
 
-// 3D Primitive rendering (cubes, spheres, etc.)
+// 3D Primitive rendering (cubes, spheres, cylinders, etc.)
 void Renderer::DrawPrimitive3D(const RenderCommand& command)
 {
-    if (!command.sprite || !command.position) {
+    if (!command.position) {
         return;
     }
 
     // Get world position in 3D space
     Vector3 worldPos = command.position->GetPosition();
 
-    // Get rendering properties
-    float scale = command.sprite->GetScale();
-    Color tint = command.sprite->GetTint();
+    // Get primitive properties
+    const auto& prim = command.primitive;
+    Color color = prim.color;
 
-    // For now, we only support cubes as primitives
-    // Later we can extend this based on the primitive properties in RenderCommand
-    if (!command.sprite->IsTextureLoaded()) {
-        // Draw 3D cube primitive
-        float size = 2.0f * scale;  // Reasonable 2-unit cube
+    // Apply tint from sprite if available
+    if (command.sprite) {
+        Color tint = command.sprite->GetTint();
+        color = Color{
+            (unsigned char)((float)prim.color.r * (float)tint.r / 255.0f),
+            (unsigned char)((float)prim.color.g * (float)tint.g / 255.0f),
+            (unsigned char)((float)prim.color.b * (float)tint.b / 255.0f),
+            (unsigned char)((float)prim.color.a * (float)tint.a / 255.0f)
+        };
+    }
 
-        LOG_INFO("Drawing 3D cube at (" + std::to_string(worldPos.x) + ", " +
-                 std::to_string(worldPos.y) + ", " + std::to_string(worldPos.z) +
-                 ") with size " + std::to_string(size) + " color: R=" + std::to_string(tint.r) +
-                 " G=" + std::to_string(tint.g) + " B=" + std::to_string(tint.b));
+    // Draw the appropriate primitive based on type
+    switch (prim.type) {
+        case PrimitiveType::CUBE: {
+            if (prim.wireframe) {
+                if (prim.size.x == prim.size.y && prim.size.y == prim.size.z) {
+                    DrawCubeWires(worldPos, prim.size.x, prim.size.y, prim.size.z, color);
+                } else {
+                    DrawCubeWiresV(worldPos, prim.size, color);
+                }
+            } else {
+                if (prim.size.x == prim.size.y && prim.size.y == prim.size.z) {
+                    DrawCube(worldPos, prim.size.x, prim.size.y, prim.size.z, color);
+                } else {
+                    DrawCubeV(worldPos, prim.size, color);
+                }
+            }
+            LOG_INFO("Drew 3D cube at (" + std::to_string(worldPos.x) + ", " +
+                     std::to_string(worldPos.y) + ", " + std::to_string(worldPos.z) + ")");
+            break;
+        }
 
-        // Draw filled cube
-        DrawCube(worldPos, size, size, size, tint);
-        // Draw wireframe outline for better visibility
-        DrawCubeWires(worldPos, size, size, size, BLACK);
+        case PrimitiveType::SPHERE: {
+            if (prim.wireframe) {
+                DrawSphereWires(worldPos, prim.radius, prim.rings, prim.slices, color);
+            } else {
+                if (prim.rings == 16 && prim.slices == 16) {
+                    DrawSphere(worldPos, prim.radius, color);
+                } else {
+                    DrawSphereEx(worldPos, prim.radius, prim.rings, prim.slices, color);
+                }
+            }
+            LOG_INFO("Drew 3D sphere at (" + std::to_string(worldPos.x) + ", " +
+                     std::to_string(worldPos.y) + ", " + std::to_string(worldPos.z) + ")");
+            break;
+        }
 
-        LOG_INFO("3D cube drawn successfully");
-    } else {
-        LOG_WARNING("DrawPrimitive3D called on entity with texture");
+        case PrimitiveType::CYLINDER: {
+            if (prim.wireframe) {
+                if (prim.topRadius == prim.bottomRadius) {
+                    DrawCylinderWires(worldPos, prim.topRadius, prim.bottomRadius, prim.height, prim.slices, color);
+                } else {
+                    // DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color)
+                    Vector3 endPos = Vector3Add(worldPos, {0.0f, prim.height, 0.0f});
+                    DrawCylinderWiresEx(worldPos, endPos, prim.topRadius, prim.bottomRadius, prim.slices, color);
+                }
+            } else {
+                if (prim.topRadius == prim.bottomRadius) {
+                    DrawCylinder(worldPos, prim.topRadius, prim.bottomRadius, prim.height, prim.slices, color);
+                } else {
+                    // DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color)
+                    Vector3 endPos = Vector3Add(worldPos, {0.0f, prim.height, 0.0f});
+                    DrawCylinderEx(worldPos, endPos, prim.topRadius, prim.bottomRadius, prim.slices, color);
+                }
+            }
+            LOG_INFO("Drew 3D cylinder/cone at (" + std::to_string(worldPos.x) + ", " +
+                     std::to_string(worldPos.y) + ", " + std::to_string(worldPos.z) + ")");
+            break;
+        }
+
+        case PrimitiveType::CAPSULE: {
+            if (prim.wireframe) {
+                DrawCapsuleWires(worldPos, prim.endPos, prim.radius, prim.slices, prim.rings, color);
+            } else {
+                DrawCapsule(worldPos, prim.endPos, prim.radius, prim.slices, prim.rings, color);
+            }
+            LOG_INFO("Drew 3D capsule at (" + std::to_string(worldPos.x) + ", " +
+                     std::to_string(worldPos.y) + ", " + std::to_string(worldPos.z) + ")");
+            break;
+        }
+
+        case PrimitiveType::PLANE: {
+            DrawPlane(worldPos, {prim.size.x, prim.size.z}, color);
+            LOG_INFO("Drew 3D plane at (" + std::to_string(worldPos.x) + ", " +
+                     std::to_string(worldPos.y) + ", " + std::to_string(worldPos.z) + ")");
+            break;
+        }
+
+        case PrimitiveType::TRIANGLE: {
+            DrawTriangle3D(prim.v1, prim.v2, prim.v3, color);
+            LOG_INFO("Drew 3D triangle at (" + std::to_string(worldPos.x) + ", " +
+                     std::to_string(worldPos.y) + ", " + std::to_string(worldPos.z) + ")");
+            break;
+        }
+
+        case PrimitiveType::LINE: {
+            DrawLine3D(prim.startPos, prim.endPos, color);
+            LOG_INFO("Drew 3D line from (" + std::to_string(prim.startPos.x) + ", " +
+                     std::to_string(prim.startPos.y) + ", " + std::to_string(prim.startPos.z) +
+                     ") to (" + std::to_string(prim.endPos.x) + ", " +
+                     std::to_string(prim.endPos.y) + ", " + std::to_string(prim.endPos.z) + ")");
+            break;
+        }
+
+        case PrimitiveType::POINT: {
+            DrawPoint3D(prim.startPos, color);
+            LOG_INFO("Drew 3D point at (" + std::to_string(prim.startPos.x) + ", " +
+                     std::to_string(prim.startPos.y) + ", " + std::to_string(prim.startPos.z) + ")");
+            break;
+        }
+
+        case PrimitiveType::CIRCLE: {
+            DrawCircle3D(worldPos, prim.radius, prim.rotationAxis, prim.rotationAngle, color);
+            LOG_INFO("Drew 3D circle at (" + std::to_string(worldPos.x) + ", " +
+                     std::to_string(worldPos.y) + ", " + std::to_string(worldPos.z) + ")");
+            break;
+        }
+
+        case PrimitiveType::RAY: {
+            Ray ray = {prim.startPos, Vector3Normalize(Vector3Subtract(prim.endPos, prim.startPos))};
+            DrawRay(ray, color);
+            LOG_INFO("Drew 3D ray from (" + std::to_string(prim.startPos.x) + ", " +
+                     std::to_string(prim.startPos.y) + ", " + std::to_string(prim.startPos.z) +
+                     ") in direction (" + std::to_string(ray.direction.x) + ", " +
+                     std::to_string(ray.direction.y) + ", " + std::to_string(ray.direction.z) + ")");
+            break;
+        }
+
+        default:
+            LOG_WARNING("Unknown primitive type in DrawPrimitive3D");
+            break;
     }
 }
 
-// 3D Mesh/Model rendering (placeholder for future implementation)
+// Mesh rendering
 void Renderer::DrawMesh3D(const RenderCommand& command)
 {
-    LOG_WARNING("DrawMesh3D not yet implemented");
-    // Future implementation will handle 3D models and meshes
-    // This would load and render .obj files, etc.
+    if (!command.position || !command.mesh) {
+        return;
+    }
+
+    Vector3 worldPos = command.position->GetPosition();
+    const auto& mesh = *command.mesh;
+
+    // Apply rotation if set
+    if (mesh.GetRotationAngle() != 0.0f) {
+        rlPushMatrix();
+        rlTranslatef(worldPos.x, worldPos.y, worldPos.z);
+        rlRotatef(mesh.GetRotationAngle(), mesh.GetRotationAxis().x, mesh.GetRotationAxis().y, mesh.GetRotationAxis().z);
+        rlTranslatef(-worldPos.x, -worldPos.y, -worldPos.z);
+    }
+
+    // Set up material/texture if available
+    if (mesh.GetTexture().id != 0) {
+        // Bind the texture for this mesh
+        rlSetTexture(mesh.GetTexture().id);
+
+        // Set texture parameters for better quality (similar to WorldRenderer)
+        SetTextureFilter(mesh.GetTexture(), TEXTURE_FILTER_BILINEAR);
+        SetTextureWrap(mesh.GetTexture(), TEXTURE_WRAP_REPEAT);
+
+        LOG_DEBUG("Bound texture ID " + std::to_string(mesh.GetTexture().id) + " for mesh rendering");
+    } else if (mesh.GetMaterial() >= 0) {
+        // Fallback: could look up material from WorldGeometry in future
+        LOG_DEBUG("Mesh has material ID " + std::to_string(mesh.GetMaterial()) + " but no direct texture set");
+    } else {
+        // No texture available, render with vertex colors only
+        LOG_DEBUG("Rendering mesh with vertex colors (no texture)");
+    }
+
+    // Render triangles
+    rlBegin(RL_TRIANGLES);
+    for (const auto& triangle : mesh.GetTriangles()) {
+        const auto& v1 = mesh.GetVertices()[triangle.v1];
+        const auto& v2 = mesh.GetVertices()[triangle.v2];
+        const auto& v3 = mesh.GetVertices()[triangle.v3];
+
+        // Vertex 1
+        rlColor4ub(v1.color.r, v1.color.g, v1.color.b, v1.color.a);
+        rlTexCoord2f(v1.texCoord.x, v1.texCoord.y);
+        rlVertex3f(worldPos.x + v1.position.x, worldPos.y + v1.position.y, worldPos.z + v1.position.z);
+
+        // Vertex 2
+        rlColor4ub(v2.color.r, v2.color.g, v2.color.b, v2.color.a);
+        rlTexCoord2f(v2.texCoord.x, v2.texCoord.y);
+        rlVertex3f(worldPos.x + v2.position.x, worldPos.y + v2.position.y, worldPos.z + v2.position.z);
+
+        // Vertex 3
+        rlColor4ub(v3.color.r, v3.color.g, v3.color.b, v3.color.a);
+        rlTexCoord2f(v3.texCoord.x, v3.texCoord.y);
+        rlVertex3f(worldPos.x + v3.position.x, worldPos.y + v3.position.y, worldPos.z + v3.position.z);
+    }
+    rlEnd();
+
+    if (mesh.GetRotationAngle() != 0.0f) {
+        rlPopMatrix();
+    }
+
+    LOG_INFO("Drew 3D mesh at (" + std::to_string(worldPos.x) + ", " +
+             std::to_string(worldPos.y) + ", " + std::to_string(worldPos.z) + ") with " +
+             std::to_string(mesh.GetTriangleCount()) + " triangles");
 }
 
 void Renderer::DrawDebugInfo()

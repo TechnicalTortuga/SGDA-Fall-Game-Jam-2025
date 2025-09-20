@@ -29,8 +29,8 @@ MapData MapLoader::LoadMap(const std::string& mapPath) {
         return MapData{}; // Return empty MapData
     }
 
-    LOG_INFO("Map parsing completed successfully. Surfaces: " +
-              std::to_string(mapData.surfaces.size()) +
+    LOG_INFO("Map parsing completed successfully. Faces: " +
+              std::to_string(mapData.faces.size()) +
               ", Textures: " + std::to_string(mapData.textures.size()));
     return mapData;
 }
@@ -60,10 +60,9 @@ bool MapLoader::ParseMapFile(const std::string& content, MapData& mapData) {
         } else if (line.find("texture:") == 0) {
             ParseTexture(line, mapData);
         } else if (line.find("surface:") == 0) {
-            Surface surface = ParseSurface(line);
-            if (surface.start.x != 0 || surface.start.z != 0 ||
-                surface.end.x != 0 || surface.end.z != 0) {
-                mapData.surfaces.push_back(surface);
+            Face face = ParseFace(line);
+            if (face.vertices.size() >= 3) {
+                mapData.faces.push_back(face);
             }
         } else if (line.find("floor:") == 0) {
             mapData.floorHeight = std::stof(Trim(line.substr(6)));
@@ -72,46 +71,70 @@ bool MapLoader::ParseMapFile(const std::string& content, MapData& mapData) {
         }
     }
 
-    return !mapData.surfaces.empty();
+    // If no brushes provided in file, aggregate faces into a single brush to preserve unflattened data
+    if (!mapData.faces.empty() && mapData.brushes.empty()) {
+        Brush brush;
+        brush.faces = mapData.faces;
+        brush.RecalculateBounds();
+        mapData.brushes.push_back(brush);
+    }
+
+    return !mapData.faces.empty();
 }
 
 
-Surface MapLoader::ParseSurface(const std::string& line) {
-    // Simple surface format: surface: x1,y1,z1 x2,y2,z2 height textureIndex color
-    Surface surface;
+Face MapLoader::ParseFace(const std::string& line) {
+    // Legacy surface format converted to a Face quad:
+    // surface: x1,y1,z1 x2,y2,z2 height textureIndex color
+    // If height ~ 0 -> horizontal quad between start/end (floor/ceiling by y sign)
+    // If height != 0 -> vertical wall quad extruded from start/end up by height
     std::string data = Trim(line.substr(8));
     std::vector<std::string> parts = Split(data, ' ');
 
+    Face face;
     if (parts.size() >= 7) {
-        // Parse start position
-        auto startParts = Split(parts[0], ',');
-        if (startParts.size() == 3) {
-            surface.start.x = std::stof(startParts[0]);
-            surface.start.y = std::stof(startParts[1]);
-            surface.start.z = std::stof(startParts[2]);
-        }
+        // Parse positions
+        auto sP = Split(parts[0], ',');
+        auto eP = Split(parts[1], ',');
+        if (sP.size() == 3 && eP.size() == 3) {
+            Vector3 start{std::stof(sP[0]), std::stof(sP[1]), std::stof(sP[2])};
+            Vector3 end{std::stof(eP[0]), std::stof(eP[1]), std::stof(eP[2])};
+            float height = std::stof(parts[2]);
+            int texIndex = std::stoi(parts[3]);
+            auto cP = Split(parts[4], ',');
+            Color tint = {255,255,255,255};
+            if (cP.size() == 3) {
+                tint.r = static_cast<unsigned char>(std::stoi(cP[0]));
+                tint.g = static_cast<unsigned char>(std::stoi(cP[1]));
+                tint.b = static_cast<unsigned char>(std::stoi(cP[2]));
+            }
 
-        // Parse end position
-        auto endParts = Split(parts[1], ',');
-        if (endParts.size() == 3) {
-            surface.end.x = std::stof(endParts[0]);
-            surface.end.y = std::stof(endParts[1]);
-            surface.end.z = std::stof(endParts[2]);
-        }
+            face.materialId = texIndex;
+            face.tint = tint;
 
-        surface.height = std::stof(parts[2]);
-        surface.textureIndex = std::stoi(parts[3]);
+            if (fabsf(height) < 0.001f) {
+                // Horizontal quad from start/end at same Y
+                float y = start.y; // assume start/end.y are identical in legacy
+                Vector3 p1{start.x, y, start.z};
+                Vector3 p2{end.x,   y, start.z};
+                Vector3 p3{end.x,   y, end.z};
+                Vector3 p4{start.x, y, end.z};
+                face.vertices = {p1,p2,p3,p4};
+            } else {
+                // Vertical wall quad
+                float bottomY = start.y;
+                float topY = bottomY + height;
+                Vector3 bottomLeft{start.x, bottomY, start.z};
+                Vector3 bottomRight{end.x,   bottomY, end.z};
+                Vector3 topRight{end.x,   topY, end.z};
+                Vector3 topLeft{start.x, topY, start.z};
+                face.vertices = {bottomLeft, bottomRight, topRight, topLeft};
+            }
 
-        // Parse color
-        auto colorParts = Split(parts[4], ',');
-        if (colorParts.size() == 3) {
-            surface.color.r = static_cast<unsigned char>(std::stoi(colorParts[0]));
-            surface.color.g = static_cast<unsigned char>(std::stoi(colorParts[1]));
-            surface.color.b = static_cast<unsigned char>(std::stoi(colorParts[2]));
+            face.RecalculateNormal();
         }
     }
-
-    return surface;
+    return face;
 }
 
 bool MapLoader::ParseTexture(const std::string& line, MapData& mapData) {

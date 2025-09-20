@@ -82,4 +82,8 @@ private:
     // Collision detection
     bool RaycastGround(float& groundHeight) const;
     bool IsPositionValid(const Vector3& position) const;
+
+    // Slope handling
+    bool IsOnSlope(Vector3& outNormal) const;
+    Vector2 AdjustMovementForSlope(Vector2 inputMovement, const Vector3& slopeNormal) const;
 };

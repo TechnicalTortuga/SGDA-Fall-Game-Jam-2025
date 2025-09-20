@@ -2,56 +2,26 @@
 
 #include <vector>
 #include <memory>
+#include <algorithm>
+#include <cfloat>
 #include "raylib.h"
 #include "raymath.h"
+#include "Brush.h"
+#include "../math/AABB.h"
 
 // Forward declarations
-struct Surface;
 struct BSPNode;
-
-// Represents a surface (wall, floor, or ceiling) in the BSP tree
-struct Surface {
-    Vector3 start;           // Start position of the surface
-    Vector3 end;             // End position of the surface
-    float height;            // Height of the surface (for walls)
-    float floorHeight;       // Floor height (for sectors)
-    float ceilingHeight;     // Ceiling height (for sectors)
-    Color color;             // Color/texture index
-    int textureIndex;        // Index into texture atlas
-    bool isWall;             // True for walls, false for floors/ceilings
-    bool isFloor;            // True for floors
-    bool isCeiling;          // True for ceilings
-
-    Surface() = default;
-    Surface(const Vector3& s, const Vector3& e, float h = 0.0f, Color c = GRAY)
-        : start(s), end(e), height(h), floorHeight(0.0f), ceilingHeight(0.0f),
-          color(c), textureIndex(0), isWall(true), isFloor(false), isCeiling(false) {}
-
-    // Calculate normal vector for the surface
-    Vector3 GetNormal() const {
-        if (isWall) {
-            Vector3 direction = Vector3Subtract(end, start);
-            return Vector3Normalize(Vector3{-direction.z, 0.0f, direction.x});
-        }
-        return {0.0f, isFloor ? 1.0f : -1.0f, 0.0f}; // Up for floors, down for ceilings
-    }
-
-    // Get distance from origin to plane
-    float GetDistance() const {
-        Vector3 normal = GetNormal();
-        return Vector3DotProduct(normal, start);
-    }
-};
 
 // A node in the BSP tree
 struct BSPNode {
     std::unique_ptr<BSPNode> front;    // Front child (relative to splitter)
     std::unique_ptr<BSPNode> back;     // Back child (relative to splitter)
-    std::vector<Surface> surfaces;     // Surfaces in this leaf node
-    Surface splitter;                  // Splitting plane for this node
+    std::vector<Face> faces;           // Faces in this node (brush-based pipeline)
+    Vector3 planeNormal;               // Splitter plane normal (face-based builds)
+    float planeDistance = 0.0f;        // Splitter plane distance from origin (dot(n, x) - d = 0)
+    AABB bounds;                       // Subtree bounds for frustum culling
 
     BSPNode() = default;
-    BSPNode(const Surface& split) : splitter(split) {}
 
     bool IsLeaf() const { return !front && !back; }
 };
@@ -61,15 +31,13 @@ class BSPTree {
 public:
     BSPTree();
     ~BSPTree() = default;
+    // Build BSP from faces (brush-based pipeline)
+    void BuildFromFaces(const std::vector<Face>& faces);
+    // Convenience: build BSP from brushes by flattening to faces
+    void BuildFromBrushes(const std::vector<Brush>& brushes);
 
-    // Build the BSP tree from a list of surfaces
-    // surfaces: List of surfaces to partition
-    void Build(const std::vector<Surface>& surfaces);
-
-    // Traverse the tree and collect visible surfaces for rendering
-    // camera: Camera position for visibility determination
-    // visibleSurfaces: Output vector for visible surfaces
-    void TraverseForRendering(const Vector3& camera, std::vector<const Surface*>& visibleSurfaces) const;
+    // Traverse and collect visible faces (brush-based)
+    void TraverseForRenderingFaces(const Camera3D& camera, std::vector<const Face*>& visibleFaces) const;
 
     // Perform ray casting for collision detection
     // rayOrigin: Ray origin
@@ -78,53 +46,46 @@ public:
     // Returns: Distance to hit, or maxDistance if no hit
     float CastRay(const Vector3& rayOrigin, const Vector3& rayDirection, float maxDistance = 1000.0f) const;
 
+    // Perform ray casting for collision detection with surface normal
+    // rayOrigin: Ray origin
+    // rayDirection: Ray direction (normalized)
+    // maxDistance: Maximum distance to check
+    // hitNormal: Output parameter for surface normal at hit point
+    // Returns: Distance to hit, or maxDistance if no hit
+    float CastRayWithNormal(const Vector3& rayOrigin, const Vector3& rayDirection, float maxDistance, Vector3& hitNormal) const;
+
     // Check if a point is inside the BSP tree bounds
     // point: Point to check
     // Returns: True if point is contained within the tree
     bool ContainsPoint(const Vector3& point) const;
 
-    // Get all surfaces in the tree
-    // Returns: Vector of all surfaces
-    const std::vector<Surface>& GetAllSurfaces() const { return allSurfaces_; }
+    // Get all faces in the tree
+    const std::vector<Face>& GetAllFaces() const { return allFaces_; }
 
     // Clear the BSP tree
     void Clear();
 
 private:
     std::unique_ptr<BSPNode> root_;
-    std::vector<Surface> allSurfaces_;
+    std::vector<Face> allFaces_;
 
-    // Recursively build the BSP tree
-    // surfaces: Surfaces to partition
-    // Returns: Root node of the subtree
-    std::unique_ptr<BSPNode> BuildRecursive(std::vector<Surface> surfaces);
+    std::unique_ptr<BSPNode> BuildRecursiveFaces(std::vector<Face> faces);
 
-    // Choose the best splitter surface from a list
-    // surfaces: Available surfaces
-    // Returns: Index of the best splitter surface
-    size_t ChooseSplitter(const std::vector<Surface>& surfaces) const;
+    size_t ChooseSplitterFaces(const std::vector<Face>& faces) const;
 
-    // Classify a surface relative to a splitter plane
-    // surface: Surface to classify
-    // splitter: Splitter plane
-    // Returns: -1 (back), 0 (on plane), 1 (front)
-    int ClassifySurface(const Surface& surface, const Surface& splitter) const;
+    // Plane representation for face-based build
+    struct Plane { Vector3 n; float d; };
+    static Plane PlaneFromFace(const Face& face);
+    static float SignedDistanceToPlane(const Plane& p, const Vector3& point);
+    int ClassifyFace(const Face& face, const Plane& plane) const; // -1 back, 0 spanning/on, 1 front
 
-    // Split a surface by a plane
-    // surface: Surface to split
-    // splitter: Splitting plane
-    // front: Output front piece
-    // back: Output back piece
-    // Returns: True if surface was split, false if on plane
-    bool SplitSurface(const Surface& surface, const Surface& splitter,
-                     Surface& front, Surface& back) const;
+    // Split a convex face by plane into front/back pieces. Returns which sides are produced.
+    void SplitFaceByPlane(const Face& face, const Plane& plane,
+                          bool& hasFront, Face& outFront,
+                          bool& hasBack, Face& outBack) const;
 
-    // Recursively traverse for rendering
-    // node: Current node
-    // camera: Camera position
-    // visibleSurfaces: Output vector
-    void TraverseRenderRecursive(const BSPNode* node, const Vector3& camera,
-                                std::vector<const Surface*>& visibleSurfaces) const;
+    void TraverseRenderRecursiveCamera3D_Faces(const BSPNode* node, const Camera3D& camera,
+                                               std::vector<const Face*>& visibleFaces) const;
 
     // Recursively cast ray
     // node: Current node
@@ -135,9 +96,24 @@ private:
     float CastRayRecursive(const BSPNode* node, const Vector3& rayOrigin,
                           const Vector3& rayDirection, float maxDistance) const;
 
-    // Check if surface is visible from camera position
-    // surface: Surface to check
-    // camera: Camera position
-    // Returns: True if potentially visible
-    bool IsSurfaceVisible(const Surface& surface, const Vector3& camera) const;
+    // Recursively cast ray with surface normal calculation
+    // node: Current node
+    // rayOrigin: Ray origin
+    // rayDirection: Ray direction
+    // maxDistance: Maximum distance
+    // hitNormal: Output parameter for surface normal at hit point
+    // Returns: Hit distance
+    float CastRayRecursiveWithNormal(const BSPNode* node, const Vector3& rayOrigin,
+                                    const Vector3& rayDirection, float maxDistance, Vector3& hitNormal) const;
+
+    bool IsFaceVisible(const Face& face, const Camera3D& camera) const;
+
+    // View frustum helpers
+    bool IsPointInViewFrustum(const Vector3& point, const Camera3D& camera) const;
+    bool IsAABBInViewFrustum(const AABB& box, const Camera3D& camera) const;
+    bool SubtreeInViewFrustum(const BSPNode* node, const Camera3D& camera) const;
+
+    // Bounds helpers
+    static AABB ComputeBoundsForFaces(const std::vector<Face>& faces);
+    static void UpdateNodeBounds(BSPNode* node);
 };

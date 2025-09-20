@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/paintsplash.dir/core/StateManager.cpp.o.d"
   "CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o"
   "CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o.d"
+  "CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o"
+  "CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o.d"
   "CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o"
   "CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o.d"
   "CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o"

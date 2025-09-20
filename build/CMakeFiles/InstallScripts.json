@@ -1,8 +1,8 @@
 {
 	"InstallScripts" : 
 	[
-		"/Users/aimac/Development/paintwars/build/cmake_install.cmake",
-		"/Users/aimac/Development/paintwars/build/src/cmake_install.cmake"
+		"/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/cmake_install.cmake",
+		"/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

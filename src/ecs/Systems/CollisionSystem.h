@@ -5,8 +5,10 @@
 #include "../Components/Position.h"
 #include "../Components/Velocity.h"
 #include "../../world/BSPTree.h"
+#include "../../utils/Logger.h"
 #include <vector>
 #include <unordered_map>
+#include "raylib.h"
 
 // Collision event data
 struct CollisionEvent {
@@ -51,6 +53,7 @@ public:
     bool CheckCollision(const Collidable& a, const Collidable& b) const;
     bool CheckCollisionWithWorld(const Collidable& entity, const Vector3& position) const;
     CollisionResponse ResolveCollision(const Collidable& entity, const Vector3& position) const;
+    CollisionEvent GetDetailedCollisionWithWorld(const Collidable& entity, const Vector3& position) const;
 
     // World collision detection (for PhysicsSystem)
     bool CheckCollisionWithWorld(const Collidable& entity, const Vector3& position);
@@ -61,6 +64,17 @@ public:
     bool CastRayWorldOnly(const Vector3& origin, const Vector3& direction, float maxDistance,
                          Vector3& hitPoint, Vector3& hitNormal) const;
 
+    // BSP Tree access (for physics system)
+    const BSPTree* GetBSPTree() const { return bspTree_; }
+
+    // Collision detection helpers (public access for physics system)
+    bool CheckAABBIntersectsTriangle(const AABB& aabb, const std::vector<Vector3>& triangle) const {
+        return AABBIntersectsTriangle(aabb, triangle);
+    }
+    float GetPenetrationDepth(const AABB& aabb, const std::vector<Vector3>& triangle, const Vector3& normal) const {
+        return CalculatePenetrationDepth(aabb, triangle, normal);
+    }
+
     // Debug visualization
     void SetDebugBoundsVisible(bool visible) { debugBoundsVisible_ = visible; }
     bool IsDebugBoundsVisible() const { return debugBoundsVisible_; }
@@ -69,6 +83,7 @@ public:
     // Collision event callbacks
     void OnCollisionEnter(const CollisionEvent& event);
     void OnCollisionStay(const CollisionEvent& event);
+    void RenderDebugBounds();
     void OnCollisionExit(const CollisionEvent& event);
 
 private:
@@ -77,11 +92,16 @@ private:
 
     // Cached collision data for optimization
     std::vector<Entity*> collidableEntities_;
+
+    // Helper functions for collision detection
+    bool PointInAABB(const Vector3& point, const AABB& aabb) const;
+    bool AABBIntersectsTriangle(const AABB& aabb, const std::vector<Vector3>& triangle) const;
+    bool EdgeIntersectsAABB(const Vector3& edgeStart, const Vector3& edgeEnd, const AABB& aabb) const;
+    float CalculatePenetrationDepth(const AABB& aabb, const std::vector<Vector3>& triangle, const Vector3& normal) const;
     std::unordered_map<Entity*, std::vector<Entity*>> collisionPairs_;
 
     // Internal collision detection methods
     bool AABBIntersect(const AABB& a, const AABB& b) const;
-    bool PointInAABB(const Vector3& point, const AABB& aabb) const;
     Vector3 GetAABBNormal(const AABB& a, const AABB& b) const;
 
     // BSP collision methods

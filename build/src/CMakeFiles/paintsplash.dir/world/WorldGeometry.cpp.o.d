@@ -1,7 +1,7 @@
 src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o: \
-  /Users/aimac/Development/paintwars/src/world/WorldGeometry.cpp \
-  /Users/aimac/Development/paintwars/src/world/WorldGeometry.h \
-  /Users/aimac/Development/paintwars/src/world/BSPTree.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/WorldGeometry.cpp \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/WorldGeometry.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/BSPTree.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_move_common.h \
@@ -904,15 +904,21 @@ src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/cstdarg \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/temp_value.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__split_buffer \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/cfloat \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/float.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/float.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/float.h \
   /opt/homebrew/include/raylib.h /opt/homebrew/include/raymath.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/Brush.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/../math/AABB.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/unordered_map \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/is_transparent.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__hash_table \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/ranges_iterator_traits.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__node_handle \
   /opt/homebrew/include/rlgl.h \
-  /Users/aimac/Development/paintwars/src/world/../rendering/Skybox.h \
-  /Users/aimac/Development/paintwars/src/world/../utils/Logger.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/../rendering/Skybox.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/../utils/Logger.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ostream \

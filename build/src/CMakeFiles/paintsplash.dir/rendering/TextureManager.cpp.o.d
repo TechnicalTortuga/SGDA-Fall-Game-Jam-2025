@@ -1,6 +1,6 @@
 src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o: \
-  /Users/aimac/Development/paintwars/src/rendering/TextureManager.cpp \
-  /Users/aimac/Development/paintwars/src/rendering/TextureManager.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/TextureManager.cpp \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/TextureManager.h \
   /opt/homebrew/include/raylib.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdarg.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/__stdarg_header_macro.h \
@@ -817,8 +817,8 @@ src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__hash_table \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/ranges_iterator_traits.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__node_handle \
-  /Users/aimac/Development/paintwars/src/rendering/../utils/PathUtils.h \
-  /Users/aimac/Development/paintwars/src/rendering/../utils/Logger.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/../utils/PathUtils.h \
+  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/../utils/Logger.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ios \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__locale \

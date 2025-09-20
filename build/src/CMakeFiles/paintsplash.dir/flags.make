@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DRAYGUI_IMPLEMENTATION
 
-CXX_INCLUDES = -I/Users/aimac/Development/paintwars/src/. -I/Users/aimac/Development/paintwars/src/core -I/Users/aimac/Development/paintwars/src/ecs -I/Users/aimac/Development/paintwars/src/ecs/Components -I/Users/aimac/Development/paintwars/src/ecs/Systems -I/Users/aimac/Development/paintwars/src/rendering -I/Users/aimac/Development/paintwars/src/events -I/Users/aimac/Development/paintwars/src/utils -I/src -I/Users/aimac/Development/paintwars/build/_deps/raygui-src/src -isystem /opt/homebrew/include
+CXX_INCLUDES = -I/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/. -I/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/core -I/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs -I/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components -I/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems -I/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering -I/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/events -I/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/utils -I/src -I/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-src/src -isystem /opt/homebrew/include
 
 CXX_FLAGSarm64 = -std=gnu++17 -arch arm64 -Wall -Wextra -Wpedantic
 

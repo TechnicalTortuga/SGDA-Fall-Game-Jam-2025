@@ -46,9 +46,10 @@ private:
     // Internal rendering methods
     void RenderBSPGeometry(const Camera3D& camera);
     void RenderSkybox(const Camera3D& camera);
-    void RenderSurface(const Surface& surface);
+    void RenderFace(const Face& face);
+    void RenderBatches();
     void SetupMaterial(const WorldMaterial& material);
 
     // Visibility culling
-    bool IsSurfaceVisible(const Surface& surface, const Camera3D& camera) const;
+    bool IsFaceVisible(const Face& face, const Camera3D& camera) const;
 };

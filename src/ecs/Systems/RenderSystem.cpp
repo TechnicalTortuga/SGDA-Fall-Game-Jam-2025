@@ -2,6 +2,7 @@
 #include "../Entity.h"
 #include "../../ecs/Components/Position.h"
 #include "../../ecs/Components/Sprite.h"
+#include "../../ecs/Components/MeshComponent.h"
 #include "../../utils/Logger.h"
 
 RenderSystem::RenderSystem()
@@ -18,13 +19,13 @@ RenderSystem::~RenderSystem()
 
 void RenderSystem::Initialize()
 {
-    LOG_INFO("RenderSystem::Initialize - setting up Position+Sprite signature");
+    LOG_INFO("RenderSystem::Initialize - setting up Position+(Sprite|Mesh) signature");
 
-    // Set signature to only get entities with Position and Sprite components
-    // This is done here instead of constructor so entities can be registered first
-    SetSignature<Position, Sprite>();
+    // Set signature to get entities with Position AND (Sprite OR Mesh)
+    // We'll handle the OR logic in CollectRenderCommands
+    SetSignature<Position>();
 
-    LOG_INFO("RenderSystem signature set (requires Position and Sprite)");
+    LOG_INFO("RenderSystem signature set (requires Position, optional Sprite/Mesh)");
     LOG_INFO("RenderSystem initialized and ready for entity registration");
 }
 
@@ -47,12 +48,12 @@ void RenderSystem::CollectRenderCommands()
 {
     renderCommands_.clear();
 
-    // Get entities that match our Position+Sprite signature
+    // Get entities that match our Position signature
     const auto& entities = GetEntities();
 
-    LOG_DEBUG("RenderSystem: processing " + std::to_string(entities.size()) + " entities with Position+Sprite signature");
+    LOG_DEBUG("RenderSystem: processing " + std::to_string(entities.size()) + " entities with Position signature");
     if (entities.empty()) {
-        LOG_ERROR("No entities match RenderSystem signature. Ensure entities register with required components.");
+        LOG_DEBUG("No entities match RenderSystem signature.");
         return;
     }
 
@@ -72,28 +73,44 @@ void RenderSystem::CollectRenderCommands()
             continue;
         }
 
-        // At this point, entities should already have Position and Sprite components
-        // (that's what the signature matching ensures)
         auto position = entity->GetComponent<Position>();
         auto sprite = entity->GetComponent<Sprite>();
+        auto mesh = entity->GetComponent<MeshComponent>();
 
         LOG_DEBUG("Processing entity " + std::to_string(entity->GetId()) +
                 " - Position: (" + std::to_string(position->GetX()) + ", " +
                 std::to_string(position->GetY()) + ", " + std::to_string(position->GetZ()) + ")");
 
-        // Determine render type based on sprite properties
-        RenderType renderType = RenderType::SPRITE_2D;
-        if (!sprite->IsTextureLoaded()) {
-            // No texture means it's a primitive (like a cube)
-            renderType = RenderType::PRIMITIVE_3D;
+        // Handle Sprite entities
+        if (sprite) {
+            // Determine render type based on sprite properties
+            RenderType renderType = RenderType::SPRITE_2D;
+            if (!sprite->IsTextureLoaded()) {
+                // No texture means it's a primitive (like a cube)
+                renderType = RenderType::PRIMITIVE_3D;
+            }
+
+            RenderCommand command(entity, position, sprite, nullptr, renderType);
+            command.depth = position->GetZ();
+            renderCommands_.push_back(command);
+
+            LOG_DEBUG("Added Sprite entity " + std::to_string(entity->GetId()) +
+                     " to render commands - Type: " + (renderType == RenderType::SPRITE_2D ? "2D Sprite" : "3D Primitive"));
         }
+        // Handle Mesh entities
+        else if (mesh) {
+            RenderCommand command(entity, position, nullptr, mesh, RenderType::MESH_3D);
+            command.depth = position->GetZ();
+            renderCommands_.push_back(command);
 
-        RenderCommand command(entity, position, sprite, renderType);
-        command.depth = position->GetZ();
-        renderCommands_.push_back(command);
-
-        LOG_DEBUG("Added entity " + std::to_string(entity->GetId()) +
-                 " to render commands - Type: " + (renderType == RenderType::SPRITE_2D ? "2D Sprite" : "3D Primitive"));
+            LOG_DEBUG("Added Mesh entity " + std::to_string(entity->GetId()) +
+                     " to render commands - Type: 3D Mesh");
+        }
+        else {
+            LOG_DEBUG("Entity " + std::to_string(entity->GetId()) + " has Position but no Sprite or Mesh - skipping");
+            skippedCount++;
+            continue;
+        }
 
         processedCount++;
     }
@@ -130,10 +147,18 @@ void RenderSystem::ExecuteRenderCommands()
 
     // Draw all render commands using the dispatcher
     for (const auto& command : renderCommands_) {
+        std::string typeStr;
+        switch (command.type) {
+            case RenderType::SPRITE_2D: typeStr = "2D Sprite"; break;
+            case RenderType::PRIMITIVE_3D: typeStr = "3D Primitive"; break;
+            case RenderType::MESH_3D: typeStr = "3D Mesh"; break;
+            case RenderType::DEBUG: typeStr = "Debug"; break;
+            default: typeStr = "Unknown"; break;
+        }
         LOG_DEBUG("Rendering entity " + std::to_string(command.entity->GetId()) +
                  " at (" + std::to_string(command.position->GetX()) + ", " +
                  std::to_string(command.position->GetY()) + ", " + std::to_string(command.position->GetZ()) +
-                 ") Type: " + (command.type == RenderType::SPRITE_2D ? "2D Sprite" : "3D Primitive"));
+                 ") Type: " + typeStr);
         renderer_.DrawRenderCommand(command);
     }
 

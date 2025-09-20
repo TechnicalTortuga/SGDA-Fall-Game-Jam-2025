@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include <cstdint>
 #include <algorithm>
+#include "../../math/AABB.h"
 
 // Collision layer bitmasks for filtering collision detection
 enum CollisionLayer : uint32_t {
@@ -17,49 +18,7 @@ enum CollisionLayer : uint32_t {
     LAYER_ALL       = 0xFFFFFFFF
 };
 
-// Axis-Aligned Bounding Box for collision detection
-struct AABB {
-    Vector3 min;    // Minimum corner of the AABB
-    Vector3 max;    // Maximum corner of the AABB
-
-    AABB() : min{0, 0, 0}, max{0, 0, 0} {}
-    AABB(const Vector3& minPos, const Vector3& maxPos) : min(minPos), max(maxPos) {}
-
-    // Check if this AABB intersects with another
-    bool Intersects(const AABB& other) const {
-        return (min.x <= other.max.x && max.x >= other.min.x) &&
-               (min.y <= other.max.y && max.y >= other.min.y) &&
-               (min.z <= other.max.z && max.z >= other.min.z);
-    }
-
-    // Get the center point of the AABB
-    Vector3 GetCenter() const {
-        return Vector3{
-            (min.x + max.x) * 0.5f,
-            (min.y + max.y) * 0.5f,
-            (min.z + max.z) * 0.5f
-        };
-    }
-
-    // Get the size/extents of the AABB
-    Vector3 GetSize() const {
-        return Vector3{
-            max.x - min.x,
-            max.y - min.y,
-            max.z - min.z
-        };
-    }
-
-    // Expand the AABB to include a point
-    void Expand(const Vector3& point) {
-        min.x = std::min(min.x, point.x);
-        min.y = std::min(min.y, point.y);
-        min.z = std::min(min.z, point.z);
-        max.x = std::max(max.x, point.x);
-        max.y = std::max(max.y, point.y);
-        max.z = std::max(max.z, point.z);
-    }
-};
+// Using shared AABB from math/AABB.h
 
 // Component that defines collision properties for entities
 class Collidable : public Component {

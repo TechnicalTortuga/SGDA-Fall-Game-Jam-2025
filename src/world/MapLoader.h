@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BSPTree.h"
+#include "Brush.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -19,7 +19,8 @@ struct TextureInfo {
 // Simple map format representation
 struct MapData {
     std::string name;
-    std::vector<Surface> surfaces;
+    std::vector<Face> faces;
+    std::vector<Brush> brushes;
     std::vector<TextureInfo> textures;
     Color skyColor;
     float floorHeight;
@@ -49,10 +50,10 @@ private:
     // Returns: True if parsing was successful
     bool ParseMapFile(const std::string& content, MapData& mapData);
 
-    // Parse a surface definition line
+    // Parse a face definition line (legacy "surface:" entries converted to faces)
     // line: Line from map file
-    // Returns: Surface object
-    Surface ParseSurface(const std::string& line);
+    // Returns: Face object
+    Face ParseFace(const std::string& line);
 
     // Parse texture definition line
     // line: Line from map file

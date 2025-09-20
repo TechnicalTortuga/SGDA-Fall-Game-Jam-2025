@@ -53,6 +53,8 @@ enable_testing()
 add_subdirectory(src)
 # add_subdirectory(editor)  # Skip editor for Phase 1
 
+# Assets are copied by the src/CMakeLists.txt target
+
 # Install targets (skip for now, will add when both targets are ready)
 # install(TARGETS paintsplash bsp_editor
 #     RUNTIME DESTINATION bin

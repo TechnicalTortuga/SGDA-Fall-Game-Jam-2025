@@ -2,6 +2,7 @@
 #include "../Entity.h"
 #include "../Components/Player.h"
 #include <algorithm>
+#include "raylib.h"
 
 CollisionSystem::CollisionSystem()
     : bspTree_(nullptr)
@@ -27,6 +28,11 @@ void CollisionSystem::Update(float deltaTime) {
 
     // Check for entity-to-entity collisions
     CheckEntityCollisions();
+
+    // Render debug collision bounds if enabled
+    if (debugBoundsVisible_) {
+        RenderDebugBounds();
+    }
 
     // Process collision events (this would integrate with the event system)
 }
@@ -103,6 +109,44 @@ bool CollisionSystem::CheckCollisionWithWorld(const Collidable& entity, const Ve
 
     // Check against BSP geometry
     return CheckBSPCollision(position, size);
+}
+
+CollisionEvent CollisionSystem::GetDetailedCollisionWithWorld(const Collidable& entity, const Vector3& position) const {
+    if (!bspTree_) return CollisionEvent(nullptr, nullptr, position, {0,0,0}, 0.0f);
+
+    Vector3 size = entity.GetBounds().GetSize();
+
+    // Create AABB from position and size
+    AABB playerBounds;
+    playerBounds.min.x = position.x - size.x / 2.0f;
+    playerBounds.min.y = position.y - size.y / 2.0f;
+    playerBounds.min.z = position.z - size.z / 2.0f;
+    playerBounds.max.x = position.x + size.x / 2.0f;
+    playerBounds.max.y = position.y + size.y / 2.0f;
+    playerBounds.max.z = position.z + size.z / 2.0f;
+
+    // Check collision against all faces in the BSP tree
+    const auto& faces = bspTree_->GetAllFaces();
+    LOG_INFO("COLLISION CHECK: Checking " + std::to_string(faces.size()) + " faces at position (" + 
+             std::to_string(position.x) + "," + std::to_string(position.y) + "," + std::to_string(position.z) + ")");
+    
+    for (const auto& face : faces) {
+        // Skip non-collidable faces
+        if (!HasFlag(face.flags, FaceFlags::Collidable)) continue;
+
+        // Simple AABB vs triangle intersection check
+        if (AABBIntersectsTriangle(playerBounds, face.vertices)) {
+            // Calculate penetration depth
+            float penetrationDepth = CalculatePenetrationDepth(playerBounds, face.vertices, face.normal);
+            LOG_INFO("COLLISION HIT: Found collision with face normal (" + std::to_string(face.normal.x) + "," + 
+                     std::to_string(face.normal.y) + "," + std::to_string(face.normal.z) + ") penetration: " + 
+                     std::to_string(penetrationDepth));
+            // Return detailed collision info
+            return CollisionEvent(nullptr, nullptr, position, face.normal, penetrationDepth);
+        }
+    }
+
+    return CollisionEvent(nullptr, nullptr, position, {0,0,0}, 0.0f);
 }
 
 CollisionResponse CollisionSystem::ResolveCollision(const Collidable& entity, const Vector3& position) const {
@@ -224,10 +268,39 @@ Vector3 CollisionSystem::GetAABBNormal(const AABB& a, const AABB& b) const {
 }
 
 bool CollisionSystem::CheckBSPCollision(const Vector3& position, const Vector3& size) const {
-    if (!bspTree_) return false;
+    if (!bspTree_) {
+        LOG_INFO("CheckBSPCollision: No BSP tree available");
+        return false;
+    }
 
-    // Simple point-in-BSP check (would be more sophisticated in practice)
-    return bspTree_->ContainsPoint(position);
+    // Create AABB from position and size
+    AABB playerBounds;
+    playerBounds.min.x = position.x - size.x / 2.0f;
+    playerBounds.min.y = position.y - size.y / 2.0f;
+    playerBounds.min.z = position.z - size.z / 2.0f;
+    playerBounds.max.x = position.x + size.x / 2.0f;
+    playerBounds.max.y = position.y + size.y / 2.0f;
+    playerBounds.max.z = position.z + size.z / 2.0f;
+
+    // Check collision against all faces in the BSP tree
+    const auto& faces = bspTree_->GetAllFaces();
+    int collidableFaces = 0;
+    for (const auto& face : faces) {
+        // Skip non-collidable faces
+        if (!HasFlag(face.flags, FaceFlags::Collidable)) continue;
+        collidableFaces++;
+
+        // Simple AABB vs triangle intersection check
+        if (AABBIntersectsTriangle(playerBounds, face.vertices)) {
+            LOG_INFO("COLLISION FOUND with face normal (" +
+                     std::to_string(face.normal.x) + ", " + std::to_string(face.normal.y) + ", " + std::to_string(face.normal.z) + ")");
+            return true;
+        }
+    }
+
+    LOG_INFO("CheckBSPCollision: Checked " + std::to_string(collidableFaces) + " collidable faces, no collision at (" +
+              std::to_string(position.x) + ", " + std::to_string(position.y) + ", " + std::to_string(position.z) + ")");
+    return false;
 }
 
 CollisionResponse CollisionSystem::ResolveBSPCollision(const Vector3& position, const Vector3& size) const {
@@ -307,9 +380,236 @@ std::vector<Entity*> CollisionSystem::QuerySpatialGrid(const AABB& bounds) const
     return collidableEntities_; // Simplified implementation
 }
 
+// Helper function to check if AABB intersects with a triangle
+bool CollisionSystem::AABBIntersectsTriangle(const AABB& aabb, const std::vector<Vector3>& triangle) const {
+    if (triangle.size() < 3) return false;
+
+    Vector3 v0 = triangle[0];
+    Vector3 v1 = triangle[1];
+    Vector3 v2 = triangle[2];
+
+    // Calculate triangle normal
+    Vector3 edge1 = Vector3Subtract(v1, v0);
+    Vector3 edge2 = Vector3Subtract(v2, v0);
+    Vector3 normal = Vector3Normalize(Vector3CrossProduct(edge1, edge2));
+
+    // Calculate triangle AABB for quick rejection
+    AABB triAABB;
+    triAABB.min = triAABB.max = v0;
+    for (const auto& vertex : triangle) {
+        triAABB.min.x = fminf(triAABB.min.x, vertex.x);
+        triAABB.min.y = fminf(triAABB.min.y, vertex.y);
+        triAABB.min.z = fminf(triAABB.min.z, vertex.z);
+        triAABB.max.x = fmaxf(triAABB.max.x, vertex.x);
+        triAABB.max.y = fmaxf(triAABB.max.y, vertex.y);
+        triAABB.max.z = fmaxf(triAABB.max.z, vertex.z);
+    }
+
+    // Quick rejection: if triangle AABB doesn't intersect player AABB, no collision
+    if (triAABB.max.x < aabb.min.x || triAABB.min.x > aabb.max.x ||
+        triAABB.max.y < aabb.min.y || triAABB.min.y > aabb.max.y ||
+        triAABB.max.z < aabb.min.z || triAABB.min.z > aabb.max.z) {
+        return false;
+    }
+
+    // Check if any triangle vertex is inside AABB
+    for (const auto& vertex : triangle) {
+        if (PointInAABB(vertex, aabb)) {
+            return true;
+        }
+    }
+
+    // Check if any AABB vertex is on the positive side of triangle plane
+    // and if the triangle intersects the AABB
+    Vector3 aabbVertices[8] = {
+        {aabb.min.x, aabb.min.y, aabb.min.z},
+        {aabb.max.x, aabb.min.y, aabb.min.z},
+        {aabb.max.x, aabb.max.y, aabb.min.z},
+        {aabb.min.x, aabb.max.y, aabb.min.z},
+        {aabb.min.x, aabb.min.y, aabb.max.z},
+        {aabb.max.x, aabb.min.y, aabb.max.z},
+        {aabb.max.x, aabb.max.y, aabb.max.z},
+        {aabb.min.x, aabb.max.y, aabb.max.z}
+    };
+
+    // Check triangle edges vs AABB faces
+    Vector3 triEdges[3] = {edge1, edge2, Vector3Subtract(v0, v2)};
+
+    for (int i = 0; i < 3; i++) {
+        Vector3 edgeStart = (i == 2) ? v2 : v0;
+        Vector3 edgeEnd = (i == 0) ? v1 : (i == 1) ? v2 : v0;
+
+        // Check if edge intersects AABB
+        if (EdgeIntersectsAABB(edgeStart, edgeEnd, aabb)) {
+            return true;
+        }
+    }
+
+    // If triangle AABB intersects and we're close to the plane, consider it a collision
+    // Distance from AABB center to triangle plane
+    Vector3 center = {
+        (aabb.min.x + aabb.max.x) / 2.0f,
+        (aabb.min.y + aabb.max.y) / 2.0f,
+        (aabb.min.z + aabb.max.z) / 2.0f
+    };
+
+    float distance = fabsf(Vector3DotProduct(normal, Vector3Subtract(center, v0)));
+    float aabbExtent = Vector3Length({aabb.max.x - aabb.min.x, aabb.max.y - aabb.min.y, aabb.max.z - aabb.min.z}) / 2.0f;
+
+    // If AABB is close to plane and triangle AABB overlaps, likely intersection
+    if (distance < aabbExtent + 0.1f) { // Small epsilon for floating point
+        return true;
+    }
+
+    return false;
+}
+
+// Helper function to check if an edge intersects an AABB
+bool CollisionSystem::EdgeIntersectsAABB(const Vector3& edgeStart, const Vector3& edgeEnd, const AABB& aabb) const {
+    Vector3 dir = Vector3Subtract(edgeEnd, edgeStart);
+
+    // Check intersection with AABB slabs
+    float tmin = 0.0f;
+    float tmax = 1.0f;
+
+    // X slab
+    if (fabsf(dir.x) > 1e-6f) {
+        float invDir = 1.0f / dir.x;
+        if (invDir >= 0) {
+            tmin = fmaxf(tmin, (aabb.min.x - edgeStart.x) * invDir);
+            tmax = fminf(tmax, (aabb.max.x - edgeStart.x) * invDir);
+        } else {
+            tmin = fmaxf(tmin, (aabb.max.x - edgeStart.x) * invDir);
+            tmax = fminf(tmax, (aabb.min.x - edgeStart.x) * invDir);
+        }
+    } else {
+        // Edge is parallel to YZ plane
+        if (edgeStart.x < aabb.min.x || edgeStart.x > aabb.max.x) {
+            return false;
+        }
+    }
+
+    // Y slab
+    if (fabsf(dir.y) > 1e-6f) {
+        float invDir = 1.0f / dir.y;
+        if (invDir >= 0) {
+            tmin = fmaxf(tmin, (aabb.min.y - edgeStart.y) * invDir);
+            tmax = fminf(tmax, (aabb.max.y - edgeStart.y) * invDir);
+        } else {
+            tmin = fmaxf(tmin, (aabb.max.y - edgeStart.y) * invDir);
+            tmax = fminf(tmax, (aabb.min.y - edgeStart.y) * invDir);
+        }
+    } else {
+        // Edge is parallel to XZ plane
+        if (edgeStart.y < aabb.min.y || edgeStart.y > aabb.max.y) {
+            return false;
+        }
+    }
+
+    // Z slab
+    if (fabsf(dir.z) > 1e-6f) {
+        float invDir = 1.0f / dir.z;
+        if (invDir >= 0) {
+            tmin = fmaxf(tmin, (aabb.min.z - edgeStart.z) * invDir);
+            tmax = fminf(tmax, (aabb.max.z - edgeStart.z) * invDir);
+        } else {
+            tmin = fmaxf(tmin, (aabb.max.z - edgeStart.z) * invDir);
+            tmax = fminf(tmax, (aabb.min.z - edgeStart.z) * invDir);
+        }
+    } else {
+        // Edge is parallel to XY plane
+        if (edgeStart.z < aabb.min.z || edgeStart.z > aabb.max.z) {
+            return false;
+        }
+    }
+
+    return tmin <= tmax && tmax >= 0.0f && tmin <= 1.0f;
+}
+
+// Calculate penetration depth between AABB and triangle
+float CollisionSystem::CalculatePenetrationDepth(const AABB& aabb, const std::vector<Vector3>& triangle, const Vector3& normal) const {
+    if (triangle.size() < 3) return 0.0f;
+
+    // Calculate AABB center
+    Vector3 center = {
+        (aabb.min.x + aabb.max.x) / 2.0f,
+        (aabb.min.y + aabb.max.y) / 2.0f,
+        (aabb.min.z + aabb.max.z) / 2.0f
+    };
+
+    // Calculate AABB extents
+    Vector3 extents = {
+        (aabb.max.x - aabb.min.x) / 2.0f,
+        (aabb.max.y - aabb.min.y) / 2.0f,
+        (aabb.max.z - aabb.min.z) / 2.0f
+    };
+
+    // Project AABB onto triangle normal
+    float centerDist = Vector3DotProduct(normal, center);
+    float aabbRadius = extents.x * fabsf(normal.x) + extents.y * fabsf(normal.y) + extents.z * fabsf(normal.z);
+
+    // Calculate distance from triangle plane to AABB center
+    Vector3 v0 = triangle[0];
+    float planeDist = Vector3DotProduct(normal, Vector3Subtract(center, v0));
+
+    // Penetration depth is how far the AABB extends beyond the triangle plane
+    // Positive means penetrating, negative means not touching
+    float penetration = aabbRadius - fabsf(planeDist);
+
+    return penetration > 0.0f ? penetration : 0.0f;
+}
+
 void CollisionSystem::OnCollisionEnter(const CollisionEvent& event) {
     // Handle collision enter events
     // This would integrate with the game's event system
+}
+
+void CollisionSystem::RenderDebugBounds() {
+    // Draw debug collision bounds for all collidable entities
+    for (auto* entity : collidableEntities_) {
+        if (!entity) continue;
+
+        auto* collidable = entity->GetComponent<Collidable>();
+        auto* position = entity->GetComponent<Position>();
+
+        if (collidable && position) {
+            AABB bounds = collidable->GetBounds();
+
+            // Set color to green for collision bounds
+            Color green = {0, 255, 0, 255};
+
+            // Draw wireframe box using DrawLine3D
+            // Bottom face
+            DrawLine3D({bounds.min.x, bounds.min.y, bounds.min.z},
+                     {bounds.max.x, bounds.min.y, bounds.min.z}, green);
+            DrawLine3D({bounds.max.x, bounds.min.y, bounds.min.z},
+                     {bounds.max.x, bounds.min.y, bounds.max.z}, green);
+            DrawLine3D({bounds.max.x, bounds.min.y, bounds.max.z},
+                     {bounds.min.x, bounds.min.y, bounds.max.z}, green);
+            DrawLine3D({bounds.min.x, bounds.min.y, bounds.max.z},
+                     {bounds.min.x, bounds.min.y, bounds.min.z}, green);
+
+            // Top face
+            DrawLine3D({bounds.min.x, bounds.max.y, bounds.min.z},
+                     {bounds.max.x, bounds.max.y, bounds.min.z}, green);
+            DrawLine3D({bounds.max.x, bounds.max.y, bounds.min.z},
+                     {bounds.max.x, bounds.max.y, bounds.max.z}, green);
+            DrawLine3D({bounds.max.x, bounds.max.y, bounds.max.z},
+                     {bounds.min.x, bounds.max.y, bounds.max.z}, green);
+            DrawLine3D({bounds.min.x, bounds.max.y, bounds.max.z},
+                     {bounds.min.x, bounds.max.y, bounds.min.z}, green);
+
+            // Vertical edges
+            DrawLine3D({bounds.min.x, bounds.min.y, bounds.min.z},
+                     {bounds.min.x, bounds.max.y, bounds.min.z}, green);
+            DrawLine3D({bounds.max.x, bounds.min.y, bounds.min.z},
+                     {bounds.max.x, bounds.max.y, bounds.min.z}, green);
+            DrawLine3D({bounds.max.x, bounds.min.y, bounds.max.z},
+                     {bounds.max.x, bounds.max.y, bounds.max.z}, green);
+            DrawLine3D({bounds.min.x, bounds.min.y, bounds.max.z},
+                     {bounds.min.x, bounds.max.y, bounds.max.z}, green);
+        }
+    }
 }
 
 void CollisionSystem::OnCollisionStay(const CollisionEvent& event) {

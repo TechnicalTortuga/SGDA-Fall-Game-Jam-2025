@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/Users/aimac/Development/paintwars/build/_deps/raygui-subbuild/cmake_install.cmake"
+		"/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

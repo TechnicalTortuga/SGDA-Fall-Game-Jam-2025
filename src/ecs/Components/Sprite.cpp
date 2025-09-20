@@ -1,5 +1,6 @@
 #include "Sprite.h"
 #include "utils/Logger.h"
+#include "rendering/TextureManager.h"
 
 Sprite::Sprite()
     : texture_{0, 0, 0, 0, 0}, textureLoaded_(false), scale_(1.0f), rotation_(0.0f),
@@ -38,7 +39,8 @@ bool Sprite::LoadTexture(const std::string& texturePath)
         UnloadTexture();
     }
 
-    texture_ = ::LoadTexture(texturePath.c_str());
+    // Use TextureManager for consistent path resolution
+    texture_ = TextureManager::Get().Load(texturePath);
     if (texture_.id == 0) {
         LOG_ERROR("Failed to load texture: " + texturePath);
         textureLoaded_ = false;

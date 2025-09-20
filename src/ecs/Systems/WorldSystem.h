@@ -4,6 +4,8 @@
 #include "../../world/WorldGeometry.h"
 #include "../../world/MapLoader.h"
 #include "../../rendering/WorldRenderer.h"
+#include "../../ecs/Components/MeshComponent.h"
+#include "CollisionSystem.h"
 #include <vector>
 #include <memory>
 
@@ -35,6 +37,9 @@ public:
     const WorldRenderer* GetWorldRenderer() const { return worldRenderer_.get(); }
     WorldRenderer* GetWorldRenderer() { return worldRenderer_.get(); }
 
+    // Collision system integration
+    void ConnectCollisionSystem(CollisionSystem* collisionSystem);
+
     // Dynamic entities management - ONLY for dynamic objects (players, lights, doors, etc.)
     void CreateDynamicEntitiesFromMap(const MapData& mapData);
     void DestroyDynamicEntities();
@@ -54,6 +59,7 @@ private:
     std::unique_ptr<WorldRenderer> worldRenderer_;    // NEW: Renderer for static world
     MapLoader mapLoader_;                             // Simplified: Only parses .map files
     bool mapLoaded_;
+    CollisionSystem* collisionSystem_ = nullptr;      // For collision integration
 
     std::vector<Entity*> dynamicEntities_;            // RENAMED: Only dynamic entities now
 

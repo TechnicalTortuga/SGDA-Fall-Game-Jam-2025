@@ -122,6 +122,7 @@ void PlayerSystem::UpdateCamera(float deltaTime) {
 
     // Update renderer camera to follow player
     Vector3 camPos = GetCameraPosition();
+    LOG_DEBUG("PlayerSystem::UpdateCamera - player pos: (" + std::to_string(camPos.x) + "," + std::to_string(camPos.y) + "," + std::to_string(camPos.z) + ")");
     renderer_->UpdateCameraToFollowPlayer(camPos.x, camPos.y, camPos.z);
 }
 
@@ -192,6 +193,22 @@ void PlayerSystem::HandleMovement(float deltaTime) {
             if (step > speed) step = speed;
             current.x -= (current.x / speed) * step;
             current.y -= (current.y / speed) * step;
+        }
+    }
+
+    // === SLOPE DETECTION AND ADJUSTMENT ===
+    // Check if player is on a slope and adjust movement accordingly
+    if (onGround && (fabsf(current.x) > 0.01f || fabsf(current.y) > 0.01f)) {
+        Vector3 slopeNormal;
+        if (IsOnSlope(slopeNormal)) {
+            // Adjust movement for slope
+            Vector2 adjustedMovement = AdjustMovementForSlope({current.x, current.y}, slopeNormal);
+            current.x = adjustedMovement.x;
+            current.y = adjustedMovement.y;
+
+            LOG_INFO("PLAYER SLOPE: Applied slope adjustment - input: (" +
+                     std::to_string(velocity->GetX()) + "," + std::to_string(velocity->GetZ()) +
+                     ") -> output: (" + std::to_string(current.x) + "," + std::to_string(current.y) + ")");
         }
     }
 
@@ -388,4 +405,66 @@ bool PlayerSystem::IsPositionValid(const Vector3& position) const {
     // Check if the position is valid (not inside walls, etc.)
     // This would use the collision system in a full implementation
     return true;
+}
+
+// === SLOPE DETECTION AND MOVEMENT ADJUSTMENT ===
+
+bool PlayerSystem::IsOnSlope(Vector3& outNormal) const {
+    if (!playerEntity_) return false;
+
+    auto position = playerEntity_->GetComponent<Position>();
+    if (!position) return false;
+
+    Vector3 playerPos = position->GetPosition();
+
+    // Cast a ray downward to detect the surface normal
+    Vector3 rayStart = playerPos;
+    rayStart.y += 0.1f; // Start slightly above player position
+
+    Vector3 rayDirection = {0.0f, -1.0f, 0.0f}; // Straight down
+    float rayLength = 1.0f;
+
+    // Use the collision system to cast the ray
+    auto collisionSystem = GetEngine()->GetSystem<CollisionSystem>();
+    if (!collisionSystem) {
+        return false;
+    }
+
+    const BSPTree* bspTree = collisionSystem->GetBSPTree();
+    if (!bspTree) {
+        return false;
+    }
+
+    float hitDistance = bspTree->CastRayWithNormal(rayStart, rayDirection, rayLength, outNormal);
+
+    if (hitDistance < rayLength) {
+        // Check if this is a slope surface (not vertical, not flat)
+        float normalY = fabsf(outNormal.y);
+        if (normalY > 0.1f && normalY < 0.95f) { // Between ~6° and ~71° from horizontal
+            LOG_INFO("PLAYER SLOPE: *** CONFIRMED SLOPE SURFACE *** normal=(" +
+                     std::to_string(outNormal.x) + "," + std::to_string(outNormal.y) + "," +
+                     std::to_string(outNormal.z) + ")");
+            return true;
+        }
+    }
+
+    return false;
+}
+
+Vector2 PlayerSystem::AdjustMovementForSlope(Vector2 inputMovement, const Vector3& slopeNormal) const {
+    // Project the input movement onto the slope surface
+    Vector3 movement3D = {inputMovement.x, 0.0f, inputMovement.y};
+
+    // Project movement onto plane defined by slope normal
+    float dot = Vector3DotProduct(movement3D, slopeNormal);
+    Vector3 projected = Vector3Subtract(movement3D, Vector3Scale(slopeNormal, dot));
+
+    // Preserve the original movement magnitude
+    float originalLength = Vector2Length(inputMovement);
+    if (Vector3Length(projected) > 0.001f) {
+        Vector3 normalized = Vector3Normalize(projected);
+        projected = Vector3Scale(normalized, originalLength);
+    }
+
+    return {projected.x, projected.z};
 }

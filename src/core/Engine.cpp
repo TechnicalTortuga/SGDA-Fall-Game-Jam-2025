@@ -62,6 +62,14 @@ bool Engine::Initialize() {
             consoleSystem->SetCollisionSystem(collisionSystem);
         }
 
+        if (collisionSystem && physicsSystem) {
+            physicsSystem->SetCollisionSystem(collisionSystem);
+        }
+
+        if (collisionSystem && worldSystem) {
+            worldSystem->ConnectCollisionSystem(collisionSystem);
+        }
+
         if (inputSystem && playerSystem) {
             playerSystem->SetInputSystem(inputSystem);
         }

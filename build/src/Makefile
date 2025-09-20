@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/aimac/Development/paintwars
+CMAKE_SOURCE_DIR = /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/aimac/Development/paintwars/build
+CMAKE_BINARY_DIR = /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /Users/aimac/Development/paintwars/build
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool..."
-	cd /Users/aimac/Development/paintwars/build && /opt/homebrew/bin/cpack --config ./CPackConfig.cmake
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && /opt/homebrew/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -78,7 +78,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool for source..."
-	cd /Users/aimac/Development/paintwars/build && /opt/homebrew/bin/cpack --config ./CPackSourceConfig.cmake /Users/aimac/Development/paintwars/build/CPackSourceConfig.cmake
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && /opt/homebrew/bin/cpack --config ./CPackSourceConfig.cmake /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -117,14 +117,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/aimac/Development/paintwars/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintwars/build/CMakeFiles /Users/aimac/Development/paintwars/build/src//CMakeFiles/progress.marks
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintwars/build/CMakeFiles 0
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src//CMakeFiles/progress.marks
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -133,23 +133,23 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/aimac/Development/paintwars/build && $(CMAKE_COMMAND) -P /Users/aimac/Development/paintwars/build/CMakeFiles/VerifyGlobs.cmake
-	cd /Users/aimac/Development/paintwars/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(CMAKE_COMMAND) -P /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles/VerifyGlobs.cmake
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/paintsplash.dir/rule:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/paintsplash.dir/rule
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/paintsplash.dir/rule
 .PHONY : src/CMakeFiles/paintsplash.dir/rule
 
 # Convenience name for target.
@@ -158,7 +158,7 @@ paintsplash: src/CMakeFiles/paintsplash.dir/rule
 
 # fast build rule for target.
 paintsplash/fast:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/build
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/build
 .PHONY : paintsplash/fast
 
 Game.o: Game.cpp.o
@@ -166,7 +166,7 @@ Game.o: Game.cpp.o
 
 # target to build an object file
 Game.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/Game.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/Game.cpp.o
 .PHONY : Game.cpp.o
 
 Game.i: Game.cpp.i
@@ -174,7 +174,7 @@ Game.i: Game.cpp.i
 
 # target to preprocess a source file
 Game.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/Game.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/Game.cpp.i
 .PHONY : Game.cpp.i
 
 Game.s: Game.cpp.s
@@ -182,7 +182,7 @@ Game.s: Game.cpp.s
 
 # target to generate assembly for a file
 Game.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/Game.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/Game.cpp.s
 .PHONY : Game.cpp.s
 
 core/Engine.o: core/Engine.cpp.o
@@ -190,7 +190,7 @@ core/Engine.o: core/Engine.cpp.o
 
 # target to build an object file
 core/Engine.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/Engine.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/Engine.cpp.o
 .PHONY : core/Engine.cpp.o
 
 core/Engine.i: core/Engine.cpp.i
@@ -198,7 +198,7 @@ core/Engine.i: core/Engine.cpp.i
 
 # target to preprocess a source file
 core/Engine.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/Engine.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/Engine.cpp.i
 .PHONY : core/Engine.cpp.i
 
 core/Engine.s: core/Engine.cpp.s
@@ -206,7 +206,7 @@ core/Engine.s: core/Engine.cpp.s
 
 # target to generate assembly for a file
 core/Engine.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/Engine.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/Engine.cpp.s
 .PHONY : core/Engine.cpp.s
 
 core/StateManager.o: core/StateManager.cpp.o
@@ -214,7 +214,7 @@ core/StateManager.o: core/StateManager.cpp.o
 
 # target to build an object file
 core/StateManager.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/StateManager.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/StateManager.cpp.o
 .PHONY : core/StateManager.cpp.o
 
 core/StateManager.i: core/StateManager.cpp.i
@@ -222,7 +222,7 @@ core/StateManager.i: core/StateManager.cpp.i
 
 # target to preprocess a source file
 core/StateManager.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/StateManager.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/StateManager.cpp.i
 .PHONY : core/StateManager.cpp.i
 
 core/StateManager.s: core/StateManager.cpp.s
@@ -230,7 +230,7 @@ core/StateManager.s: core/StateManager.cpp.s
 
 # target to generate assembly for a file
 core/StateManager.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/StateManager.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/StateManager.cpp.s
 .PHONY : core/StateManager.cpp.s
 
 ecs/Components/Collidable.o: ecs/Components/Collidable.cpp.o
@@ -238,7 +238,7 @@ ecs/Components/Collidable.o: ecs/Components/Collidable.cpp.o
 
 # target to build an object file
 ecs/Components/Collidable.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o
 .PHONY : ecs/Components/Collidable.cpp.o
 
 ecs/Components/Collidable.i: ecs/Components/Collidable.cpp.i
@@ -246,7 +246,7 @@ ecs/Components/Collidable.i: ecs/Components/Collidable.cpp.i
 
 # target to preprocess a source file
 ecs/Components/Collidable.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.i
 .PHONY : ecs/Components/Collidable.cpp.i
 
 ecs/Components/Collidable.s: ecs/Components/Collidable.cpp.s
@@ -254,15 +254,39 @@ ecs/Components/Collidable.s: ecs/Components/Collidable.cpp.s
 
 # target to generate assembly for a file
 ecs/Components/Collidable.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.s
 .PHONY : ecs/Components/Collidable.cpp.s
+
+ecs/Components/MeshComponent.o: ecs/Components/MeshComponent.cpp.o
+.PHONY : ecs/Components/MeshComponent.o
+
+# target to build an object file
+ecs/Components/MeshComponent.cpp.o:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o
+.PHONY : ecs/Components/MeshComponent.cpp.o
+
+ecs/Components/MeshComponent.i: ecs/Components/MeshComponent.cpp.i
+.PHONY : ecs/Components/MeshComponent.i
+
+# target to preprocess a source file
+ecs/Components/MeshComponent.cpp.i:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.i
+.PHONY : ecs/Components/MeshComponent.cpp.i
+
+ecs/Components/MeshComponent.s: ecs/Components/MeshComponent.cpp.s
+.PHONY : ecs/Components/MeshComponent.s
+
+# target to generate assembly for a file
+ecs/Components/MeshComponent.cpp.s:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.s
+.PHONY : ecs/Components/MeshComponent.cpp.s
 
 ecs/Components/Player.o: ecs/Components/Player.cpp.o
 .PHONY : ecs/Components/Player.o
 
 # target to build an object file
 ecs/Components/Player.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o
 .PHONY : ecs/Components/Player.cpp.o
 
 ecs/Components/Player.i: ecs/Components/Player.cpp.i
@@ -270,7 +294,7 @@ ecs/Components/Player.i: ecs/Components/Player.cpp.i
 
 # target to preprocess a source file
 ecs/Components/Player.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.i
 .PHONY : ecs/Components/Player.cpp.i
 
 ecs/Components/Player.s: ecs/Components/Player.cpp.s
@@ -278,7 +302,7 @@ ecs/Components/Player.s: ecs/Components/Player.cpp.s
 
 # target to generate assembly for a file
 ecs/Components/Player.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.s
 .PHONY : ecs/Components/Player.cpp.s
 
 ecs/Components/Position.o: ecs/Components/Position.cpp.o
@@ -286,7 +310,7 @@ ecs/Components/Position.o: ecs/Components/Position.cpp.o
 
 # target to build an object file
 ecs/Components/Position.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o
 .PHONY : ecs/Components/Position.cpp.o
 
 ecs/Components/Position.i: ecs/Components/Position.cpp.i
@@ -294,7 +318,7 @@ ecs/Components/Position.i: ecs/Components/Position.cpp.i
 
 # target to preprocess a source file
 ecs/Components/Position.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.i
 .PHONY : ecs/Components/Position.cpp.i
 
 ecs/Components/Position.s: ecs/Components/Position.cpp.s
@@ -302,7 +326,7 @@ ecs/Components/Position.s: ecs/Components/Position.cpp.s
 
 # target to generate assembly for a file
 ecs/Components/Position.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.s
 .PHONY : ecs/Components/Position.cpp.s
 
 ecs/Components/Sprite.o: ecs/Components/Sprite.cpp.o
@@ -310,7 +334,7 @@ ecs/Components/Sprite.o: ecs/Components/Sprite.cpp.o
 
 # target to build an object file
 ecs/Components/Sprite.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o
 .PHONY : ecs/Components/Sprite.cpp.o
 
 ecs/Components/Sprite.i: ecs/Components/Sprite.cpp.i
@@ -318,7 +342,7 @@ ecs/Components/Sprite.i: ecs/Components/Sprite.cpp.i
 
 # target to preprocess a source file
 ecs/Components/Sprite.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.i
 .PHONY : ecs/Components/Sprite.cpp.i
 
 ecs/Components/Sprite.s: ecs/Components/Sprite.cpp.s
@@ -326,7 +350,7 @@ ecs/Components/Sprite.s: ecs/Components/Sprite.cpp.s
 
 # target to generate assembly for a file
 ecs/Components/Sprite.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.s
 .PHONY : ecs/Components/Sprite.cpp.s
 
 ecs/Components/Velocity.o: ecs/Components/Velocity.cpp.o
@@ -334,7 +358,7 @@ ecs/Components/Velocity.o: ecs/Components/Velocity.cpp.o
 
 # target to build an object file
 ecs/Components/Velocity.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o
 .PHONY : ecs/Components/Velocity.cpp.o
 
 ecs/Components/Velocity.i: ecs/Components/Velocity.cpp.i
@@ -342,7 +366,7 @@ ecs/Components/Velocity.i: ecs/Components/Velocity.cpp.i
 
 # target to preprocess a source file
 ecs/Components/Velocity.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.i
 .PHONY : ecs/Components/Velocity.cpp.i
 
 ecs/Components/Velocity.s: ecs/Components/Velocity.cpp.s
@@ -350,7 +374,7 @@ ecs/Components/Velocity.s: ecs/Components/Velocity.cpp.s
 
 # target to generate assembly for a file
 ecs/Components/Velocity.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.s
 .PHONY : ecs/Components/Velocity.cpp.s
 
 ecs/Entity.o: ecs/Entity.cpp.o
@@ -358,7 +382,7 @@ ecs/Entity.o: ecs/Entity.cpp.o
 
 # target to build an object file
 ecs/Entity.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o
 .PHONY : ecs/Entity.cpp.o
 
 ecs/Entity.i: ecs/Entity.cpp.i
@@ -366,7 +390,7 @@ ecs/Entity.i: ecs/Entity.cpp.i
 
 # target to preprocess a source file
 ecs/Entity.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.i
 .PHONY : ecs/Entity.cpp.i
 
 ecs/Entity.s: ecs/Entity.cpp.s
@@ -374,7 +398,7 @@ ecs/Entity.s: ecs/Entity.cpp.s
 
 # target to generate assembly for a file
 ecs/Entity.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.s
 .PHONY : ecs/Entity.cpp.s
 
 ecs/System.o: ecs/System.cpp.o
@@ -382,7 +406,7 @@ ecs/System.o: ecs/System.cpp.o
 
 # target to build an object file
 ecs/System.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/System.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/System.cpp.o
 .PHONY : ecs/System.cpp.o
 
 ecs/System.i: ecs/System.cpp.i
@@ -390,7 +414,7 @@ ecs/System.i: ecs/System.cpp.i
 
 # target to preprocess a source file
 ecs/System.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/System.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/System.cpp.i
 .PHONY : ecs/System.cpp.i
 
 ecs/System.s: ecs/System.cpp.s
@@ -398,7 +422,7 @@ ecs/System.s: ecs/System.cpp.s
 
 # target to generate assembly for a file
 ecs/System.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/System.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/System.cpp.s
 .PHONY : ecs/System.cpp.s
 
 ecs/Systems/CollisionSystem.o: ecs/Systems/CollisionSystem.cpp.o
@@ -406,7 +430,7 @@ ecs/Systems/CollisionSystem.o: ecs/Systems/CollisionSystem.cpp.o
 
 # target to build an object file
 ecs/Systems/CollisionSystem.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o
 .PHONY : ecs/Systems/CollisionSystem.cpp.o
 
 ecs/Systems/CollisionSystem.i: ecs/Systems/CollisionSystem.cpp.i
@@ -414,7 +438,7 @@ ecs/Systems/CollisionSystem.i: ecs/Systems/CollisionSystem.cpp.i
 
 # target to preprocess a source file
 ecs/Systems/CollisionSystem.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.i
 .PHONY : ecs/Systems/CollisionSystem.cpp.i
 
 ecs/Systems/CollisionSystem.s: ecs/Systems/CollisionSystem.cpp.s
@@ -422,7 +446,7 @@ ecs/Systems/CollisionSystem.s: ecs/Systems/CollisionSystem.cpp.s
 
 # target to generate assembly for a file
 ecs/Systems/CollisionSystem.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.s
 .PHONY : ecs/Systems/CollisionSystem.cpp.s
 
 ecs/Systems/InputSystem.o: ecs/Systems/InputSystem.cpp.o
@@ -430,7 +454,7 @@ ecs/Systems/InputSystem.o: ecs/Systems/InputSystem.cpp.o
 
 # target to build an object file
 ecs/Systems/InputSystem.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o
 .PHONY : ecs/Systems/InputSystem.cpp.o
 
 ecs/Systems/InputSystem.i: ecs/Systems/InputSystem.cpp.i
@@ -438,7 +462,7 @@ ecs/Systems/InputSystem.i: ecs/Systems/InputSystem.cpp.i
 
 # target to preprocess a source file
 ecs/Systems/InputSystem.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.i
 .PHONY : ecs/Systems/InputSystem.cpp.i
 
 ecs/Systems/InputSystem.s: ecs/Systems/InputSystem.cpp.s
@@ -446,7 +470,7 @@ ecs/Systems/InputSystem.s: ecs/Systems/InputSystem.cpp.s
 
 # target to generate assembly for a file
 ecs/Systems/InputSystem.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.s
 .PHONY : ecs/Systems/InputSystem.cpp.s
 
 ecs/Systems/PlayerSystem.o: ecs/Systems/PlayerSystem.cpp.o
@@ -454,7 +478,7 @@ ecs/Systems/PlayerSystem.o: ecs/Systems/PlayerSystem.cpp.o
 
 # target to build an object file
 ecs/Systems/PlayerSystem.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o
 .PHONY : ecs/Systems/PlayerSystem.cpp.o
 
 ecs/Systems/PlayerSystem.i: ecs/Systems/PlayerSystem.cpp.i
@@ -462,7 +486,7 @@ ecs/Systems/PlayerSystem.i: ecs/Systems/PlayerSystem.cpp.i
 
 # target to preprocess a source file
 ecs/Systems/PlayerSystem.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.i
 .PHONY : ecs/Systems/PlayerSystem.cpp.i
 
 ecs/Systems/PlayerSystem.s: ecs/Systems/PlayerSystem.cpp.s
@@ -470,7 +494,7 @@ ecs/Systems/PlayerSystem.s: ecs/Systems/PlayerSystem.cpp.s
 
 # target to generate assembly for a file
 ecs/Systems/PlayerSystem.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.s
 .PHONY : ecs/Systems/PlayerSystem.cpp.s
 
 ecs/Systems/RenderSystem.o: ecs/Systems/RenderSystem.cpp.o
@@ -478,7 +502,7 @@ ecs/Systems/RenderSystem.o: ecs/Systems/RenderSystem.cpp.o
 
 # target to build an object file
 ecs/Systems/RenderSystem.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o
 .PHONY : ecs/Systems/RenderSystem.cpp.o
 
 ecs/Systems/RenderSystem.i: ecs/Systems/RenderSystem.cpp.i
@@ -486,7 +510,7 @@ ecs/Systems/RenderSystem.i: ecs/Systems/RenderSystem.cpp.i
 
 # target to preprocess a source file
 ecs/Systems/RenderSystem.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.i
 .PHONY : ecs/Systems/RenderSystem.cpp.i
 
 ecs/Systems/RenderSystem.s: ecs/Systems/RenderSystem.cpp.s
@@ -494,7 +518,7 @@ ecs/Systems/RenderSystem.s: ecs/Systems/RenderSystem.cpp.s
 
 # target to generate assembly for a file
 ecs/Systems/RenderSystem.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.s
 .PHONY : ecs/Systems/RenderSystem.cpp.s
 
 ecs/Systems/WorldSystem.o: ecs/Systems/WorldSystem.cpp.o
@@ -502,7 +526,7 @@ ecs/Systems/WorldSystem.o: ecs/Systems/WorldSystem.cpp.o
 
 # target to build an object file
 ecs/Systems/WorldSystem.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o
 .PHONY : ecs/Systems/WorldSystem.cpp.o
 
 ecs/Systems/WorldSystem.i: ecs/Systems/WorldSystem.cpp.i
@@ -510,7 +534,7 @@ ecs/Systems/WorldSystem.i: ecs/Systems/WorldSystem.cpp.i
 
 # target to preprocess a source file
 ecs/Systems/WorldSystem.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.i
 .PHONY : ecs/Systems/WorldSystem.cpp.i
 
 ecs/Systems/WorldSystem.s: ecs/Systems/WorldSystem.cpp.s
@@ -518,7 +542,7 @@ ecs/Systems/WorldSystem.s: ecs/Systems/WorldSystem.cpp.s
 
 # target to generate assembly for a file
 ecs/Systems/WorldSystem.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.s
 .PHONY : ecs/Systems/WorldSystem.cpp.s
 
 events/EventManager.o: events/EventManager.cpp.o
@@ -526,7 +550,7 @@ events/EventManager.o: events/EventManager.cpp.o
 
 # target to build an object file
 events/EventManager.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.o
 .PHONY : events/EventManager.cpp.o
 
 events/EventManager.i: events/EventManager.cpp.i
@@ -534,7 +558,7 @@ events/EventManager.i: events/EventManager.cpp.i
 
 # target to preprocess a source file
 events/EventManager.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.i
 .PHONY : events/EventManager.cpp.i
 
 events/EventManager.s: events/EventManager.cpp.s
@@ -542,7 +566,7 @@ events/EventManager.s: events/EventManager.cpp.s
 
 # target to generate assembly for a file
 events/EventManager.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.s
 .PHONY : events/EventManager.cpp.s
 
 input/Input.o: input/Input.cpp.o
@@ -550,7 +574,7 @@ input/Input.o: input/Input.cpp.o
 
 # target to build an object file
 input/Input.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/input/Input.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/input/Input.cpp.o
 .PHONY : input/Input.cpp.o
 
 input/Input.i: input/Input.cpp.i
@@ -558,7 +582,7 @@ input/Input.i: input/Input.cpp.i
 
 # target to preprocess a source file
 input/Input.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/input/Input.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/input/Input.cpp.i
 .PHONY : input/Input.cpp.i
 
 input/Input.s: input/Input.cpp.s
@@ -566,7 +590,7 @@ input/Input.s: input/Input.cpp.s
 
 # target to generate assembly for a file
 input/Input.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/input/Input.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/input/Input.cpp.s
 .PHONY : input/Input.cpp.s
 
 main.o: main.cpp.o
@@ -574,7 +598,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/main.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -582,7 +606,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/main.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -590,7 +614,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/main.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 physics/PhysicsSystem.o: physics/PhysicsSystem.cpp.o
@@ -598,7 +622,7 @@ physics/PhysicsSystem.o: physics/PhysicsSystem.cpp.o
 
 # target to build an object file
 physics/PhysicsSystem.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.o
 .PHONY : physics/PhysicsSystem.cpp.o
 
 physics/PhysicsSystem.i: physics/PhysicsSystem.cpp.i
@@ -606,7 +630,7 @@ physics/PhysicsSystem.i: physics/PhysicsSystem.cpp.i
 
 # target to preprocess a source file
 physics/PhysicsSystem.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.i
 .PHONY : physics/PhysicsSystem.cpp.i
 
 physics/PhysicsSystem.s: physics/PhysicsSystem.cpp.s
@@ -614,7 +638,7 @@ physics/PhysicsSystem.s: physics/PhysicsSystem.cpp.s
 
 # target to generate assembly for a file
 physics/PhysicsSystem.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.s
 .PHONY : physics/PhysicsSystem.cpp.s
 
 rendering/Renderer.o: rendering/Renderer.cpp.o
@@ -622,7 +646,7 @@ rendering/Renderer.o: rendering/Renderer.cpp.o
 
 # target to build an object file
 rendering/Renderer.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.o
 .PHONY : rendering/Renderer.cpp.o
 
 rendering/Renderer.i: rendering/Renderer.cpp.i
@@ -630,7 +654,7 @@ rendering/Renderer.i: rendering/Renderer.cpp.i
 
 # target to preprocess a source file
 rendering/Renderer.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.i
 .PHONY : rendering/Renderer.cpp.i
 
 rendering/Renderer.s: rendering/Renderer.cpp.s
@@ -638,7 +662,7 @@ rendering/Renderer.s: rendering/Renderer.cpp.s
 
 # target to generate assembly for a file
 rendering/Renderer.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.s
 .PHONY : rendering/Renderer.cpp.s
 
 rendering/Skybox.o: rendering/Skybox.cpp.o
@@ -646,7 +670,7 @@ rendering/Skybox.o: rendering/Skybox.cpp.o
 
 # target to build an object file
 rendering/Skybox.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o
 .PHONY : rendering/Skybox.cpp.o
 
 rendering/Skybox.i: rendering/Skybox.cpp.i
@@ -654,7 +678,7 @@ rendering/Skybox.i: rendering/Skybox.cpp.i
 
 # target to preprocess a source file
 rendering/Skybox.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.i
 .PHONY : rendering/Skybox.cpp.i
 
 rendering/Skybox.s: rendering/Skybox.cpp.s
@@ -662,7 +686,7 @@ rendering/Skybox.s: rendering/Skybox.cpp.s
 
 # target to generate assembly for a file
 rendering/Skybox.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.s
 .PHONY : rendering/Skybox.cpp.s
 
 rendering/TextureManager.o: rendering/TextureManager.cpp.o
@@ -670,7 +694,7 @@ rendering/TextureManager.o: rendering/TextureManager.cpp.o
 
 # target to build an object file
 rendering/TextureManager.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o
 .PHONY : rendering/TextureManager.cpp.o
 
 rendering/TextureManager.i: rendering/TextureManager.cpp.i
@@ -678,7 +702,7 @@ rendering/TextureManager.i: rendering/TextureManager.cpp.i
 
 # target to preprocess a source file
 rendering/TextureManager.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.i
 .PHONY : rendering/TextureManager.cpp.i
 
 rendering/TextureManager.s: rendering/TextureManager.cpp.s
@@ -686,7 +710,7 @@ rendering/TextureManager.s: rendering/TextureManager.cpp.s
 
 # target to generate assembly for a file
 rendering/TextureManager.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.s
 .PHONY : rendering/TextureManager.cpp.s
 
 rendering/WorldRenderer.o: rendering/WorldRenderer.cpp.o
@@ -694,7 +718,7 @@ rendering/WorldRenderer.o: rendering/WorldRenderer.cpp.o
 
 # target to build an object file
 rendering/WorldRenderer.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.o
 .PHONY : rendering/WorldRenderer.cpp.o
 
 rendering/WorldRenderer.i: rendering/WorldRenderer.cpp.i
@@ -702,7 +726,7 @@ rendering/WorldRenderer.i: rendering/WorldRenderer.cpp.i
 
 # target to preprocess a source file
 rendering/WorldRenderer.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.i
 .PHONY : rendering/WorldRenderer.cpp.i
 
 rendering/WorldRenderer.s: rendering/WorldRenderer.cpp.s
@@ -710,7 +734,7 @@ rendering/WorldRenderer.s: rendering/WorldRenderer.cpp.s
 
 # target to generate assembly for a file
 rendering/WorldRenderer.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.s
 .PHONY : rendering/WorldRenderer.cpp.s
 
 ui/ConsoleSystem.o: ui/ConsoleSystem.cpp.o
@@ -718,7 +742,7 @@ ui/ConsoleSystem.o: ui/ConsoleSystem.cpp.o
 
 # target to build an object file
 ui/ConsoleSystem.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.o
 .PHONY : ui/ConsoleSystem.cpp.o
 
 ui/ConsoleSystem.i: ui/ConsoleSystem.cpp.i
@@ -726,7 +750,7 @@ ui/ConsoleSystem.i: ui/ConsoleSystem.cpp.i
 
 # target to preprocess a source file
 ui/ConsoleSystem.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.i
 .PHONY : ui/ConsoleSystem.cpp.i
 
 ui/ConsoleSystem.s: ui/ConsoleSystem.cpp.s
@@ -734,7 +758,7 @@ ui/ConsoleSystem.s: ui/ConsoleSystem.cpp.s
 
 # target to generate assembly for a file
 ui/ConsoleSystem.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.s
 .PHONY : ui/ConsoleSystem.cpp.s
 
 utils/Logger.o: utils/Logger.cpp.o
@@ -742,7 +766,7 @@ utils/Logger.o: utils/Logger.cpp.o
 
 # target to build an object file
 utils/Logger.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.o
 .PHONY : utils/Logger.cpp.o
 
 utils/Logger.i: utils/Logger.cpp.i
@@ -750,7 +774,7 @@ utils/Logger.i: utils/Logger.cpp.i
 
 # target to preprocess a source file
 utils/Logger.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.i
 .PHONY : utils/Logger.cpp.i
 
 utils/Logger.s: utils/Logger.cpp.s
@@ -758,7 +782,7 @@ utils/Logger.s: utils/Logger.cpp.s
 
 # target to generate assembly for a file
 utils/Logger.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.s
 .PHONY : utils/Logger.cpp.s
 
 utils/PathUtils.o: utils/PathUtils.cpp.o
@@ -766,7 +790,7 @@ utils/PathUtils.o: utils/PathUtils.cpp.o
 
 # target to build an object file
 utils/PathUtils.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.o
 .PHONY : utils/PathUtils.cpp.o
 
 utils/PathUtils.i: utils/PathUtils.cpp.i
@@ -774,7 +798,7 @@ utils/PathUtils.i: utils/PathUtils.cpp.i
 
 # target to preprocess a source file
 utils/PathUtils.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.i
 .PHONY : utils/PathUtils.cpp.i
 
 utils/PathUtils.s: utils/PathUtils.cpp.s
@@ -782,7 +806,7 @@ utils/PathUtils.s: utils/PathUtils.cpp.s
 
 # target to generate assembly for a file
 utils/PathUtils.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.s
 .PHONY : utils/PathUtils.cpp.s
 
 world/BSPTree.o: world/BSPTree.cpp.o
@@ -790,7 +814,7 @@ world/BSPTree.o: world/BSPTree.cpp.o
 
 # target to build an object file
 world/BSPTree.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.o
 .PHONY : world/BSPTree.cpp.o
 
 world/BSPTree.i: world/BSPTree.cpp.i
@@ -798,7 +822,7 @@ world/BSPTree.i: world/BSPTree.cpp.i
 
 # target to preprocess a source file
 world/BSPTree.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.i
 .PHONY : world/BSPTree.cpp.i
 
 world/BSPTree.s: world/BSPTree.cpp.s
@@ -806,7 +830,7 @@ world/BSPTree.s: world/BSPTree.cpp.s
 
 # target to generate assembly for a file
 world/BSPTree.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.s
 .PHONY : world/BSPTree.cpp.s
 
 world/MapLoader.o: world/MapLoader.cpp.o
@@ -814,7 +838,7 @@ world/MapLoader.o: world/MapLoader.cpp.o
 
 # target to build an object file
 world/MapLoader.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.o
 .PHONY : world/MapLoader.cpp.o
 
 world/MapLoader.i: world/MapLoader.cpp.i
@@ -822,7 +846,7 @@ world/MapLoader.i: world/MapLoader.cpp.i
 
 # target to preprocess a source file
 world/MapLoader.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.i
 .PHONY : world/MapLoader.cpp.i
 
 world/MapLoader.s: world/MapLoader.cpp.s
@@ -830,7 +854,7 @@ world/MapLoader.s: world/MapLoader.cpp.s
 
 # target to generate assembly for a file
 world/MapLoader.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.s
 .PHONY : world/MapLoader.cpp.s
 
 world/WorldGeometry.o: world/WorldGeometry.cpp.o
@@ -838,7 +862,7 @@ world/WorldGeometry.o: world/WorldGeometry.cpp.o
 
 # target to build an object file
 world/WorldGeometry.cpp.o:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o
 .PHONY : world/WorldGeometry.cpp.o
 
 world/WorldGeometry.i: world/WorldGeometry.cpp.i
@@ -846,7 +870,7 @@ world/WorldGeometry.i: world/WorldGeometry.cpp.i
 
 # target to preprocess a source file
 world/WorldGeometry.cpp.i:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.i
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.i
 .PHONY : world/WorldGeometry.cpp.i
 
 world/WorldGeometry.s: world/WorldGeometry.cpp.s
@@ -854,7 +878,7 @@ world/WorldGeometry.s: world/WorldGeometry.cpp.s
 
 # target to generate assembly for a file
 world/WorldGeometry.cpp.s:
-	cd /Users/aimac/Development/paintwars/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.s
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.s
 .PHONY : world/WorldGeometry.cpp.s
 
 # Help Target
@@ -881,6 +905,9 @@ help:
 	@echo "... ecs/Components/Collidable.o"
 	@echo "... ecs/Components/Collidable.i"
 	@echo "... ecs/Components/Collidable.s"
+	@echo "... ecs/Components/MeshComponent.o"
+	@echo "... ecs/Components/MeshComponent.i"
+	@echo "... ecs/Components/MeshComponent.s"
 	@echo "... ecs/Components/Player.o"
 	@echo "... ecs/Components/Player.i"
 	@echo "... ecs/Components/Player.s"
@@ -967,7 +994,7 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/aimac/Development/paintwars/build && $(CMAKE_COMMAND) -P /Users/aimac/Development/paintwars/build/CMakeFiles/VerifyGlobs.cmake
-	cd /Users/aimac/Development/paintwars/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(CMAKE_COMMAND) -P /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles/VerifyGlobs.cmake
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
