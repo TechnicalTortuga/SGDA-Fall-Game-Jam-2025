@@ -5,6 +5,8 @@
 #include "../Components/Sprite.h"
 #include "../Components/Collidable.h"
 #include "../Components/Velocity.h"
+#include "../Components/TransformComponent.h"
+#include "../Systems/MeshSystem.h"
 #include "../../core/Engine.h"
 #include "../../rendering/TextureManager.h"
 #include "../../utils/Logger.h"
@@ -84,15 +86,14 @@ void WorldSystem::Update(float deltaTime) {
     for (Entity* entity : dynamicEntities_) {
         if (entity && entity->IsActive()) {
             auto position = entity->GetComponent<Position>();
-            auto mesh = entity->GetComponent<MeshComponent>();
-            if (mesh && position) {
+            auto transform = entity->GetComponent<TransformComponent>();
+            if (transform && position) {
                 // Only rotate entities in Room 3 (pyramid), not Room 2 (cube)
                 if (position->GetX() < 0.0f) { // Room 3 is at negative X coordinates
-                    // Rotate at 180 degrees per second (4x faster than 45)
-                    float currentRotation = mesh->GetRotationAngle();
+                    // Rotate at 180 degrees per second around Y axis
                     float rotationSpeed = 180.0f * 0.01745329252f; // 180 degrees to radians
-                    float newRotation = currentRotation + (rotationSpeed * deltaTime);
-                    mesh->SetRotation(newRotation, {0, 1, 0});
+                    Quaternion rotationDelta = QuaternionFromAxisAngle({0, 1, 0}, rotationSpeed * deltaTime);
+                    transform->rotation = QuaternionMultiply(transform->rotation, rotationDelta);
                 }
             }
         }
@@ -743,24 +744,33 @@ void WorldSystem::AddTestDynamicEntity() {
     cubeEntity->AddComponent<Position>(21.0f, 2.0f, 0.0f); // Floating above ground
     LOG_INFO("Added Position component to cube at (21, 2, 0) in Room 2");
 
+    // Add transform component for the cube (static - no rotation)
+    auto cubeTransform = cubeEntity->AddComponent<TransformComponent>();
+    cubeTransform->position = {21.0f, 2.0f, 0.0f};
+    cubeTransform->rotation = QuaternionIdentity(); // No rotation
+    LOG_INFO("Added Transform component to cube (static)");
+
     // Add mesh component with cube geometry
     auto cubeMesh = cubeEntity->AddComponent<MeshComponent>();
-    cubeMesh->CreateCube(2.0f, WHITE); // Orange texture will be applied via material system
-    cubeMesh->SetMaterial(3); // Use orange texture material ID 3
 
-    // Set the actual texture for rendering
-    if (worldGeometry_ && worldGeometry_->materials.size() > 3) {
-        cubeMesh->SetTexture(worldGeometry_->materials[3].texture);
-        LOG_INFO("Set orange texture on cube mesh (texture ID: " + std::to_string(worldGeometry_->materials[3].texture.id) + ")");
+    // Use MeshSystem to create cube geometry
+    auto meshSystem = GetEngine()->GetSystem<MeshSystem>();
+    if (meshSystem) {
+        meshSystem->CreateCube(cubeEntity, 2.0f, WHITE);
+        meshSystem->SetMaterial(cubeEntity, 3); // Use orange texture material ID 3
+
+        // Set the actual texture for rendering
+        if (worldGeometry_ && worldGeometry_->materials.size() > 3) {
+            meshSystem->SetTexture(cubeEntity, worldGeometry_->materials[3].texture);
+            LOG_INFO("Set orange texture on cube mesh (texture ID: " + std::to_string(worldGeometry_->materials[3].texture.id) + ")");
+        } else {
+            LOG_WARNING("Could not set texture on cube - worldGeometry or material 3 not available");
+        }
+
+        LOG_INFO("Added Mesh component with orange cube (material ID 3)");
     } else {
-        LOG_WARNING("Could not set texture on cube - worldGeometry or material 3 not available");
+        LOG_ERROR("MeshSystem not available for cube creation");
     }
-
-    LOG_INFO("Added Mesh component with orange cube (material ID 3)");
-
-    // No rotation for the cube (static test)
-    cubeMesh->SetRotation(0.0f, {0, 1, 0});
-    LOG_INFO("Cube is static (no rotation)");
 
     // Add velocity component (stationary)
     auto* cubeVelocity = cubeEntity->AddComponent<Velocity>();
@@ -791,14 +801,23 @@ void WorldSystem::AddTestDynamicEntity() {
     pyramidEntity->AddComponent<Position>(-15.0f, 3.0f, 0.0f); // Hovering above ground
     LOG_INFO("Added Position component to pyramid at (-15, 3, 0) in Room 3");
 
+    // Add transform component for the pyramid (will be rotated)
+    auto pyramidTransform = pyramidEntity->AddComponent<TransformComponent>();
+    pyramidTransform->position = {-15.0f, 3.0f, 0.0f};
+    pyramidTransform->rotation = QuaternionIdentity(); // Start with no rotation
+    LOG_INFO("Added Transform component to pyramid (rotating)");
+
     // Add mesh component with pyramid geometry
     auto pyramidMesh = pyramidEntity->AddComponent<MeshComponent>();
-    pyramidMesh->CreatePyramid(2.0f, 3.0f, {RED, GREEN, BLUE, YELLOW, GRAY}); // Different colored faces
-    LOG_INFO("Added Mesh component with colored pyramid");
 
-    // Set initial rotation (will be updated each frame for animation)
-    pyramidMesh->SetRotation(0.0f, {0, 1, 0}); // Start with no rotation, rotate around Y axis
-    LOG_INFO("Set pyramid rotation around Y axis");
+    // Use MeshSystem to create pyramid geometry
+    auto pyramidMeshSystem = GetEngine()->GetSystem<MeshSystem>();
+    if (pyramidMeshSystem) {
+        pyramidMeshSystem->CreatePyramid(pyramidEntity, 2.0f, 3.0f, {RED, GREEN, BLUE, YELLOW, GRAY}); // Different colored faces
+        LOG_INFO("Added Mesh component with colored pyramid");
+    } else {
+        LOG_ERROR("MeshSystem not available for pyramid creation");
+    }
 
     // Add velocity component for movement (optional)
     auto* pyramidVelocity = pyramidEntity->AddComponent<Velocity>();

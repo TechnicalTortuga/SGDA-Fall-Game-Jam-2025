@@ -1,13 +1,23 @@
 #pragma once
 
-class Entity;
+/*
+Component - Pure data container for ECS architecture
 
+Components are pure data structures with no knowledge of their containing entity.
+All logic that operates on component data lives in Systems, not in components themselves.
+
+This design enables:
+- Cache-friendly memory layout
+- Easy serialization for networking
+- Independent component testing
+- Parallel system processing
+*/
 class Component {
 public:
-    Component() : owner_(nullptr) {}
+    Component() = default;
     virtual ~Component() = default;
 
-    // Prevent copying
+    // Prevent copying (use move semantics)
     Component(const Component&) = delete;
     Component& operator=(const Component&) = delete;
 
@@ -15,14 +25,6 @@ public:
     Component(Component&&) = default;
     Component& operator=(Component&&) = default;
 
-    // Access to owner entity
-    Entity* GetOwner() const { return owner_; }
-
-    // Virtual methods for component lifecycle
-    virtual void OnAttach() {}    // Called when component is attached to entity
-    virtual void OnDetach() {}    // Called when component is detached from entity
-
-private:
-    friend class Entity;
-    Entity* owner_;
+    // Optional: Component type identification for debugging
+    virtual const char* GetTypeName() const { return "Component"; }
 };

@@ -3,10 +3,12 @@
 #include "../../ecs/Components/Position.h"
 #include "../../ecs/Components/Sprite.h"
 #include "../../ecs/Components/MeshComponent.h"
+#include "../../ecs/Systems/MeshSystem.h"  // Include before Engine.h for template instantiation
+#include "../../core/Engine.h"
 #include "../../utils/Logger.h"
 
 RenderSystem::RenderSystem()
-    : debugRendering_(true), gridEnabled_(true),  // Enable grid to see if 3D rendering works
+    : meshSystem_(nullptr), assetSystem_(nullptr), debugRendering_(true), gridEnabled_(true),  // Enable grid to see if 3D rendering works
       playerPosX_(0.0f), playerPosY_(0.0f), playerPosZ_(0.0f)
 {
     LOG_INFO("RenderSystem constructed; signature set during Initialize()");
@@ -24,6 +26,34 @@ void RenderSystem::Initialize()
     // Set signature to get entities with Position AND (Sprite OR Mesh)
     // We'll handle the OR logic in CollectRenderCommands
     SetSignature<Position>();
+
+    // Get system references
+    if (GetEngine()) {
+        meshSystem_ = GetEngine()->GetSystem<MeshSystem>();
+        assetSystem_ = GetEngine()->GetSystem<AssetSystem>();
+
+        if (meshSystem_) {
+            LOG_INFO("RenderSystem acquired MeshSystem reference");
+        } else {
+            LOG_WARNING("RenderSystem could not acquire MeshSystem reference");
+        }
+
+        if (assetSystem_) {
+            LOG_INFO("RenderSystem acquired AssetSystem reference");
+        } else {
+            LOG_WARNING("RenderSystem could not acquire AssetSystem reference");
+        }
+
+        // Pass system references to Renderer
+        if (meshSystem_) {
+            renderer_.SetMeshSystem(meshSystem_);
+        }
+        if (assetSystem_) {
+            renderer_.SetAssetSystem(assetSystem_);
+        }
+    } else {
+        LOG_ERROR("RenderSystem has no engine reference");
+    }
 
     LOG_INFO("RenderSystem signature set (requires Position, optional Sprite/Mesh)");
     LOG_INFO("RenderSystem initialized and ready for entity registration");

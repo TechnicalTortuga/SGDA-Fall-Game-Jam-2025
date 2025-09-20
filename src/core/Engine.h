@@ -109,4 +109,5 @@ private:
     uint64_t GenerateEntityId();
     void InitializeEventManager();
     void InitializeStateManager();
+    void RegisterEssentialComponents();
 };

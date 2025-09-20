@@ -114,10 +114,24 @@ src/CMakeFiles/paintsplash.dir/core/StateManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/paintsplash.dir/core/StateManager.cpp.s"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/core/StateManager.cpp -o CMakeFiles/paintsplash.dir/core/StateManager.cpp.s
 
+src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
+src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/ComponentRegistry.cpp
+src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.o"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/ComponentRegistry.cpp
+
+src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.i"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/ComponentRegistry.cpp > CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.i
+
+src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.s"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/ComponentRegistry.cpp -o CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.s
+
 src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Collidable.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Collidable.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.i: cmake_force
@@ -131,7 +145,7 @@ src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/MeshComponent.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/MeshComponent.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.i: cmake_force
@@ -145,7 +159,7 @@ src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Player.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Player.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.i: cmake_force
@@ -159,7 +173,7 @@ src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Position.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Position.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.i: cmake_force
@@ -173,7 +187,7 @@ src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Sprite.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Sprite.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.i: cmake_force
@@ -184,10 +198,24 @@ src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.s"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Sprite.cpp -o CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.s
 
+src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
+src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/TransformComponent.cpp
+src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.o"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/TransformComponent.cpp
+
+src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.i"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/TransformComponent.cpp > CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.i
+
+src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.s"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/TransformComponent.cpp -o CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.s
+
 src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Velocity.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/Velocity.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.i: cmake_force
@@ -201,7 +229,7 @@ src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Entity.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Entity.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.i: cmake_force
@@ -215,7 +243,7 @@ src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/ecs/System.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/System.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/System.cpp
 src/CMakeFiles/paintsplash.dir/ecs/System.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/System.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/System.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/System.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/System.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/System.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/System.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/System.cpp.i: cmake_force
@@ -226,10 +254,24 @@ src/CMakeFiles/paintsplash.dir/ecs/System.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/paintsplash.dir/ecs/System.cpp.s"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/System.cpp -o CMakeFiles/paintsplash.dir/ecs/System.cpp.s
 
+src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
+src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/AssetSystem.cpp
+src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.o"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/AssetSystem.cpp
+
+src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.i"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/AssetSystem.cpp > CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.i
+
+src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.s"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/AssetSystem.cpp -o CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.s
+
 src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/CollisionSystem.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/CollisionSystem.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.i: cmake_force
@@ -240,10 +282,24 @@ src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.s"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/CollisionSystem.cpp -o CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.s
 
+src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
+src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/EntitySystem.cpp
+src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.o"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/EntitySystem.cpp
+
+src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.i"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/EntitySystem.cpp > CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.i
+
+src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.s"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/EntitySystem.cpp -o CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.s
+
 src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/InputSystem.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/InputSystem.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.i: cmake_force
@@ -254,10 +310,24 @@ src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.s"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/InputSystem.cpp -o CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.s
 
+src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
+src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/MeshSystem.cpp
+src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/MeshSystem.cpp
+
+src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.i"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/MeshSystem.cpp > CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.i
+
+src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.s"
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/MeshSystem.cpp -o CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.s
+
 src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/PlayerSystem.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/PlayerSystem.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.i: cmake_force
@@ -271,7 +341,7 @@ src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/RenderSystem.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/RenderSystem.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.i: cmake_force
@@ -285,7 +355,7 @@ src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/WorldSystem.cpp
 src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o -MF CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o.d -o CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/WorldSystem.cpp
 
 src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.i: cmake_force
@@ -299,7 +369,7 @@ src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/events/EventManager.cpp
 src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.o -MF CMakeFiles/paintsplash.dir/events/EventManager.cpp.o.d -o CMakeFiles/paintsplash.dir/events/EventManager.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/events/EventManager.cpp
 
 src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.i: cmake_force
@@ -313,7 +383,7 @@ src/CMakeFiles/paintsplash.dir/events/EventManager.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/input/Input.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/input/Input.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/input/Input.cpp
 src/CMakeFiles/paintsplash.dir/input/Input.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object src/CMakeFiles/paintsplash.dir/input/Input.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object src/CMakeFiles/paintsplash.dir/input/Input.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/input/Input.cpp.o -MF CMakeFiles/paintsplash.dir/input/Input.cpp.o.d -o CMakeFiles/paintsplash.dir/input/Input.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/input/Input.cpp
 
 src/CMakeFiles/paintsplash.dir/input/Input.cpp.i: cmake_force
@@ -327,7 +397,7 @@ src/CMakeFiles/paintsplash.dir/input/Input.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/main.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/main.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/main.cpp
 src/CMakeFiles/paintsplash.dir/main.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object src/CMakeFiles/paintsplash.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object src/CMakeFiles/paintsplash.dir/main.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/main.cpp.o -MF CMakeFiles/paintsplash.dir/main.cpp.o.d -o CMakeFiles/paintsplash.dir/main.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/main.cpp
 
 src/CMakeFiles/paintsplash.dir/main.cpp.i: cmake_force
@@ -341,7 +411,7 @@ src/CMakeFiles/paintsplash.dir/main.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/physics/PhysicsSystem.cpp
 src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.o -MF CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.o.d -o CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/physics/PhysicsSystem.cpp
 
 src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.i: cmake_force
@@ -355,7 +425,7 @@ src/CMakeFiles/paintsplash.dir/physics/PhysicsSystem.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/Renderer.cpp
 src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.o -MF CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.o.d -o CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/Renderer.cpp
 
 src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.i: cmake_force
@@ -369,7 +439,7 @@ src/CMakeFiles/paintsplash.dir/rendering/Renderer.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/Skybox.cpp
 src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o -MF CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o.d -o CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/Skybox.cpp
 
 src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.i: cmake_force
@@ -383,7 +453,7 @@ src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/TextureManager.cpp
 src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o -MF CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o.d -o CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/TextureManager.cpp
 
 src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.i: cmake_force
@@ -397,7 +467,7 @@ src/CMakeFiles/paintsplash.dir/rendering/TextureManager.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/WorldRenderer.cpp
 src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.o -MF CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.o.d -o CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/WorldRenderer.cpp
 
 src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.i: cmake_force
@@ -411,7 +481,7 @@ src/CMakeFiles/paintsplash.dir/rendering/WorldRenderer.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ui/ConsoleSystem.cpp
 src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.o -MF CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.o.d -o CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ui/ConsoleSystem.cpp
 
 src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.i: cmake_force
@@ -425,7 +495,7 @@ src/CMakeFiles/paintsplash.dir/ui/ConsoleSystem.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/utils/Logger.cpp
 src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.o -MF CMakeFiles/paintsplash.dir/utils/Logger.cpp.o.d -o CMakeFiles/paintsplash.dir/utils/Logger.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/utils/Logger.cpp
 
 src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.i: cmake_force
@@ -439,7 +509,7 @@ src/CMakeFiles/paintsplash.dir/utils/Logger.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/utils/PathUtils.cpp
 src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.o -MF CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.o.d -o CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/utils/PathUtils.cpp
 
 src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.i: cmake_force
@@ -453,7 +523,7 @@ src/CMakeFiles/paintsplash.dir/utils/PathUtils.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/BSPTree.cpp
 src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.o -MF CMakeFiles/paintsplash.dir/world/BSPTree.cpp.o.d -o CMakeFiles/paintsplash.dir/world/BSPTree.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/BSPTree.cpp
 
 src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.i: cmake_force
@@ -467,7 +537,7 @@ src/CMakeFiles/paintsplash.dir/world/BSPTree.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/MapLoader.cpp
 src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.o -MF CMakeFiles/paintsplash.dir/world/MapLoader.cpp.o.d -o CMakeFiles/paintsplash.dir/world/MapLoader.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/MapLoader.cpp
 
 src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.i: cmake_force
@@ -481,7 +551,7 @@ src/CMakeFiles/paintsplash.dir/world/MapLoader.cpp.s: cmake_force
 src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o: src/CMakeFiles/paintsplash.dir/flags.make
 src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o: /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/WorldGeometry.cpp
 src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o: src/CMakeFiles/paintsplash.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o -MF CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o.d -o CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o -c /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/world/WorldGeometry.cpp
 
 src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.i: cmake_force
@@ -497,16 +567,21 @@ paintsplash_OBJECTS = \
 "CMakeFiles/paintsplash.dir/Game.cpp.o" \
 "CMakeFiles/paintsplash.dir/core/Engine.cpp.o" \
 "CMakeFiles/paintsplash.dir/core/StateManager.cpp.o" \
+"CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o" \
+"CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/System.cpp.o" \
+"CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o" \
+"CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o" \
+"CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o" \
 "CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o" \
@@ -531,16 +606,21 @@ paintsplash_EXTERNAL_OBJECTS =
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/Game.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/core/Engine.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/core/StateManager.cpp.o
+bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Components/Collidable.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Components/Player.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Components/Position.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.o
+bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Components/Velocity.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/System.cpp.o
+bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.o
+bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o
+bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o
@@ -561,7 +641,7 @@ bin/paintsplash: src/CMakeFiles/paintsplash.dir/world/WorldGeometry.cpp.o
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/build.make
 bin/paintsplash: /opt/homebrew/lib/libraylib.dylib
 bin/paintsplash: src/CMakeFiles/paintsplash.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Linking CXX executable ../bin/paintsplash"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Linking CXX executable ../bin/paintsplash"
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/paintsplash.dir/link.txt --verbose=$(VERBOSE)
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /opt/homebrew/bin/cmake -E copy_directory /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/assets /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/bin/assets
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/src && /opt/homebrew/bin/cmake -E copy_directory /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/shaders /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/bin/shaders

@@ -11,6 +11,12 @@
 #include "ecs/Systems/CollisionSystem.h"
 #include "physics/PhysicsSystem.h"
 #include "ui/ConsoleSystem.h"
+#include "ecs/Systems/MeshSystem.h"
+#include "ecs/Systems/AssetSystem.h"
+#include "ecs/ComponentRegistry.h"
+#include "ecs/Components/MaterialComponent.h"
+#include "ecs/Components/TextureComponent.h"
+#include "ecs/Components/MeshComponent.h"
 #include "utils/Logger.h"
 
 Engine::Engine()
@@ -40,9 +46,14 @@ bool Engine::Initialize() {
         auto worldSystem = AddSystem<WorldSystem>();
         auto collisionSystem = AddSystem<CollisionSystem>();
         auto physicsSystem = AddSystem<PhysicsSystem>();
+        AddSystem<MeshSystem>();
+        auto assetSystem = AddSystem<AssetSystem>();
         auto consoleSystem = AddSystem<ConsoleSystem>();
 
         // NOTE: MovementSystem removed - PhysicsSystem handles all movement now
+
+        // Register essential ECR components with ComponentRegistry
+        RegisterEssentialComponents();
 
         // Initialize systems
         for (auto& system : systems_) {
@@ -285,6 +296,25 @@ void Engine::InitializeStateManager()
         stateManager_ = new StateManager(eventManager_);
         LOG_INFO("StateManager initialized");
     }
+}
+
+void Engine::RegisterEssentialComponents()
+{
+    LOG_INFO("Registering essential ECR components...");
+
+    // Get the ComponentRegistry instance
+    ComponentRegistry& registry = ComponentRegistry::GetInstance();
+
+    // Register MaterialComponent (network-serializable for multiplayer)
+    registry.RegisterComponent<MaterialComponent>("MaterialComponent", true);
+
+    // Register TextureComponent (network-serializable for multiplayer)
+    registry.RegisterComponent<TextureComponent>("TextureComponent", true);
+
+    // Register MeshComponent (network-serializable for multiplayer)
+    registry.RegisterComponent<MeshComponent>("MeshComponent", true);
+
+    LOG_INFO("Essential ECR components registered successfully");
 }
 
 

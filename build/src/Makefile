@@ -233,6 +233,30 @@ core/StateManager.cpp.s:
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/core/StateManager.cpp.s
 .PHONY : core/StateManager.cpp.s
 
+ecs/ComponentRegistry.o: ecs/ComponentRegistry.cpp.o
+.PHONY : ecs/ComponentRegistry.o
+
+# target to build an object file
+ecs/ComponentRegistry.cpp.o:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.o
+.PHONY : ecs/ComponentRegistry.cpp.o
+
+ecs/ComponentRegistry.i: ecs/ComponentRegistry.cpp.i
+.PHONY : ecs/ComponentRegistry.i
+
+# target to preprocess a source file
+ecs/ComponentRegistry.cpp.i:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.i
+.PHONY : ecs/ComponentRegistry.cpp.i
+
+ecs/ComponentRegistry.s: ecs/ComponentRegistry.cpp.s
+.PHONY : ecs/ComponentRegistry.s
+
+# target to generate assembly for a file
+ecs/ComponentRegistry.cpp.s:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/ComponentRegistry.cpp.s
+.PHONY : ecs/ComponentRegistry.cpp.s
+
 ecs/Components/Collidable.o: ecs/Components/Collidable.cpp.o
 .PHONY : ecs/Components/Collidable.o
 
@@ -353,6 +377,30 @@ ecs/Components/Sprite.cpp.s:
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/Sprite.cpp.s
 .PHONY : ecs/Components/Sprite.cpp.s
 
+ecs/Components/TransformComponent.o: ecs/Components/TransformComponent.cpp.o
+.PHONY : ecs/Components/TransformComponent.o
+
+# target to build an object file
+ecs/Components/TransformComponent.cpp.o:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.o
+.PHONY : ecs/Components/TransformComponent.cpp.o
+
+ecs/Components/TransformComponent.i: ecs/Components/TransformComponent.cpp.i
+.PHONY : ecs/Components/TransformComponent.i
+
+# target to preprocess a source file
+ecs/Components/TransformComponent.cpp.i:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.i
+.PHONY : ecs/Components/TransformComponent.cpp.i
+
+ecs/Components/TransformComponent.s: ecs/Components/TransformComponent.cpp.s
+.PHONY : ecs/Components/TransformComponent.s
+
+# target to generate assembly for a file
+ecs/Components/TransformComponent.cpp.s:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Components/TransformComponent.cpp.s
+.PHONY : ecs/Components/TransformComponent.cpp.s
+
 ecs/Components/Velocity.o: ecs/Components/Velocity.cpp.o
 .PHONY : ecs/Components/Velocity.o
 
@@ -425,6 +473,30 @@ ecs/System.cpp.s:
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/System.cpp.s
 .PHONY : ecs/System.cpp.s
 
+ecs/Systems/AssetSystem.o: ecs/Systems/AssetSystem.cpp.o
+.PHONY : ecs/Systems/AssetSystem.o
+
+# target to build an object file
+ecs/Systems/AssetSystem.cpp.o:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.o
+.PHONY : ecs/Systems/AssetSystem.cpp.o
+
+ecs/Systems/AssetSystem.i: ecs/Systems/AssetSystem.cpp.i
+.PHONY : ecs/Systems/AssetSystem.i
+
+# target to preprocess a source file
+ecs/Systems/AssetSystem.cpp.i:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.i
+.PHONY : ecs/Systems/AssetSystem.cpp.i
+
+ecs/Systems/AssetSystem.s: ecs/Systems/AssetSystem.cpp.s
+.PHONY : ecs/Systems/AssetSystem.s
+
+# target to generate assembly for a file
+ecs/Systems/AssetSystem.cpp.s:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/AssetSystem.cpp.s
+.PHONY : ecs/Systems/AssetSystem.cpp.s
+
 ecs/Systems/CollisionSystem.o: ecs/Systems/CollisionSystem.cpp.o
 .PHONY : ecs/Systems/CollisionSystem.o
 
@@ -449,6 +521,30 @@ ecs/Systems/CollisionSystem.cpp.s:
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/CollisionSystem.cpp.s
 .PHONY : ecs/Systems/CollisionSystem.cpp.s
 
+ecs/Systems/EntitySystem.o: ecs/Systems/EntitySystem.cpp.o
+.PHONY : ecs/Systems/EntitySystem.o
+
+# target to build an object file
+ecs/Systems/EntitySystem.cpp.o:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.o
+.PHONY : ecs/Systems/EntitySystem.cpp.o
+
+ecs/Systems/EntitySystem.i: ecs/Systems/EntitySystem.cpp.i
+.PHONY : ecs/Systems/EntitySystem.i
+
+# target to preprocess a source file
+ecs/Systems/EntitySystem.cpp.i:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.i
+.PHONY : ecs/Systems/EntitySystem.cpp.i
+
+ecs/Systems/EntitySystem.s: ecs/Systems/EntitySystem.cpp.s
+.PHONY : ecs/Systems/EntitySystem.s
+
+# target to generate assembly for a file
+ecs/Systems/EntitySystem.cpp.s:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/EntitySystem.cpp.s
+.PHONY : ecs/Systems/EntitySystem.cpp.s
+
 ecs/Systems/InputSystem.o: ecs/Systems/InputSystem.cpp.o
 .PHONY : ecs/Systems/InputSystem.o
 
@@ -472,6 +568,30 @@ ecs/Systems/InputSystem.s: ecs/Systems/InputSystem.cpp.s
 ecs/Systems/InputSystem.cpp.s:
 	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.s
 .PHONY : ecs/Systems/InputSystem.cpp.s
+
+ecs/Systems/MeshSystem.o: ecs/Systems/MeshSystem.cpp.o
+.PHONY : ecs/Systems/MeshSystem.o
+
+# target to build an object file
+ecs/Systems/MeshSystem.cpp.o:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o
+.PHONY : ecs/Systems/MeshSystem.cpp.o
+
+ecs/Systems/MeshSystem.i: ecs/Systems/MeshSystem.cpp.i
+.PHONY : ecs/Systems/MeshSystem.i
+
+# target to preprocess a source file
+ecs/Systems/MeshSystem.cpp.i:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.i
+.PHONY : ecs/Systems/MeshSystem.cpp.i
+
+ecs/Systems/MeshSystem.s: ecs/Systems/MeshSystem.cpp.s
+.PHONY : ecs/Systems/MeshSystem.s
+
+# target to generate assembly for a file
+ecs/Systems/MeshSystem.cpp.s:
+	cd /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.s
+.PHONY : ecs/Systems/MeshSystem.cpp.s
 
 ecs/Systems/PlayerSystem.o: ecs/Systems/PlayerSystem.cpp.o
 .PHONY : ecs/Systems/PlayerSystem.o
@@ -902,6 +1022,9 @@ help:
 	@echo "... core/StateManager.o"
 	@echo "... core/StateManager.i"
 	@echo "... core/StateManager.s"
+	@echo "... ecs/ComponentRegistry.o"
+	@echo "... ecs/ComponentRegistry.i"
+	@echo "... ecs/ComponentRegistry.s"
 	@echo "... ecs/Components/Collidable.o"
 	@echo "... ecs/Components/Collidable.i"
 	@echo "... ecs/Components/Collidable.s"
@@ -917,6 +1040,9 @@ help:
 	@echo "... ecs/Components/Sprite.o"
 	@echo "... ecs/Components/Sprite.i"
 	@echo "... ecs/Components/Sprite.s"
+	@echo "... ecs/Components/TransformComponent.o"
+	@echo "... ecs/Components/TransformComponent.i"
+	@echo "... ecs/Components/TransformComponent.s"
 	@echo "... ecs/Components/Velocity.o"
 	@echo "... ecs/Components/Velocity.i"
 	@echo "... ecs/Components/Velocity.s"
@@ -926,12 +1052,21 @@ help:
 	@echo "... ecs/System.o"
 	@echo "... ecs/System.i"
 	@echo "... ecs/System.s"
+	@echo "... ecs/Systems/AssetSystem.o"
+	@echo "... ecs/Systems/AssetSystem.i"
+	@echo "... ecs/Systems/AssetSystem.s"
 	@echo "... ecs/Systems/CollisionSystem.o"
 	@echo "... ecs/Systems/CollisionSystem.i"
 	@echo "... ecs/Systems/CollisionSystem.s"
+	@echo "... ecs/Systems/EntitySystem.o"
+	@echo "... ecs/Systems/EntitySystem.i"
+	@echo "... ecs/Systems/EntitySystem.s"
 	@echo "... ecs/Systems/InputSystem.o"
 	@echo "... ecs/Systems/InputSystem.i"
 	@echo "... ecs/Systems/InputSystem.s"
+	@echo "... ecs/Systems/MeshSystem.o"
+	@echo "... ecs/Systems/MeshSystem.i"
+	@echo "... ecs/Systems/MeshSystem.s"
 	@echo "... ecs/Systems/PlayerSystem.o"
 	@echo "... ecs/Systems/PlayerSystem.i"
 	@echo "... ecs/Systems/PlayerSystem.s"

@@ -132,17 +132,26 @@
 
 ---
 
-## 📁 **Current Project Structure**
+## 📁 **Current Project Structure** (PRE-ECR)
 
 ```
 src/
 ├── core/                   # Engine, StateManager, EventManager
 ├── ecs/
 │   ├── Components/         # Position, Velocity, Player, Collidable...
+│   │   ├── ⚠️  MeshComponent.h - VIOLATION: Direct texture storage
+│   │   ├── ⚠️  Component.h - VIOLATION: Owner entity coupling
+│   │   └── ✅ Position.h, Velocity.h - Pure data components
 │   └── Systems/           # Render, Physics, Collision, Input, Player...
-├── world/                 # BSPTree, MapLoader, WorldGeometry  
+│       ├── ⚠️  WorldSystem.h - VIOLATION: Multiple responsibilities
+│       ├── ⚠️  RenderSystem.h - VIOLATION: Mixed static/dynamic rendering
+│       └── ✅ CollisionSystem.h - Focused responsibility
+├── world/                 # BSPTree, MapLoader, WorldGeometry
+│   ├── ⚠️  WorldGeometry.h - VIOLATION: ECS data in non-ECS class
+│   └── ✅ BSPTree.h - Pure spatial partitioning
 ├── physics/               # Advanced collision system with constraints
 ├── rendering/             # WorldRenderer, Skybox, TextureManager
+│   └── ⚠️  WorldRenderer - VIOLATION: Tightly coupled to WorldGeometry
 ├── input/                 # Action-based input mapping
 ├── ui/                    # Developer console and UI systems
 └── utils/                 # Logger, PathUtils, math utilities
@@ -154,6 +163,195 @@ assets/
 │   └── skyboxcubemaps/    # 360° environment maps
 └── shaders/               # GLSL shaders for rendering
 ```
+
+## 🚨 **CRITICAL: ECS Architecture Violations Identified**
+
+### **Immediate Violations Requiring ECR (ECS Compliance Refactoring)**
+
+#### **1. Component Coupling Violations** 🔴
+- **Owner Entity Reference**: `Component.h` stores direct Entity* owner - violates data-only principle
+- **Heavy Resource Storage**: `MeshComponent` stores `Texture2D` directly - components should be lightweight
+- **Logic in Components**: `MeshComponent` has transform/rotation methods - logic belongs in systems
+- **Non-ECS Coupling**: Components reference `materialId_` from non-ECS `WorldGeometry`
+
+#### **2. System Responsibility Violations** 🔴
+- **WorldSystem Overload**: Handles map loading + material creation + texture loading + entity creation
+- **Mixed Rendering**: Static geometry in `WorldRenderer`, dynamic in `RenderSystem`
+- **Resource Management**: `WorldGeometry` manages materials (non-ECS managing ECS concerns)
+
+#### **3. Resource Management Violations** 🟡
+- **Direct Texture Storage**: Components hold heavy `Texture2D` objects instead of lightweight IDs
+- **No Reference Counting**: No automatic cleanup when textures are no longer referenced
+- **Mixed Ownership**: ECS and non-ECS systems both manage the same resources
+
+#### **4. Architecture Violations** 🟡
+- **Tight Coupling**: Systems depend on specific component implementations
+- **Cross-Contamination**: ECS and non-ECS concerns are mixed throughout
+- **No Clear Boundaries**: Hard to test systems independently
+
+---
+
+## 🛠️ **ECR (ECS Compliance Refactoring) Plan**
+
+### **Phase 1: Foundation & Safety Nets** (Week 1-2)
+- ✅ Create backup branch: `git checkout -b ecs-refactor-backup`
+- ✅ Implement ECSValidator for runtime validation
+- ✅ Add comprehensive logging and error recovery
+- ✅ Create ISystem interface with standardized lifecycle
+
+### **Phase 2: AssetSystem Implementation** (Week 3-4)
+- ✅ **NEW: AssetSystem** - Centralized texture/material resource management
+- ✅ **NEW: TextureComponent** - Lightweight texture reference (ID + metadata only)
+- ✅ **NEW: MaterialComponent** - Material properties with texture entity references
+- ✅ Remove direct texture storage from MeshComponent
+
+### **Phase 3: Component Migration** (Week 5-6)
+- ✅ **TransformComponent** - Enhanced Position with scale/rotation/parenting
+- ✅ **Entity Relationship System** - Components reference other entities, not direct objects
+- ✅ Remove Component.owner_ coupling - use entity queries instead
+
+### **Phase 4: System Refactoring** (Week 7-8)
+- ✅ **WorldSystem Decoupling** - Focus only on map loading and static geometry
+- ✅ **MaterialSystem** - Handle material creation and assignment
+- ✅ **MeshSystem** - Handle procedural mesh generation and updates
+- ✅ **Unified RenderSystem** - Handle all rendering (static + dynamic)
+
+### **Phase 5: Integration & Optimization** (Week 9-10)
+- ✅ Event-driven system communication
+- ✅ Archetype-based storage optimization
+- ✅ Performance profiling and memory optimization
+
+---
+
+## 🌐 **PHASE 4: MULTIPLAYER & NETWORKING** (Q2 2026 - POST-ECR)
+
+### **Network Architecture** (ECR-Ready Design)
+
+#### **Transport Layer Decisions**
+- **UDP-Based**: Low-latency for FPS movement and paint projectiles
+- **P2P Mesh**: Direct player connections with relay server for NAT traversal
+- **Delta Compression**: Position/velocity updates with prediction/correction
+- **Authority Model**: Server-authoritative for paint/scoring, client-side prediction for movement
+
+#### **Network-Aware ECS Components**
+```cpp
+// Network-ready components (post-ECR)
+struct NetworkComponent : public Component {
+    uint32_t networkId = 0;        // Unique across network
+    uint32_t ownerId = 0;          // Owning client ID
+    NetworkAuthority authority;     // Server/Local/Proxy
+    float lastUpdateTime = 0.0f;   // For interpolation
+};
+
+struct InterpolatedTransformComponent : public Component {
+    Vector3 position;
+    Vector3 velocity;
+    Quaternion rotation;
+    // Network interpolation data
+    Vector3 targetPosition;
+    Quaternion targetRotation;
+    float interpolationTime = 0.0f;
+};
+```
+
+#### **Network Systems Architecture**
+```cpp
+src/networking/               # New directory post-ECR
+├── NetworkSystem.cpp        # Core network management
+├── ReplicationSystem.cpp    # Entity state synchronization
+├── InterpolationSystem.cpp  # Client-side prediction/interpolation
+├── TransportLayer.cpp       # UDP connection management
+└── NATTraversal.cpp         # P2P connection establishment
+```
+
+### **Team System (PaintWars Mechanics)**
+- **Color-Based Teams**: 4 teams with distinct paint colors (Red, Blue, Green, Yellow)
+- **Territory Control**: Paint coverage percentage determines score
+- **Dynamic Spawn Points**: Team-controlled spawn areas
+- **Win Conditions**: Time-based or percentage-based victory
+
+### **Paint Networking**
+- **Projectile Synchronization**: Authoritative server validation
+- **Surface State**: Distributed paint decal management
+- **Ownership Resolution**: Server arbitration for overlapping paint
+- **Bandwidth Optimization**: Region-based paint updates
+
+---
+
+## 📋 **Updated Project Structure** (POST-ECR + NETWORK)
+
+```
+src/
+├── core/                    # Engine, StateManager, EventManager
+├── ecs/                     # ✅ PURE ECS after ECR
+│   ├── Components/          # Pure data components only
+│   │   ├── MaterialComponent.h    # NEW: Entity relationships
+│   │   ├── TextureComponent.h     # NEW: Lightweight resource refs
+│   │   ├── TransformComponent.h   # NEW: Enhanced Position
+│   │   └── NetworkComponent.h     # NEW: Network state
+│   └── Systems/             # Logic-only systems
+│       ├── AssetSystem.h          # NEW: Resource management
+│       ├── MaterialSystem.h       # NEW: Material assignment
+│       ├── MeshSystem.h           # NEW: Mesh generation
+│       ├── RenderSystem.h         # NEW: Unified rendering
+│       └── WorldSystem.h          # REFACTORED: Map loading only
+├── networking/             # NEW: Multiplayer systems
+│   ├── NetworkSystem.h     # Core network management
+│   ├── ReplicationSystem.h # Entity synchronization
+│   └── InterpolationSystem.h # Client prediction
+├── world/                  # BSPTree, MapLoader
+├── physics/                # Collision system
+├── rendering/              # Shaders, graphics utilities
+├── input/                  # Action-based input
+├── ui/                     # Console, HUD, menus
+├── audio/                  # 3D audio system
+├── weapons/                # Paint gun mechanics
+├── teams/                  # Team management
+└── utils/                  # Logger, math utilities
+
+assets/
+├── maps/                   # Level data
+├── textures/               # Texture resources
+├── sounds/                 # Audio resources
+├── shaders/                # GLSL programs
+└── config/                 # Network/team configurations
+```
+
+---
+
+## 🎯 **Updated Development Roadmap**
+
+### **PHASE 3: Weapons & Paint System** (Current - Q1 2026)
+- **Week 1-2**: Paint gun mechanics and projectile physics
+- **Week 3-4**: Paint decal system with surface modification
+- **Week 5-6**: Audio system and 3D spatial sound
+- **Week 7-8**: **ECR Foundation** (safety nets and validation)
+- **Week 9-10**: **ECR AssetSystem** (resource management)
+- **Week 11-12**: Polish, testing, and ECR component migration
+
+### **PHASE 4: Multiplayer & Networking** (Q2 2026 - POST-ECR)
+- **Month 1**: Core networking infrastructure and P2P setup
+- **Month 2**: Entity synchronization and client prediction
+- **Month 3**: Team system and paint networking
+- **Month 4**: Game modes, matchmaking, and optimization
+
+---
+
+## 🚨 **CRITICAL DECISION POINT**
+
+**Before proceeding with Phase 3 weapons implementation, we MUST complete ECR (ECS Compliance Refactoring) to ensure:**
+
+1. **Clean Architecture**: Pure ECS principles for long-term maintainability
+2. **Network Readiness**: Proper component structure for synchronization
+3. **Performance**: Optimized component storage and system queries
+4. **Scalability**: Easy addition of new features without architectural debt
+
+**RECOMMENDATION**: Complete ECR Phases 1-2 during Phase 3 development, then proceed with full ECR before starting Phase 4 networking.
+
+---
+
+*Last Updated: September 20, 2025*
+*Current Status: ECR Analysis Complete - Ready for implementation planning*
 
 ---
 

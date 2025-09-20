@@ -7,6 +7,7 @@
 #include "../world/BSPTree.h"
 #include "../ecs/Components/Collidable.h"
 #include "../ecs/Components/MeshComponent.h"
+#include "../ecs/Systems/AssetSystem.h"
 
 class Entity;
 class Position;
@@ -83,10 +84,16 @@ struct RenderCommand {
     }
 };
 
+class MeshSystem;
+
 class Renderer {
 public:
     Renderer();
     ~Renderer();
+
+    // System access for resource operations
+    void SetMeshSystem(MeshSystem* meshSystem) { meshSystem_ = meshSystem; }
+    void SetAssetSystem(AssetSystem* assetSystem) { assetSystem_ = assetSystem; }
 
     // Main rendering methods
     void BeginFrame();
@@ -152,6 +159,10 @@ private:
     Camera3D camera_;
     int screenWidth_;
     int screenHeight_;
+
+    // System references
+    MeshSystem* meshSystem_;
+    AssetSystem* assetSystem_;
 
     // Camera rotation angles (standard FPS terminology)
     float yaw_;              // Horizontal rotation (left/right around Y axis)

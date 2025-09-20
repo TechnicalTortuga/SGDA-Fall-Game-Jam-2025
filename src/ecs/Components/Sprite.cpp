@@ -99,14 +99,5 @@ float Sprite::GetHeight() const
     return textureLoaded_ ? texture_.height * scale_ : 0.0f;
 }
 
-void Sprite::OnAttach()
-{
-    LOG_DEBUG("Sprite component attached to entity");
-}
-
-void Sprite::OnDetach()
-{
-    LOG_DEBUG("Sprite component detached from entity");
-    UnloadTexture();
-    ClearDecalOverlay();
-}
+// Removed OnAttach/OnDetach methods - ECS components should not have lifecycle knowledge
+// Texture unloading should be handled by AssetSystem, not component lifecycle

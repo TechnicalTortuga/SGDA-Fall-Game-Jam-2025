@@ -3,6 +3,8 @@
 #include "../System.h"
 #include "../../rendering/Renderer.h"
 #include "../Components/Velocity.h"
+#include "../Systems/MeshSystem.h"
+#include "../Systems/AssetSystem.h"
 #include <vector>
 
 class RenderSystem : public System {
@@ -34,6 +36,8 @@ public:
 
 private:
     Renderer renderer_;
+    MeshSystem* meshSystem_;
+    AssetSystem* assetSystem_;
     bool debugRendering_;
     bool gridEnabled_;
 

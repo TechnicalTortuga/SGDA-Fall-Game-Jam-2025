@@ -30,10 +30,9 @@ public:
         }
 
         auto component = std::make_unique<T>(std::forward<Args>(args)...);
-        component->owner_ = this;
+        // Removed owner coupling - components should not know about their entity
         T* rawPtr = component.get();
         components_[typeIndex] = std::move(component);
-
 
         return rawPtr;
     }

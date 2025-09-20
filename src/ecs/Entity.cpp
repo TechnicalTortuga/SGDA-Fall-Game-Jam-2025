@@ -23,8 +23,9 @@ void Entity::AddComponent(std::unique_ptr<Component> component)
     }
 
     std::type_index typeIndex(typeid(*component));
-    component->owner_ = this;
+    // Removed owner coupling - components should not know about their entity
     components_[typeIndex] = std::move(component);
+    LOG_DEBUG("Added component " + std::string(component->GetTypeName()) + " to entity " + std::to_string(id_));
 }
 
 Component* Entity::GetComponent(std::type_index type) const

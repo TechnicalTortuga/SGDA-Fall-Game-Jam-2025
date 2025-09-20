@@ -42,9 +42,8 @@ public:
     float GetWidth() const;
     float GetHeight() const;
 
-    // Component lifecycle
-    void OnAttach() override;
-    void OnDetach() override;
+    // Component type identification
+    const char* GetTypeName() const override { return "Sprite"; }
 
 private:
     Texture2D texture_;

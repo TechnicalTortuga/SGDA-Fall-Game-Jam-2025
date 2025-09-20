@@ -3,11 +3,15 @@
 #include "../ecs/Components/Position.h"
 #include "../ecs/Components/Sprite.h"
 #include "../ecs/Components/MeshComponent.h"
+#include "../ecs/Components/TransformComponent.h"
+#include "../ecs/Systems/MeshSystem.h"
+#include "../ecs/Systems/AssetSystem.h"
 #include "utils/Logger.h"
 #include <algorithm>
 
 Renderer::Renderer()
     : screenWidth_(800), screenHeight_(600),
+      meshSystem_(nullptr), assetSystem_(nullptr),
       spritesRendered_(0), framesRendered_(0),
       yaw_(0.0f), pitch_(0.0f), mouseSensitivity_(0.15f),
       bspTree_(nullptr)
@@ -288,63 +292,83 @@ void Renderer::DrawMesh3D(const RenderCommand& command)
     Vector3 worldPos = command.position->GetPosition();
     const auto& mesh = *command.mesh;
 
-    // Apply rotation if set
-    if (mesh.GetRotationAngle() != 0.0f) {
-        rlPushMatrix();
-        rlTranslatef(worldPos.x, worldPos.y, worldPos.z);
-        rlRotatef(mesh.GetRotationAngle(), mesh.GetRotationAxis().x, mesh.GetRotationAxis().y, mesh.GetRotationAxis().z);
-        rlTranslatef(-worldPos.x, -worldPos.y, -worldPos.z);
+    // Check for TransformComponent for rotation (simplified approach)
+    auto transform = command.entity->GetComponent<TransformComponent>();
+    bool hasRotation = false;
+    Matrix rotationMatrix = MatrixIdentity();
+
+    if (transform) {
+        // Convert quaternion to rotation matrix for vertex transformation
+        Vector3 rotationAxis;
+        float rotationAngle;
+        QuaternionToAxisAngle(transform->rotation, &rotationAxis, &rotationAngle);
+
+        if (rotationAngle != 0.0f) {
+            hasRotation = true;
+            rotationMatrix = MatrixRotate(rotationAxis, rotationAngle);
+        }
     }
 
     // Set up material/texture if available
-    if (mesh.GetTexture().id != 0) {
-        // Bind the texture for this mesh
-        rlSetTexture(mesh.GetTexture().id);
+    if (meshSystem_) {
+        int materialId = meshSystem_->GetMaterial(command.entity);
+        if (materialId >= 0) {
+            // For now, use the legacy material ID system
+            // TODO: Replace with proper AssetSystem integration
+            LOG_DEBUG("Mesh has material ID " + std::to_string(materialId));
+        }
 
-        // Set texture parameters for better quality (similar to WorldRenderer)
-        SetTextureFilter(mesh.GetTexture(), TEXTURE_FILTER_BILINEAR);
-        SetTextureWrap(mesh.GetTexture(), TEXTURE_WRAP_REPEAT);
+        // Try to get texture from MeshSystem (legacy compatibility)
+        auto texture = meshSystem_->GetTexture(command.entity);
+        if (texture.id != 0) {
+            // Bind the texture for this mesh
+            rlSetTexture(texture.id);
 
-        LOG_DEBUG("Bound texture ID " + std::to_string(mesh.GetTexture().id) + " for mesh rendering");
-    } else if (mesh.GetMaterial() >= 0) {
-        // Fallback: could look up material from WorldGeometry in future
-        LOG_DEBUG("Mesh has material ID " + std::to_string(mesh.GetMaterial()) + " but no direct texture set");
+            // Set texture parameters for better quality (similar to WorldRenderer)
+            SetTextureFilter(texture, TEXTURE_FILTER_BILINEAR);
+            SetTextureWrap(texture, TEXTURE_WRAP_REPEAT);
+
+            LOG_DEBUG("Bound texture ID " + std::to_string(texture.id) + " for mesh rendering");
+        } else {
+            // No texture available, render with vertex colors only
+            LOG_DEBUG("Rendering mesh with vertex colors (no texture)");
+        }
     } else {
-        // No texture available, render with vertex colors only
-        LOG_DEBUG("Rendering mesh with vertex colors (no texture)");
+        LOG_WARNING("MeshSystem not available for texture/material access");
     }
 
     // Render triangles
     rlBegin(RL_TRIANGLES);
-    for (const auto& triangle : mesh.GetTriangles()) {
-        const auto& v1 = mesh.GetVertices()[triangle.v1];
-        const auto& v2 = mesh.GetVertices()[triangle.v2];
-        const auto& v3 = mesh.GetVertices()[triangle.v3];
+    for (const auto& triangle : mesh.triangles) {
+        const auto& v1 = mesh.vertices[triangle.v1];
+        const auto& v2 = mesh.vertices[triangle.v2];
+        const auto& v3 = mesh.vertices[triangle.v3];
+
+        // Apply rotation and translation to vertices
+        Vector3 pos1 = hasRotation ? Vector3Transform(v1.position, rotationMatrix) : v1.position;
+        Vector3 pos2 = hasRotation ? Vector3Transform(v2.position, rotationMatrix) : v2.position;
+        Vector3 pos3 = hasRotation ? Vector3Transform(v3.position, rotationMatrix) : v3.position;
 
         // Vertex 1
         rlColor4ub(v1.color.r, v1.color.g, v1.color.b, v1.color.a);
         rlTexCoord2f(v1.texCoord.x, v1.texCoord.y);
-        rlVertex3f(worldPos.x + v1.position.x, worldPos.y + v1.position.y, worldPos.z + v1.position.z);
+        rlVertex3f(worldPos.x + pos1.x, worldPos.y + pos1.y, worldPos.z + pos1.z);
 
         // Vertex 2
         rlColor4ub(v2.color.r, v2.color.g, v2.color.b, v2.color.a);
         rlTexCoord2f(v2.texCoord.x, v2.texCoord.y);
-        rlVertex3f(worldPos.x + v2.position.x, worldPos.y + v2.position.y, worldPos.z + v2.position.z);
+        rlVertex3f(worldPos.x + pos2.x, worldPos.y + pos2.y, worldPos.z + pos2.z);
 
         // Vertex 3
         rlColor4ub(v3.color.r, v3.color.g, v3.color.b, v3.color.a);
         rlTexCoord2f(v3.texCoord.x, v3.texCoord.y);
-        rlVertex3f(worldPos.x + v3.position.x, worldPos.y + v3.position.y, worldPos.z + v3.position.z);
+        rlVertex3f(worldPos.x + pos3.x, worldPos.y + pos3.y, worldPos.z + pos3.z);
     }
     rlEnd();
 
-    if (mesh.GetRotationAngle() != 0.0f) {
-        rlPopMatrix();
-    }
-
     LOG_INFO("Drew 3D mesh at (" + std::to_string(worldPos.x) + ", " +
              std::to_string(worldPos.y) + ", " + std::to_string(worldPos.z) + ") with " +
-             std::to_string(mesh.GetTriangleCount()) + " triangles");
+             std::to_string(mesh.triangles.size()) + " triangles");
 }
 
 void Renderer::DrawDebugInfo()
