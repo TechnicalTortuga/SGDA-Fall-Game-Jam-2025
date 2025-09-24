@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include <algorithm>
 #include <cfloat>
+#include <cmath>
 
 // Unified Axis-Aligned Bounding Box used across BSP, physics, and ECS
 struct AABB {

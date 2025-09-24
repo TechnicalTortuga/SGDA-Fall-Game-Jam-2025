@@ -37,6 +37,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o.d"
   "CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o"
   "CMakeFiles/paintsplash.dir/ecs/Systems/MeshSystem.cpp.o.d"
+  "CMakeFiles/paintsplash.dir/ecs/Systems/NetworkSystem.cpp.o"
+  "CMakeFiles/paintsplash.dir/ecs/Systems/NetworkSystem.cpp.o.d"
   "CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o"
   "CMakeFiles/paintsplash.dir/ecs/Systems/PlayerSystem.cpp.o.d"
   "CMakeFiles/paintsplash.dir/ecs/Systems/RenderSystem.cpp.o"

@@ -1,14 +1,14 @@
 # Target labels
  raygui-populate
 # Source files and their labels
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles/raygui-populate
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles/raygui-populate.rule
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles/raygui-populate-complete.rule
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-build.rule
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-configure.rule
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-download.rule
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-install.rule
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-mkdir.rule
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-patch.rule
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-test.rule
-/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update.rule
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles/raygui-populate
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles/raygui-populate.rule
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/CMakeFiles/raygui-populate-complete.rule
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-build.rule
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-configure.rule
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-download.rule
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-install.rule
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-mkdir.rule
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-patch.rule
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-test.rule
+/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/src/raygui-populate-stamp/raygui-populate-update.rule

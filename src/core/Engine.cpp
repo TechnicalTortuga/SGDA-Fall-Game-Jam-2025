@@ -17,6 +17,13 @@
 #include "ecs/Components/MaterialComponent.h"
 #include "ecs/Components/TextureComponent.h"
 #include "ecs/Components/MeshComponent.h"
+#include "ecs/Systems/NetworkSystem.h"
+#include "ecs/Systems/ReplicationSystem.h"
+#include "ecs/Systems/InterpolationSystem.h"
+#include "ecs/Components/NetworkComponent.h"
+#include "ecs/Components/InterpolatedTransformComponent.h"
+#include "ecs/Components/ReplicationComponent.h"
+#include "events/NetworkEvents.h"
 #include "utils/Logger.h"
 
 Engine::Engine()
@@ -49,6 +56,11 @@ bool Engine::Initialize() {
         AddSystem<MeshSystem>();
         auto assetSystem = AddSystem<AssetSystem>();
         auto consoleSystem = AddSystem<ConsoleSystem>();
+
+        // Create networking systems
+        auto networkSystem = AddSystem<NetworkSystem>();
+        auto replicationSystem = AddSystem<ReplicationSystem>();
+        auto interpolationSystem = AddSystem<InterpolationSystem>();
 
         // NOTE: MovementSystem removed - PhysicsSystem handles all movement now
 
@@ -83,6 +95,11 @@ bool Engine::Initialize() {
 
         if (inputSystem && playerSystem) {
             playerSystem->SetInputSystem(inputSystem);
+        }
+
+        // Set up networking system interdependencies
+        if (replicationSystem && networkSystem) {
+            replicationSystem->SetNetworkSystem(networkSystem);
         }
 
         LOG_INFO("Engine initialization completed successfully");
@@ -314,9 +331,109 @@ void Engine::RegisterEssentialComponents()
     // Register MeshComponent (network-serializable for multiplayer)
     registry.RegisterComponent<MeshComponent>("MeshComponent", true);
 
+    // Register networking components
+    registry.RegisterComponent<NetworkComponent>("NetworkComponent", true);
+    registry.RegisterComponent<InterpolatedTransformComponent>("InterpolatedTransformComponent", true);
+    registry.RegisterComponent<ReplicationComponent>("ReplicationComponent", true);
+
     LOG_INFO("Essential ECR components registered successfully");
 }
 
+// Networking method implementations
+bool Engine::InitializeNetwork(NetworkMode mode, uint16_t port) {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    if (!networkSystem) {
+        LOG_ERROR("NetworkSystem not found - cannot initialize networking");
+        return false;
+    }
+    
+    LOG_INFO("Initializing network in mode: " + std::to_string(static_cast<int>(mode)));
+    return networkSystem->InitializeNetwork(mode, port);
+}
+
+void Engine::ShutdownNetwork() {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    if (networkSystem) {
+        networkSystem->ShutdownNetwork();
+        LOG_INFO("Network shutdown completed");
+    }
+}
+
+bool Engine::IsNetworkEnabled() const {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    return networkSystem && networkSystem->IsConnected();
+}
+
+bool Engine::IsHost() const {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    return networkSystem && networkSystem->IsHost();
+}
+
+bool Engine::IsConnected() const {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    return networkSystem && networkSystem->IsConnected();
+}
+
+uint32_t Engine::GetLocalClientId() const {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    return networkSystem ? networkSystem->GetLocalClientId() : 0;
+}
+
+bool Engine::JoinLobby(const std::string& lobbyId) {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    if (!networkSystem) {
+        LOG_ERROR("NetworkSystem not found - cannot join lobby");
+        return false;
+    }
+    
+    LOG_INFO("Joining lobby: " + lobbyId);
+    return networkSystem->JoinLobby(lobbyId);
+}
+
+bool Engine::CreateLobby(const std::string& lobbyName) {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    if (!networkSystem) {
+        LOG_ERROR("NetworkSystem not found - cannot create lobby");
+        return false;
+    }
+    
+    LOG_INFO("Creating lobby: " + lobbyName);
+    return networkSystem->CreateLobby(lobbyName);
+}
+
+void Engine::LeaveLobby() {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    if (networkSystem) {
+        networkSystem->LeaveLobby();
+        LOG_INFO("Left current lobby");
+    }
+}
+
+bool Engine::RequestUDPHandoff(const std::string& lobbyId) {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    if (!networkSystem) {
+        LOG_ERROR("NetworkSystem not found - cannot request UDP handoff");
+        return false;
+    }
+    
+    LOG_INFO("Requesting UDP handoff for lobby: " + lobbyId);
+    return networkSystem->RequestUDPHandoff(lobbyId);
+}
+
+float Engine::GetNetworkLatency() const {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    return networkSystem ? networkSystem->GetLatency() : 0.0f;
+}
+
+uint32_t Engine::GetPacketsSent() const {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    return networkSystem ? networkSystem->GetPacketsSent() : 0;
+}
+
+uint32_t Engine::GetPacketsReceived() const {
+    auto networkSystem = GetSystem<NetworkSystem>();
+    return networkSystem ? networkSystem->GetPacketsReceived() : 0;
+}
 
 void Engine::RemoveSystem(System* system)
 {

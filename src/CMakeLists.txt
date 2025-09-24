@@ -20,6 +20,7 @@ target_include_directories(paintsplash PRIVATE
     rendering
     events
     utils
+    networking
     ${raylib_SOURCE_DIR}/src
     ${raygui_SOURCE_DIR}/src
 )

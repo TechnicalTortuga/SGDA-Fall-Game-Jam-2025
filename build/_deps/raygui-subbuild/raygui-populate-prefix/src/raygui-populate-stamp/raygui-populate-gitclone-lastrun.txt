@@ -3,13 +3,13 @@
 # No other meaning or use of this file is supported.
 
 method=git
-command=/opt/homebrew/bin/cmake;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/tmp/raygui-populate-gitclone.cmake
-source_dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-src
-work_dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/_deps
+command=/usr/bin/cmake;-P;/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-subbuild/raygui-populate-prefix/tmp/raygui-populate-gitclone.cmake
+source_dir=/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps/raygui-src
+work_dir=/home/sergio/Documents/CursorRepo/SGDA-Fall-Game-Jam-2025/build/_deps
 repository=https://github.com/raysan5/raygui.git
 remote=origin
 init_submodules=TRUE
 recurse_submodules=--recursive
 submodules=
 CMP0097=NEW
-      
+

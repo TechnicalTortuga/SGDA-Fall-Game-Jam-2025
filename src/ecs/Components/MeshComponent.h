@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include <vector>
 #include <string>
+#include <cstdint>
 
 /*
 MeshVertex and MeshTriangle - Pure data structures for mesh geometry

@@ -3,8 +3,11 @@
 #include <memory>
 #include <vector>
 #include <unordered_map>
+#include <string>
+#include <cstdint>
 
 #include "utils/Logger.h"
+#include "../networking/TransportLayer.h"
 
 class StateManager;
 class EventManager;
@@ -96,6 +99,25 @@ public:
         }
         return nullptr;
     }
+
+    // Networking methods
+    bool InitializeNetwork(NetworkMode mode, uint16_t port = 0);
+    void ShutdownNetwork();
+    bool IsNetworkEnabled() const;
+    bool IsHost() const;
+    bool IsConnected() const;
+    uint32_t GetLocalClientId() const;
+    
+    // Lobby management
+    bool JoinLobby(const std::string& lobbyId);
+    bool CreateLobby(const std::string& lobbyName);
+    void LeaveLobby();
+    bool RequestUDPHandoff(const std::string& lobbyId);
+    
+    // Network statistics
+    float GetNetworkLatency() const;
+    uint32_t GetPacketsSent() const;
+    uint32_t GetPacketsReceived() const;
 
 private:
     StateManager* stateManager_;
