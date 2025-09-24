@@ -1,12 +1,13 @@
 #pragma once
 
 #include "../ecs/System.h"
-#include "../ecs/Components/Position.h"
+#include "../ecs/Components/TransformComponent.h"
 #include "../ecs/Components/Velocity.h"
 #include "../ecs/Components/Collidable.h"
 #include "../ecs/Components/Player.h"
 #include "../world/BSPTree.h"
 #include "../ecs/Systems/CollisionSystem.h"
+#include "../ecs/Systems/WorldSystem.h"
 
 // Physics constants
 const float GRAVITY = -30.0f;          // Gravity acceleration (units/s²)
@@ -59,6 +60,7 @@ public:
     // BSP integration
     void SetBSPTree(BSPTree* bspTree) { bspTree_ = bspTree; }
     void SetCollisionSystem(System* collisionSystem) { collisionSystem_ = collisionSystem; }
+    void SetWorldSystem(System* worldSystem) { worldSystem_ = static_cast<WorldSystem*>(worldSystem); }
 
 private:
     float gravity_;
@@ -67,6 +69,16 @@ private:
     float airResistance_;
     BSPTree* bspTree_;
     System* collisionSystem_;
+    WorldSystem* worldSystem_;
+
+    // Physics startup delay to ensure collision system is ready
+    float mapLoadTime_;
+    float physicsStartupDelay_;  // Delay in seconds after map loads before physics starts
+
+    // Pre-allocated containers to avoid per-frame allocations (performance optimization)
+    std::vector<CollisionEvent> collisionEventsCache_;
+    std::vector<CollisionEvent> collisionsCache_;
+    std::vector<CollisionPlane> collisionPlanesCache_;
 
     // Physics update methods
     void UpdateEntityPhysics(Entity* entity, float deltaTime);
@@ -83,7 +95,7 @@ private:
     void HandleCollision(Entity* entity, const Vector3& movement, const Vector3& surfaceNormal);
     void HandleCollisionResponse(Entity* entity, const Vector3& movement, const Vector3& surfaceNormal);
     Vector3 ResolveCollisionsSequentially(Entity* entity, const Vector3& startPos, const Vector3& intendedMovement);
-    std::vector<CollisionEvent> GetAllCollisions(Entity* entity, const Vector3& position) const;
+    void GetAllCollisions(Entity* entity, const Vector3& position, std::vector<CollisionEvent>& outCollisions) const;
     void HandleMultipleCollisions(Entity* entity, const Vector3& intendedMovement, const std::vector<CollisionEvent>& collisions);
     bool WouldCollideWithAny(Entity* entity, const Vector3& position, const std::vector<CollisionEvent>& collisions, size_t excludeIndex) const;
     CollisionEvent GetDetailedCollision(Entity* entity, const Vector3& position, const Vector3& movement) const;

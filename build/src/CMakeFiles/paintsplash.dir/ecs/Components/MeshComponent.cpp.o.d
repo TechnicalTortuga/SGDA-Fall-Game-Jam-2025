@@ -1,7 +1,7 @@
 src/CMakeFiles/paintsplash.dir/ecs/Components/MeshComponent.cpp.o: \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/MeshComponent.cpp \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/MeshComponent.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Components/../Component.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Components/MeshComponent.cpp \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Components/MeshComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Components/../Component.h \
   /opt/homebrew/include/raylib.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdarg.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/__stdarg_header_macro.h \

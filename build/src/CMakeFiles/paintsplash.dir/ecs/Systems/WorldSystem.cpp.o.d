@@ -1,7 +1,7 @@
 src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o: \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/WorldSystem.cpp \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/WorldSystem.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../System.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/WorldSystem.cpp \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/WorldSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../System.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_move_common.h \
@@ -931,37 +931,69 @@ src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/pointer_to_binary_function.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_negate.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/WorldGeometry.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/BSPTree.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/WorldGeometry.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/BSPTree.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/cfloat \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/float.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/float.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/float.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/bitset \
   /opt/homebrew/include/raylib.h /opt/homebrew/include/raymath.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/Brush.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../math/AABB.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/Brush.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../math/AABB.h \
   /opt/homebrew/include/rlgl.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../rendering/Skybox.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/MapLoader.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/WorldRenderer.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../world/WorldGeometry.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/MeshComponent.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Component.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/CollisionSystem.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/Collidable.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/../Component.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/../../math/AABB.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/Position.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/Velocity.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../utils/Logger.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../rendering/Skybox.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/MapLoader.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/any \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/chrono \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/calendar.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/convert_to_tm.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/concepts.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/hh_mm_ss.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/day.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/file_clock.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/month.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/month_weekday.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/weekday.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/monthday.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/statically_widen.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_day.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_weekday.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/literals.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/forward_list \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/GameObject.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/../Component.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/LightComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/AudioComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/Collidable.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/../../math/AABB.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/MeshComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/Sprite.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/EnemyComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/TriggerComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Components/SpawnPointComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/EntityFactory.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/Entity.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/BSPTreeSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/../ecs/System.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../world/MaterialValidator.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/MeshComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/MaterialComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Component.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Systems/MaterialSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Systems/../System.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Systems/../Systems/AssetSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Systems/../Systems/../System.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Systems/../Systems/../../rendering/TextureManager.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Systems/../Systems/../../rendering/../utils/Logger.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ostream \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/bitset \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/format \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/container_adaptor.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/range_default_formatter.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/statically_widen.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/range_formatter.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_context.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_arg_store.h \
@@ -991,7 +1023,6 @@ src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/file_type.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/perms.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/file_time_type.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/file_clock.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/filesystem_error.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/path.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iomanip \
@@ -1003,32 +1034,54 @@ src/CMakeFiles/paintsplash.dir/ecs/Systems/WorldSystem.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/u8path.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/chrono \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/calendar.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/convert_to_tm.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/concepts.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/hh_mm_ss.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/day.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/month.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/month_weekday.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/weekday.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/monthday.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_day.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_weekday.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/literals.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/forward_list \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/Skybox.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Entity.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/Sprite.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/TransformComponent.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/MeshSystem.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../System.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../Components/MeshComponent.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../Entity.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../core/Engine.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/./utils/Logger.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/TextureManager.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../utils/PathUtils.h
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Systems/CacheSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Systems/../../utils/Logger.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/TextureComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../ecs/Components/../Systems/AssetSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/CollisionSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/Collidable.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/Position.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/../Component.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/Velocity.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../utils/Logger.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/AssetSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/RenderSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/Renderer.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../world/WorldGeometry.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../world/BSPTreeSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../math/AABB.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Components/Collidable.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Components/MeshComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Components/TransformComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Components/../Component.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Components/MaterialComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Systems/AssetSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../core/Engine.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/./utils/Logger.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/Skybox.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/../ecs/Systems/CacheSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/MeshSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../System.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../Components/MeshComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../Entity.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../Systems/WorldSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../../core/Engine.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/AssetSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Entity.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/Sprite.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Components/TransformComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/LODSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../Components/LODComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../Components/../Component.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/CacheSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../core/Engine.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../rendering/TextureManager.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../utils/PathUtils.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/GameObjectSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../Components/GameObject.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/LightSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../Components/LightComponent.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../Systems/../Components/TransformComponent.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree

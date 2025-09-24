@@ -13,13 +13,13 @@ Skybox::~Skybox() {
 bool Skybox::LoadFromFile(const std::string& filePath) {
     Unload();
     std::string exeDir = Utils::GetExecutableDir();
-    // Always use executable-relative path for cubemap
-    std::string cubemapPath = exeDir + "/" + filePath;
+    // Always use executable-relative path for cubemap, assets are copied to build/bin/assets/
+    std::string cubemapPath = exeDir + "/assets/" + filePath;
     LOG_INFO("SKYBOX: Attempting to load cubemap image from: " + cubemapPath);
     Image img = LoadImage(cubemapPath.c_str());
     if (img.data == nullptr || img.width == 0 || img.height == 0) {
         LOG_ERROR("SKYBOX: Failed to load image: " + cubemapPath);
-        // Try fallback paths, all relative to exeDir
+        // Try fallback paths, all relative to exeDir/assets
         std::string fallback1 = exeDir + "/assets/textures/skybox.png";
         LOG_INFO("SKYBOX: Attempting to load cubemap image from: " + fallback1);
         img = LoadImage(fallback1.c_str());

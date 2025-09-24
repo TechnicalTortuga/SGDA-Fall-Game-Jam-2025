@@ -1,6 +1,7 @@
 #include "Entity.h"
 #include "Component.h"
 #include "utils/Logger.h"
+#include "../core/Engine.h"
 #include <sstream>
 
 Entity::Entity(EntityId id)
@@ -26,6 +27,9 @@ void Entity::AddComponent(std::unique_ptr<Component> component)
     // Removed owner coupling - components should not know about their entity
     components_[typeIndex] = std::move(component);
     LOG_DEBUG("Added component " + std::string(component->GetTypeName()) + " to entity " + std::to_string(id_));
+
+    // Notify systems that this entity may now match their signatures
+    Engine::GetInstance().UpdateEntityRegistration(this);
 }
 
 Component* Entity::GetComponent(std::type_index type) const

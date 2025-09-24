@@ -1,10 +1,11 @@
 #include "System.h"
 #include "Entity.h"
+#include "../core/Engine.h"
 #include "utils/Logger.h"
 
 System::System()
     : enabled_(true)
-    , engine_(nullptr)
+    , engine_(Engine::GetInstance())
 {
     LOG_DEBUG("System created");
 }

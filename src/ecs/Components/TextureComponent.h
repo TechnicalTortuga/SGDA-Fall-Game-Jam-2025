@@ -3,6 +3,7 @@
 #include "../Component.h"
 #include "../Systems/AssetSystem.h"
 #include <string>
+#include "raylib.h"
 
 /*
 TextureComponent - Pure data texture component for ECS
@@ -33,6 +34,7 @@ struct TextureComponent : public Component {
     // Texture metadata (pure data only - NO methods)
     TextureType type = TextureType::DIFFUSE;
     std::string texturePath = "";      // Original file path for loading
+    Texture2D texture = {0, 0, 0, 0, 0}; // Actual texture data
     AssetSystem::TextureHandle textureHandle; // Resource handle for safe access
 
     // Reference IDs for related systems (data-oriented decoupling)

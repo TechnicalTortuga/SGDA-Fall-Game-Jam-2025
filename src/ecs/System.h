@@ -6,6 +6,7 @@
 #include <unordered_set>
 
 class Entity;
+class Engine;
 
 class System {
 public:
@@ -24,9 +25,8 @@ public:
     bool IsEnabled() const { return enabled_; }
     void SetEnabled(bool enabled) { enabled_ = enabled; }
 
-    // Engine access (set by engine during system registration)
-    void SetEngine(class Engine* engine) { engine_ = engine; }
-    class Engine* GetEngine() const { return engine_; }
+    // Engine access (stored reference for performance)
+    // Use engine_ member directly
 
     // Entity management
     void AddEntity(Entity* entity);
@@ -56,5 +56,5 @@ protected:
     std::unordered_set<Entity*> entities_;
     std::vector<std::type_index> signature_;
     bool enabled_;
-    class Engine* engine_;
+    Engine& engine_;
 };

@@ -1,7 +1,7 @@
 src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o: \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/InputSystem.cpp \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/InputSystem.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../System.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/InputSystem.cpp \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/InputSystem.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../System.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_move_common.h \
@@ -931,9 +931,9 @@ src/CMakeFiles/paintsplash.dir/ecs/Systems/InputSystem.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/pointer_to_binary_function.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_negate.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../input/Input.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../input/Input.h \
   /opt/homebrew/include/raylib.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../utils/Logger.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Systems/../../utils/Logger.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ostream \

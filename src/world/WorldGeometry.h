@@ -9,6 +9,19 @@
 #include "../rendering/Skybox.h"
 #include "Brush.h"
 
+// Quake-style World structure - contains BSP tree, PVS, and all surfaces
+struct World {
+    std::string name;
+    std::vector<Face> surfaces;           // All faces in the world
+    std::vector<std::unique_ptr<BSPNode>> nodes; // BSP tree (owned pointers)
+    std::vector<uint8_t> visData;         // PVS data (byte array)
+    int numClusters;
+    int clusterBytes;
+    BSPNode* root;                        // Root of BSP tree
+
+    World() : numClusters(0), clusterBytes(0), root(nullptr) {}
+};
+
 // WorldMaterial definition for static world geometry (avoiding raylib's Material conflict)
 struct WorldMaterial {
     Color diffuseColor;    // Base color tint
@@ -45,7 +58,8 @@ public:
     ~WorldGeometry();
 
     // Core static data containers
-    std::unique_ptr<BSPTree> bspTree;           // For physics queries and culling
+    std::unique_ptr<BSPTree> bspTree;           // LEGACY: For physics queries and culling (to be removed)
+    std::unique_ptr<World> world;               // NEW: Quake-style world with BSP tree and PVS
     struct StaticBatch {
         int materialId;
         std::vector<Vector3> positions;  // per-vertex positions (triangulated)
@@ -54,13 +68,14 @@ public:
         std::vector<unsigned int> indices; // triangle indices into positions
     };
     std::vector<StaticBatch> batches;           // Pre-batched meshes for efficient rendering
-    std::unordered_map<int, WorldMaterial> materials; // Material definitions by surface ID
+    std::unordered_map<int, uint32_t> materialIdMap; // Map surface ID to MaterialSystem ID
     // Brush-based geometry (new pipeline)
     std::vector<Brush> brushes;
     std::vector<Face> faces; // flattened faces for BSP build
 
     // Skybox system
     std::unique_ptr<class Skybox> skybox;
+    class AssetSystem* assetSystem_;
 
     // Level metadata
     std::string levelName;
@@ -70,6 +85,9 @@ public:
 
     // Initialize with default values
     void Initialize();
+
+    // Set asset system for resource loading
+    void SetAssetSystem(class AssetSystem* assetSystem) { assetSystem_ = assetSystem; }
 
     // Clear all data
     void Clear();
@@ -85,13 +103,19 @@ public:
     void BuildBSPFromFaces(const std::vector<Face>& inFaces);
     void BuildBSPFromBrushes(const std::vector<Brush>& inBrushes);
 
-    // BSP Tree access
+    // BSP Tree access - LEGACY
     const BSPTree* GetBSPTree() const { return bspTree.get(); }
     BSPTree* GetBSPTree() { return bspTree.get(); }
+    void SetBSPTree(std::unique_ptr<BSPTree> tree) { bspTree = std::move(tree); }
+
+    // World access - NEW: Quake-style world
+    const World* GetWorld() const { return world.get(); }
+    World* GetWorld() { return world.get(); }
+    void SetWorld(std::unique_ptr<World> w) { world = std::move(w); }
 
     // Mesh and material access
     const std::vector<StaticBatch>& GetBatches() const { return batches; }
-    const WorldMaterial* GetMaterial(int surfaceId) const;
+    uint32_t GetMaterialId(int surfaceId) const; // Returns MaterialSystem ID
 
     // Level info
     const std::string& GetLevelName() const { return levelName; }
@@ -115,7 +139,14 @@ private:
 public:
     // Build GPU batches by material from faces
     void BuildBatchesFromFaces(const std::vector<Face>& inFaces);
-    
+
+    // Calculate UV coordinates for a face (called during world building)
+    void CalculateFaceUVs(Face& face);
+
+    // UV validation and fallback generation
+    void ValidateAndFixUVs(Face& face);
+    void GenerateDefaultUVsForFace(Face& face);
+
     // Update batch colors after materials are loaded
-    void UpdateBatchColors();
+
 };

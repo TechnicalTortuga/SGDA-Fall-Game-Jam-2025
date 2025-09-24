@@ -1,12 +1,15 @@
 #pragma once
 
 #include "../System.h"
+#include "../../core/Engine.h"
 #include "../Components/Position.h"
 #include "../Components/Player.h"
 #include "../Components/Collidable.h"
 #include "../../rendering/Renderer.h"
 #include "../../ui/ConsoleSystem.h"
 #include "InputSystem.h"
+#include "LODSystem.h"
+#include "CollisionSystem.h"
 
 class PlayerSystem : public System {
 public:
@@ -48,16 +51,16 @@ public:
     void SetRenderer(Renderer* renderer) { renderer_ = renderer; }
     void SetConsoleSystem(ConsoleSystem* console) { consoleSystem_ = console; }
     void SetInputSystem(InputSystem* inputSystem) { inputSystem_ = inputSystem; }
+    void SetCollisionSystem(CollisionSystem* collisionSystem) { collisionSystem_ = collisionSystem; }
 
 private:
     Entity* playerEntity_;
     Renderer* renderer_;
     ConsoleSystem* consoleSystem_;
     InputSystem* inputSystem_;
+    CollisionSystem* collisionSystem_;
 
     // Camera control variables
-    float cameraYaw_;
-    float cameraPitch_;
     float cameraSensitivity_;
 
     // Player movement variables

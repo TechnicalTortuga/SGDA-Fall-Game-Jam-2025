@@ -1,6 +1,6 @@
 src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o: \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Entity.cpp \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Entity.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Entity.cpp \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Entity.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/cstdint \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__assert \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__assertion_handler \
@@ -817,8 +817,8 @@ src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/noexcept_move_assign_container.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/string_view.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/ecs/Component.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/./utils/Logger.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/Component.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/./utils/Logger.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ios \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__locale \
@@ -996,4 +996,5 @@ src/CMakeFiles/paintsplash.dir/ecs/Entity.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_weekday.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/literals.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/forward_list \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/ecs/../core/Engine.h

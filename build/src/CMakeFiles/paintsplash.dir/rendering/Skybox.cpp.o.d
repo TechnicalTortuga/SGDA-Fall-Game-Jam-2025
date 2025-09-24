@@ -1,6 +1,6 @@
 src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o: \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/Skybox.cpp \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/Skybox.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/rendering/Skybox.cpp \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/rendering/Skybox.h \
   /opt/homebrew/include/raylib.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdarg.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/__stdarg_header_macro.h \
@@ -813,7 +813,7 @@ src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/endian.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/has_single_bit.h \
   /opt/homebrew/include/rlgl.h \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/../utils/Logger.h \
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/rendering/../utils/Logger.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ios \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__locale \
@@ -997,4 +997,4 @@ src/CMakeFiles/paintsplash.dir/rendering/Skybox.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/literals.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/forward_list \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
-  /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/rendering/../utils/PathUtils.h
+  /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/rendering/../utils/PathUtils.h

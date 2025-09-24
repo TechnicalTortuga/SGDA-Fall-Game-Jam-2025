@@ -54,29 +54,52 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025
+CMAKE_SOURCE_DIR = /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build
+CMAKE_BINARY_DIR = /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
 all: src/all
+all: editor/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: src/codegen
+codegen: editor/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
 preinstall: src/preinstall
+preinstall: editor/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: src/clean
+clean: editor/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory editor
+
+# Recursive "all" directory target.
+editor/all: editor/CMakeFiles/paintstrike_editor.dir/all
+.PHONY : editor/all
+
+# Recursive "codegen" directory target.
+editor/codegen: editor/CMakeFiles/paintstrike_editor.dir/codegen
+.PHONY : editor/codegen
+
+# Recursive "preinstall" directory target.
+editor/preinstall:
+.PHONY : editor/preinstall
+
+# Recursive "clean" directory target.
+editor/clean: editor/CMakeFiles/paintstrike_editor.dir/clean
+.PHONY : editor/clean
 
 #=============================================================================
 # Directory level rules for directory src
@@ -104,14 +127,14 @@ src/clean: src/CMakeFiles/paintsplash.dir/clean
 src/CMakeFiles/paintsplash.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36 "Built target paintsplash"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51 "Built target paintsplash"
 .PHONY : src/CMakeFiles/paintsplash.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/paintsplash.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles 36
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/build/CMakeFiles 51
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/paintsplash.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/build/CMakeFiles 0
 .PHONY : src/CMakeFiles/paintsplash.dir/rule
 
 # Convenience name for target.
@@ -121,7 +144,7 @@ paintsplash: src/CMakeFiles/paintsplash.dir/rule
 # codegen rule for target.
 src/CMakeFiles/paintsplash.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/paintsplash.dir/build.make src/CMakeFiles/paintsplash.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36 "Finished codegen for target paintsplash"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51 "Finished codegen for target paintsplash"
 .PHONY : src/CMakeFiles/paintsplash.dir/codegen
 
 # clean rule for target.
@@ -130,13 +153,45 @@ src/CMakeFiles/paintsplash.dir/clean:
 .PHONY : src/CMakeFiles/paintsplash.dir/clean
 
 #=============================================================================
+# Target rules for target editor/CMakeFiles/paintstrike_editor.dir
+
+# All Build rule for target.
+editor/CMakeFiles/paintstrike_editor.dir/all:
+	$(MAKE) $(MAKESILENT) -f editor/CMakeFiles/paintstrike_editor.dir/build.make editor/CMakeFiles/paintstrike_editor.dir/depend
+	$(MAKE) $(MAKESILENT) -f editor/CMakeFiles/paintstrike_editor.dir/build.make editor/CMakeFiles/paintstrike_editor.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70 "Built target paintstrike_editor"
+.PHONY : editor/CMakeFiles/paintstrike_editor.dir/all
+
+# Build rule for subdir invocation for target.
+editor/CMakeFiles/paintstrike_editor.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/build/CMakeFiles 19
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 editor/CMakeFiles/paintstrike_editor.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/build/CMakeFiles 0
+.PHONY : editor/CMakeFiles/paintstrike_editor.dir/rule
+
+# Convenience name for target.
+paintstrike_editor: editor/CMakeFiles/paintstrike_editor.dir/rule
+.PHONY : paintstrike_editor
+
+# codegen rule for target.
+editor/CMakeFiles/paintstrike_editor.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f editor/CMakeFiles/paintstrike_editor.dir/build.make editor/CMakeFiles/paintstrike_editor.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/build/CMakeFiles --progress-num=52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70 "Finished codegen for target paintstrike_editor"
+.PHONY : editor/CMakeFiles/paintstrike_editor.dir/codegen
+
+# clean rule for target.
+editor/CMakeFiles/paintstrike_editor.dir/clean:
+	$(MAKE) $(MAKESILENT) -f editor/CMakeFiles/paintstrike_editor.dir/build.make editor/CMakeFiles/paintstrike_editor.dir/clean
+.PHONY : editor/CMakeFiles/paintstrike_editor.dir/clean
+
+#=============================================================================
 # Special targets to cleanup operation of make.
 
 # Special rule to run CMake to check the build system integrity.
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -P /Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build/CMakeFiles/VerifyGlobs.cmake
+	$(CMAKE_COMMAND) -P /Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/build/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

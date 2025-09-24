@@ -4,6 +4,11 @@
 #include <memory>
 #include <algorithm>
 #include <cfloat>
+#include <cstdint>
+#include <bitset>
+#include <unordered_map>
+#include <unordered_set>
+#include <functional>
 #include "raylib.h"
 #include "raymath.h"
 #include "Brush.h"
@@ -12,52 +17,70 @@
 // Forward declarations
 struct BSPNode;
 
-// A node in the BSP tree
-struct BSPNode {
-    std::unique_ptr<BSPNode> front;    // Front child (relative to splitter)
-    std::unique_ptr<BSPNode> back;     // Back child (relative to splitter)
-    std::vector<Face> faces;           // Faces in this node (brush-based pipeline)
-    Vector3 planeNormal;               // Splitter plane normal (face-based builds)
-    float planeDistance = 0.0f;        // Splitter plane distance from origin (dot(n, x) - d = 0)
-    AABB bounds;                       // Subtree bounds for frustum culling
+// Maximum number of clusters (adjust based on level size)
+constexpr int32_t MAX_CLUSTERS = 4096;
 
-    BSPNode() = default;
+// PVS (Potentially Visible Set) data structure
+struct PVSData {
+    int32_t numClusters = 0;
+    std::vector<uint8_t> visibilityData;  // Compressed visibility data
 
-    bool IsLeaf() const { return !front && !back; }
+    // Get visibility between two clusters
+    bool IsVisible(int32_t fromCluster, int32_t toCluster) const {
+        if (fromCluster < 0 || toCluster < 0 || fromCluster >= numClusters || toCluster >= numClusters) {
+            return true;  // Default to visible for invalid clusters
+        }
+
+        // Simple bit vector implementation (1 bit per cluster)
+        size_t byteIndex = (fromCluster * ((numClusters + 7) / 8)) + (toCluster / 8);
+        uint8_t bitMask = 1 << (toCluster % 8);
+        return (visibilityData[byteIndex] & bitMask) != 0;
+    }
 };
 
-// Binary Space Partitioning tree for efficient 3D rendering and collision detection
+// Cluster information for a leaf node
+struct BSPCluster {
+    int32_t id = -1;
+    AABB bounds;
+    std::vector<BSPNode*> leafNodes;  // All leaf nodes in this cluster
+
+    // For building PVS
+    std::vector<Vector3> visibilityPoints;  // Points used for visibility testing
+
+    bool IsValid() const { return id >= 0; }
+};
+
+// Quake-style BSP Node (unified node/leaf structure)
+struct BSPNode {
+    int contents;              // -1 for nodes, leaf contents for leaves
+    int visframe;              // Visibility frame counter
+    Vector3 mins, maxs;        // Bounding box
+    BSPNode* parent;
+    BSPNode* children[2];      // Node specific (nullptr for leaves)
+    int cluster;               // Leaf specific (-1 for internal nodes)
+    int area;                  // Leaf specific
+    std::vector<size_t> surfaceIndices; // Indices into world->surfaces (leaf specific)
+
+    BSPNode() : contents(-1), visframe(0), parent(nullptr), cluster(-1), area(0) {
+        children[0] = children[1] = nullptr;
+        mins = maxs = Vector3{0, 0, 0};
+    }
+
+    bool IsLeaf() const { return contents != -1; }
+};
+
+// Binary Space Partitioning tree data component
+// Just contains the tree structure and data, all logic is in BSPTreeSystem
 class BSPTree {
 public:
     BSPTree();
     ~BSPTree() = default;
-    // Build BSP from faces (brush-based pipeline)
-    void BuildFromFaces(const std::vector<Face>& faces);
-    // Convenience: build BSP from brushes by flattening to faces
-    void BuildFromBrushes(const std::vector<Brush>& brushes);
 
-    // Traverse and collect visible faces (brush-based)
-    void TraverseForRenderingFaces(const Camera3D& camera, std::vector<const Face*>& visibleFaces) const;
+    // Get the number of clusters in the PVS
+    int32_t GetClusterCount() const { return static_cast<int32_t>(clusters_.size()); }
 
-    // Perform ray casting for collision detection
-    // rayOrigin: Ray origin
-    // rayDirection: Ray direction (normalized)
-    // maxDistance: Maximum distance to check
-    // Returns: Distance to hit, or maxDistance if no hit
-    float CastRay(const Vector3& rayOrigin, const Vector3& rayDirection, float maxDistance = 1000.0f) const;
-
-    // Perform ray casting for collision detection with surface normal
-    // rayOrigin: Ray origin
-    // rayDirection: Ray direction (normalized)
-    // maxDistance: Maximum distance to check
-    // hitNormal: Output parameter for surface normal at hit point
-    // Returns: Distance to hit, or maxDistance if no hit
-    float CastRayWithNormal(const Vector3& rayOrigin, const Vector3& rayDirection, float maxDistance, Vector3& hitNormal) const;
-
-    // Check if a point is inside the BSP tree bounds
-    // point: Point to check
-    // Returns: True if point is contained within the tree
-    bool ContainsPoint(const Vector3& point) const;
+    // Get the bounds of a cluster
+    const AABB& GetClusterBounds(int32_t clusterId) const;
 
     // Get all faces in the tree
     const std::vector<Face>& GetAllFaces() const { return allFaces_; }
@@ -65,55 +88,17 @@ public:
     // Clear the BSP tree
     void Clear();
 
-private:
+    // --- Data members (public for BSPTreeSystem access) ---
+    std::vector<BSPCluster> clusters_;
+    std::shared_ptr<PVSData> pvsData_;
+
+    // Visibility marking system (like Quake's visframe)
+    int32_t visCount_ = 0;  // Current visibility frame counter
+
+    // Tree structure
     std::unique_ptr<BSPNode> root_;
     std::vector<Face> allFaces_;
 
-    std::unique_ptr<BSPNode> BuildRecursiveFaces(std::vector<Face> faces);
-
-    size_t ChooseSplitterFaces(const std::vector<Face>& faces) const;
-
-    // Plane representation for face-based build
-    struct Plane { Vector3 n; float d; };
-    static Plane PlaneFromFace(const Face& face);
-    static float SignedDistanceToPlane(const Plane& p, const Vector3& point);
-    int ClassifyFace(const Face& face, const Plane& plane) const; // -1 back, 0 spanning/on, 1 front
-
-    // Split a convex face by plane into front/back pieces. Returns which sides are produced.
-    void SplitFaceByPlane(const Face& face, const Plane& plane,
-                          bool& hasFront, Face& outFront,
-                          bool& hasBack, Face& outBack) const;
-
-    void TraverseRenderRecursiveCamera3D_Faces(const BSPNode* node, const Camera3D& camera,
-                                               std::vector<const Face*>& visibleFaces) const;
-
-    // Recursively cast ray
-    // node: Current node
-    // rayOrigin: Ray origin
-    // rayDirection: Ray direction
-    // maxDistance: Maximum distance
-    // Returns: Hit distance
-    float CastRayRecursive(const BSPNode* node, const Vector3& rayOrigin,
-                          const Vector3& rayDirection, float maxDistance) const;
-
-    // Recursively cast ray with surface normal calculation
-    // node: Current node
-    // rayOrigin: Ray origin
-    // rayDirection: Ray direction
-    // maxDistance: Maximum distance
-    // hitNormal: Output parameter for surface normal at hit point
-    // Returns: Hit distance
-    float CastRayRecursiveWithNormal(const BSPNode* node, const Vector3& rayOrigin,
-                                    const Vector3& rayDirection, float maxDistance, Vector3& hitNormal) const;
-
-    bool IsFaceVisible(const Face& face, const Camera3D& camera) const;
-
-    // View frustum helpers
-    bool IsPointInViewFrustum(const Vector3& point, const Camera3D& camera) const;
-    bool IsAABBInViewFrustum(const AABB& box, const Camera3D& camera) const;
-    bool SubtreeInViewFrustum(const BSPNode* node, const Camera3D& camera) const;
-
-    // Bounds helpers
-    static AABB ComputeBoundsForFaces(const std::vector<Face>& faces);
-    static void UpdateNodeBounds(BSPNode* node);
+private:
+    // BSPTree is pure data - no rendering or drawing code
 };

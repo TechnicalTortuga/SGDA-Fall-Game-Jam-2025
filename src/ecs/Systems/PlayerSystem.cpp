@@ -10,8 +10,6 @@ PlayerSystem::PlayerSystem()
     , renderer_(nullptr)
     , consoleSystem_(nullptr)
     , inputSystem_(nullptr)
-    , cameraYaw_(0.0f)
-    , cameraPitch_(0.0f)
     , cameraSensitivity_(0.15f)
     , moveSpeed_(50.0f)
     , runMultiplier_(2.0f)
@@ -62,14 +60,14 @@ Entity* PlayerSystem::CreatePlayer() {
     }
 
     // Create player entity
-    playerEntity_ = GetEngine()->CreateEntity();
+    playerEntity_ = engine_.CreateEntity();
 
     // Initialize player components
     InitializePlayerComponents();
 
     // Register entity with systems AFTER components are added
     LOG_INFO("Registering player entity with systems after components added");
-    GetEngine()->UpdateEntityRegistration(playerEntity_);
+    engine_.UpdateEntityRegistration(playerEntity_);
 
     LOG_INFO("Player entity created with ID: " + std::to_string(playerEntity_->GetId()));
     return playerEntity_;
@@ -77,7 +75,7 @@ Entity* PlayerSystem::CreatePlayer() {
 
 void PlayerSystem::DestroyPlayer() {
     if (playerEntity_) {
-        GetEngine()->DestroyEntity(playerEntity_);
+        engine_.DestroyEntity(playerEntity_);
         playerEntity_ = nullptr;
         LOG_INFO("Player entity destroyed");
     }
@@ -86,8 +84,11 @@ void PlayerSystem::DestroyPlayer() {
 void PlayerSystem::InitializePlayerComponents() {
     if (!playerEntity_) return;
 
-    // Add Position component (spawn high enough to avoid initial ground contact)
-    auto position = playerEntity_->AddComponent<Position>(0.0f, 5.0f, 0.0f);
+    // Add TransformComponent (spawn high enough to avoid initial ground contact)
+    auto transform = playerEntity_->AddComponent<TransformComponent>();
+    transform->position = {0.0f, 5.0f, 0.0f};
+    transform->scale = {1.0f, 1.0f, 1.0f};
+    transform->rotation = {0.0f, 0.0f, 0.0f, 1.0f};
 
     // Add Velocity component
     auto velocity = playerEntity_->AddComponent<Velocity>(0.0f, 0.0f, 0.0f);
@@ -122,8 +123,13 @@ void PlayerSystem::UpdateCamera(float deltaTime) {
 
     // Update renderer camera to follow player
     Vector3 camPos = GetCameraPosition();
-    LOG_DEBUG("PlayerSystem::UpdateCamera - player pos: (" + std::to_string(camPos.x) + "," + std::to_string(camPos.y) + "," + std::to_string(camPos.z) + ")");
     renderer_->UpdateCameraToFollowPlayer(camPos.x, camPos.y, camPos.z);
+
+    // Update LOD system with camera position for distance calculations
+    auto lodSystem = engine_.GetSystem<LODSystem>();
+    if (lodSystem) {
+        lodSystem->SetCameraPosition(camPos);
+    }
 }
 
 void PlayerSystem::UpdatePlayerInput() {
@@ -144,11 +150,11 @@ void PlayerSystem::UpdatePlayerInput() {
 void PlayerSystem::HandleMovement(float deltaTime) {
     if (!playerEntity_) return;
 
-    auto position = playerEntity_->GetComponent<Position>();
+    auto transform = playerEntity_->GetComponent<TransformComponent>();
     auto velocity = playerEntity_->GetComponent<Velocity>();
     auto player = playerEntity_->GetComponent<Player>();
 
-    if (!position || !velocity || !player) return;
+    if (!transform || !velocity || !player) return;
 
     // Calculate movement vector based on input and camera orientation
     Vector3 movement = CalculateMovementVector();
@@ -221,7 +227,7 @@ void PlayerSystem::HandleMovement(float deltaTime) {
     // Update collidable bounds
     auto collidable = playerEntity_->GetComponent<Collidable>();
     if (collidable) {
-        collidable->UpdateBoundsFromPosition(position->GetPosition());
+        collidable->UpdateBoundsFromPosition(transform->position);
     }
 }
 
@@ -315,20 +321,7 @@ void PlayerSystem::ApplyCameraRotation(Vector2 mouseDelta, float deltaTime) {
     float scaledDeltaX = mouseDelta.x * cameraSensitivity_ * deltaTime * 60.0f;
     float scaledDeltaY = mouseDelta.y * cameraSensitivity_ * deltaTime * 60.0f;
 
-    // Update camera angles
-    cameraYaw_ += scaledDeltaX;
-    cameraPitch_ -= scaledDeltaY; // Inverted for natural up/down
-
-    // Normalize yaw to [0, 2π]
-    while (cameraYaw_ > 2.0f * PI) cameraYaw_ -= 2.0f * PI;
-    while (cameraYaw_ < 0.0f) cameraYaw_ += 2.0f * PI;
-
-    // Clamp pitch to prevent camera flipping
-    const float maxPitch = PI * 0.45f;
-    if (cameraPitch_ > maxPitch) cameraPitch_ = maxPitch;
-    if (cameraPitch_ < -maxPitch) cameraPitch_ = -maxPitch;
-
-    // Update renderer camera rotation
+    // Update renderer camera rotation (renderer handles angle management and clamping)
     if (renderer_) {
         renderer_->UpdateCameraRotation(scaledDeltaX, scaledDeltaY, deltaTime);
     }
@@ -337,32 +330,43 @@ void PlayerSystem::ApplyCameraRotation(Vector2 mouseDelta, float deltaTime) {
 Vector3 PlayerSystem::GetCameraPosition() const {
     if (!playerEntity_) return {0.0f, 0.0f, 0.0f};
 
-    auto position = playerEntity_->GetComponent<Position>();
-    if (!position) return {0.0f, 0.0f, 0.0f};
+    auto transform = playerEntity_->GetComponent<TransformComponent>();
+    if (!transform) return {0.0f, 0.0f, 0.0f};
 
     // Camera is at player position with eye height
     return {
-        position->GetX(),
-        position->GetY() + 1.5f, // Eye height
-        position->GetZ()
+        transform->position.x,
+        transform->position.y + 1.5f, // Eye height
+        transform->position.z
     };
 }
 
 Vector3 PlayerSystem::GetCameraForward() const {
+    // Get camera angles from renderer to ensure synchronization
+    if (!renderer_) return {0.0f, 0.0f, -1.0f}; // Default forward direction
+
+    float yaw = renderer_->GetYaw();
+    float pitch = renderer_->GetPitch();
+
     // Calculate forward vector from camera angles
     return {
-        sinf(cameraYaw_) * cosf(cameraPitch_),
-        sinf(cameraPitch_),
-        -cosf(cameraYaw_) * cosf(cameraPitch_)
+        sinf(yaw) * cosf(pitch),
+        sinf(pitch),
+        -cosf(yaw) * cosf(pitch)
     };
 }
 
 Vector3 PlayerSystem::GetCameraRight() const {
+    // Get camera angles from renderer to ensure synchronization
+    if (!renderer_) return {1.0f, 0.0f, 0.0f}; // Default right direction
+
+    float yaw = renderer_->GetYaw();
+
     // Calculate right vector (perpendicular to forward)
     return {
-        cosf(cameraYaw_),
+        cosf(yaw),
         0.0f,
-        sinf(cameraYaw_)
+        sinf(yaw)
     };
 }
 
@@ -412,10 +416,10 @@ bool PlayerSystem::IsPositionValid(const Vector3& position) const {
 bool PlayerSystem::IsOnSlope(Vector3& outNormal) const {
     if (!playerEntity_) return false;
 
-    auto position = playerEntity_->GetComponent<Position>();
-    if (!position) return false;
+    auto transform = playerEntity_->GetComponent<TransformComponent>();
+    if (!transform) return false;
 
-    Vector3 playerPos = position->GetPosition();
+    Vector3 playerPos = transform->position;
 
     // Cast a ray downward to detect the surface normal
     Vector3 rayStart = playerPos;
@@ -425,19 +429,14 @@ bool PlayerSystem::IsOnSlope(Vector3& outNormal) const {
     float rayLength = 1.0f;
 
     // Use the collision system to cast the ray
-    auto collisionSystem = GetEngine()->GetSystem<CollisionSystem>();
-    if (!collisionSystem) {
+    auto collisionSystem = engine_.GetSystem<CollisionSystem>();
+    if (!collisionSystem_ || !collisionSystem_->HasWorldGeometry()) {
         return false;
     }
 
-    const BSPTree* bspTree = collisionSystem->GetBSPTree();
-    if (!bspTree) {
-        return false;
-    }
-
-    float hitDistance = bspTree->CastRayWithNormal(rayStart, rayDirection, rayLength, outNormal);
-
-    if (hitDistance < rayLength) {
+    Vector3 hitPoint;
+    if (collisionSystem_->CastRayWorldOnly(rayStart, rayDirection, rayLength, hitPoint, outNormal)) {
+        float hitDistance = Vector3Length(Vector3Subtract(hitPoint, rayStart));
         // Check if this is a slope surface (not vertical, not flat)
         float normalY = fabsf(outNormal.y);
         if (normalY > 0.1f && normalY < 0.95f) { // Between ~6° and ~71° from horizontal

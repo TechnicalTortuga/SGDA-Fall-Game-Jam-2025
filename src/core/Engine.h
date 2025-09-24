@@ -13,8 +13,14 @@ class Entity;
 
 class Engine {
 public:
-    Engine();
-    ~Engine();
+    static Engine& GetInstance() {
+        static Engine instance;
+        return instance;
+    }
+
+    // Delete copy constructor and assignment operator
+    Engine(const Engine&) = delete;
+    Engine& operator=(const Engine&) = delete;
 
     // Core engine methods
     bool Initialize();
@@ -30,6 +36,9 @@ public:
     void DestroyEntity(Entity* entity);
     Entity* GetEntityById(uint64_t id) const;
     const std::unordered_map<uint64_t, std::unique_ptr<Entity>>& GetEntities() const { return entities_; }
+
+    // Entity-System management
+    void UpdateEntityRegistration(Entity* entity);
 
     // System management
     template<typename T, typename... Args>
@@ -47,7 +56,6 @@ public:
 
         auto system = std::make_unique<T>(std::forward<Args>(args)...);
         T* rawPtr = system.get();
-        rawPtr->SetEngine(this);
         systems_.push_back(std::move(system));
 
         LOG_DEBUG("Added system to engine");
@@ -69,6 +77,10 @@ public:
         return nullptr;
     }
 
+private:
+    Engine();
+    ~Engine();
+
     template<typename T>
     bool HasSystem() const {
         static_assert(std::is_base_of<System, T>::value,
@@ -78,9 +90,6 @@ public:
     }
 
     void RemoveSystem(System* system);
-
-    // Entity-System management
-    void UpdateEntityRegistration(Entity* entity);
 
     // Engine utilities
     void Clear();
@@ -109,5 +118,7 @@ private:
     uint64_t GenerateEntityId();
     void InitializeEventManager();
     void InitializeStateManager();
+    void InitializeEntityFactory();
+    void InitializeGameObjectSystem();
     void RegisterEssentialComponents();
 };

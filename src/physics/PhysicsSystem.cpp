@@ -4,6 +4,7 @@
 #include "../utils/Logger.h"
 #include <algorithm>
 #include <cfloat>
+#include "raylib.h"
 
 PhysicsSystem::PhysicsSystem()
     : gravity_(GRAVITY)
@@ -12,6 +13,9 @@ PhysicsSystem::PhysicsSystem()
     , airResistance_(AIR_RESISTANCE)
     , bspTree_(nullptr)
     , collisionSystem_(nullptr)
+    , worldSystem_(nullptr)
+    , mapLoadTime_(0.0f)
+    , physicsStartupDelay_(0.3f)  // 300ms delay after map loads
 {
 }
 
@@ -26,6 +30,12 @@ void PhysicsSystem::Shutdown() {
 void PhysicsSystem::Update(float deltaTime) {
     if (!IsEnabled()) return;
 
+    // Track when the map becomes loaded for physics startup delay
+    if (worldSystem_ && worldSystem_->IsMapLoaded() && mapLoadTime_ == 0.0f) {
+        mapLoadTime_ = GetTime();  // Record when map was loaded
+        LOG_INFO("Map loaded, physics will start in " + std::to_string(physicsStartupDelay_) + " seconds");
+    }
+
     // Update physics for all entities
     for (Entity* entity : GetEntities()) {
         UpdateEntityPhysics(entity, deltaTime);
@@ -33,11 +43,11 @@ void PhysicsSystem::Update(float deltaTime) {
 }
 
 void PhysicsSystem::UpdateEntityPhysics(Entity* entity, float deltaTime) {
-    auto* position = entity->GetComponent<Position>();
+    auto* transform = entity->GetComponent<TransformComponent>();
     auto* velocity = entity->GetComponent<Velocity>();
     auto* player = entity->GetComponent<Player>();
 
-    if (!position || !velocity) return;
+    if (!transform || !velocity) return;
 
     // Special handling for player entities
     if (player) {
@@ -62,17 +72,17 @@ void PhysicsSystem::UpdateEntityPhysics(Entity* entity, float deltaTime) {
     ResolveMovement(entity, movement, deltaTime);
 
     // Apply friction based on ground contact
-    bool onGround = IsOnGround(position->GetPosition(), {1.0f, 1.0f, 1.0f});
+    bool onGround = IsOnGround(transform->position, {1.0f, 1.0f, 1.0f});
     ApplyFriction(*velocity, deltaTime, onGround);
 }
 
 void PhysicsSystem::UpdatePlayerPhysics(Entity* playerEntity, float deltaTime) {
-    auto* position = playerEntity->GetComponent<Position>();
+    auto* transform = playerEntity->GetComponent<TransformComponent>();
     auto* velocity = playerEntity->GetComponent<Velocity>();
     auto* player = playerEntity->GetComponent<Player>();
     auto* collidable = playerEntity->GetComponent<Collidable>();
 
-    if (!position || !velocity || !player) return;
+    if (!transform || !velocity || !player) return;
 
     // Debug: Player physics - Position and Velocity tracking
 
@@ -111,37 +121,37 @@ void PhysicsSystem::UpdatePlayerPhysics(Entity* playerEntity, float deltaTime) {
         ResolveMovement(playerEntity, movement, deltaTime);
     } else {
         // No-clip mode: just apply movement directly
-        position->Move(movement);
+        transform->position = Vector3Add(transform->position, movement);
         if (collidable) {
-            collidable->UpdateBoundsFromPosition(position->GetPosition());
+            collidable->UpdateBoundsFromPosition(transform->position);
         }
     }
 
     // Apply friction based on ground contact (use actual ground check, not just state)
-    bool onGround = IsOnGround(position->GetPosition(), collidable->GetBounds().GetSize());
+    bool onGround = IsOnGround(transform->position, collidable->GetBounds().GetSize());
     ApplyFriction(*velocity, deltaTime, onGround);
     
     // Check for geometry stuck and apply gentle unstuck correction
     ApplyUnstuckCorrection(playerEntity, deltaTime);
 
     // Ground snap: if very close to ground while moving downward, snap to surface
-    const BSPTree* bspTree = nullptr;
+    const World* world = nullptr;
     if (collisionSystem_) {
-        bspTree = dynamic_cast<CollisionSystem*>(collisionSystem_)->GetBSPTree();
+        world = dynamic_cast<CollisionSystem*>(collisionSystem_)->GetWorld();
     }
-    if (bspTree && position && collidable) {
+    if (world && transform && collidable) {
         Vector3 size = collidable->GetBounds().GetSize();
         float halfHeight = size.y * 0.5f;
-        Vector3 bottom = { position->GetX(), position->GetY() - halfHeight, position->GetZ() };
+        Vector3 bottom = { transform->position.x, transform->position.y - halfHeight, transform->position.z };
         Vector3 down = {0.0f, -1.0f, 0.0f};
         const float maxSnap = 0.1f;   // 10cm snap range
-        float d = bspTree->CastRay(bottom, down, maxSnap);
+        float d = worldSystem_->CastRay(bottom, down, maxSnap);
         if (d < maxSnap) {
             // Move player up by the penetration distance plus small epsilon
             float epsilon = 0.01f;
-            Vector3 newPos = position->GetPosition();
+            Vector3 newPos = transform->position;
             newPos.y = newPos.y - d + epsilon;
-            position->SetPosition(newPos);
+            transform->position = newPos;
             collidable->UpdateBoundsFromPosition(newPos);
             if (velocity->GetY() < 0.0f) velocity->SetY(0.0f);
         }
@@ -149,6 +159,29 @@ void PhysicsSystem::UpdatePlayerPhysics(Entity* playerEntity, float deltaTime) {
 }
 
 void PhysicsSystem::ApplyGravity(Velocity& velocity, float deltaTime) {
+    // Don't apply gravity if the world is still loading
+    if (worldSystem_ && !worldSystem_->IsMapLoaded()) {
+        LOG_DEBUG("World not loaded yet, skipping gravity application");
+        return;
+    }
+
+    // Check physics startup delay after map loads
+    if (mapLoadTime_ > 0.0f) {
+        float timeSinceMapLoad = GetTime() - mapLoadTime_;
+        if (timeSinceMapLoad < physicsStartupDelay_) {
+            LOG_DEBUG("Physics startup delay active: " + std::to_string(timeSinceMapLoad) +
+                     "/" + std::to_string(physicsStartupDelay_) + " seconds");
+            return;
+        }
+    }
+
+    // Also check if collision system has BSP tree (collision geometry is ready)
+    auto collisionSys = static_cast<CollisionSystem*>(collisionSystem_);
+    if (collisionSys && !collisionSys->HasWorldGeometry()) {
+        LOG_DEBUG("Collision system not ready (no world geometry), skipping gravity application");
+        return;
+    }
+
     // Apply gravity to Y-axis (up/down), not Z-axis
     float currentY = velocity.GetY();
     float newY = currentY + (gravity_ * deltaTime);
@@ -212,13 +245,13 @@ void PhysicsSystem::ApplyAirResistance(Velocity& velocity, float deltaTime) {
 }
 
 void PhysicsSystem::ResolveMovement(Entity* entity, const Vector3& intendedMovement, float deltaTime) {
-    auto* position = entity->GetComponent<Position>();
+    auto* transform = entity->GetComponent<TransformComponent>();
     auto* velocity = entity->GetComponent<Velocity>();
     auto* collidable = entity->GetComponent<Collidable>();
 
-    if (!position || !velocity || !collidable) return;
+    if (!transform || !velocity || !collidable) return;
 
-    Vector3 currentPos = position->GetPosition();
+    Vector3 currentPos = transform->position;
     Vector3 targetPos = Vector3Add(currentPos, intendedMovement);
 
     // Only log when near stairs area (X=40-50, Z=-10 to 10) or when moving significantly
@@ -240,7 +273,7 @@ void PhysicsSystem::ResolveMovement(Entity* entity, const Vector3& intendedMovem
     // Check for collisions at target position
     if (!CheckCollisionAtPosition(entity, targetPos)) {
         // No collisions, apply full movement
-        position->SetPosition(targetPos);
+        transform->position = targetPos;
         collidable->UpdateBoundsFromPosition(targetPos);
         LOG_INFO("MOVEMENT: No collision, applied full movement to (" +
                  std::to_string(targetPos.x) + "," + std::to_string(targetPos.y) + "," + std::to_string(targetPos.z) + ")");
@@ -252,10 +285,11 @@ void PhysicsSystem::ResolveMovement(Entity* entity, const Vector3& intendedMovem
              ") - horizontalSpeed: " + std::to_string(horizontalSpeed) + ", vertical: " + std::to_string(intendedMovement.y));
 
     // PRIORITY 1: Check if the collision surface is a slope - if so, project movement onto slope
-    std::vector<CollisionEvent> collisionEvents = GetAllCollisions(entity, targetPos);
+    collisionEventsCache_.clear();
+    GetAllCollisions(entity, targetPos, collisionEventsCache_);
     
-    if (!collisionEvents.empty()) {
-        const CollisionEvent& firstCollision = collisionEvents[0];
+    if (!collisionEventsCache_.empty()) {
+        const CollisionEvent& firstCollision = collisionEventsCache_[0];
         Vector3 surfaceNormal = firstCollision.normal;
         
         // Check if this is a slope surface (not vertical, not flat)
@@ -291,7 +325,7 @@ void PhysicsSystem::ResolveMovement(Entity* entity, const Vector3& intendedMovem
             Vector3 finalMovement = {projectedMovement.x, slopeMovementY + intendedMovement.y, projectedMovement.z};
             Vector3 finalPos = Vector3Add(currentPos, finalMovement);
             
-            position->SetPosition(finalPos);
+            transform->position = finalPos;
             collidable->UpdateBoundsFromPosition(finalPos);
             
             // Update velocity to reflect slope movement
@@ -325,7 +359,7 @@ void PhysicsSystem::ResolveMovement(Entity* entity, const Vector3& intendedMovem
 
     // Apply constraint-resolved movement
     Vector3 finalPos = Vector3Add(currentPos, finalMovement);
-    position->SetPosition(finalPos);
+    transform->position = finalPos;
     collidable->UpdateBoundsFromPosition(finalPos);
 
     // Update velocity based on movement constraints
@@ -337,11 +371,11 @@ void PhysicsSystem::ResolveMovement(Entity* entity, const Vector3& intendedMovem
 }
 
 void PhysicsSystem::HandleCollision(Entity* entity, const Vector3& movement, const Vector3& surfaceNormal) {
-    auto* position = entity->GetComponent<Position>();
+    auto* transform = entity->GetComponent<TransformComponent>();
     auto* velocity = entity->GetComponent<Velocity>();
     auto* collidable = entity->GetComponent<Collidable>();
 
-    if (!position || !velocity || !collidable) return;
+    if (!transform || !velocity || !collidable) return;
 
     // Simple collision response - just stop movement in the collision direction
     // Classify surface type based on normal
@@ -359,9 +393,9 @@ void PhysicsSystem::HandleCollision(Entity* entity, const Vector3& movement, con
             // Allow horizontal movement with sliding
             Vector3 horizontalMovement = {movement.x, 0.0f, movement.z};
             if (Vector3Length(horizontalMovement) > 0.001f) {
-                Vector3 testPos = Vector3Add(position->GetPosition(), horizontalMovement);
+                Vector3 testPos = Vector3Add(transform->position, horizontalMovement);
                 if (!CheckCollisionAtPosition(entity, testPos)) {
-                    position->Move(horizontalMovement);
+                    transform->position = Vector3Add(transform->position, horizontalMovement);
                 }
             }
         } else {
@@ -378,9 +412,9 @@ void PhysicsSystem::HandleCollision(Entity* entity, const Vector3& movement, con
             // Allow Z movement
             Vector3 slideMovement = {0.0f, movement.y, movement.z};
             if (Vector3Length(slideMovement) > 0.001f) {
-                Vector3 testPos = Vector3Add(position->GetPosition(), slideMovement);
+                Vector3 testPos = Vector3Add(transform->position, slideMovement);
                 if (!CheckCollisionAtPosition(entity, testPos)) {
-                    position->Move(slideMovement);
+                    transform->position = Vector3Add(transform->position, slideMovement);
                 }
             }
         } else {
@@ -389,16 +423,16 @@ void PhysicsSystem::HandleCollision(Entity* entity, const Vector3& movement, con
             // Allow X movement
             Vector3 slideMovement = {movement.x, movement.y, 0.0f};
             if (Vector3Length(slideMovement) > 0.001f) {
-                Vector3 testPos = Vector3Add(position->GetPosition(), slideMovement);
+                Vector3 testPos = Vector3Add(transform->position, slideMovement);
                 if (!CheckCollisionAtPosition(entity, testPos)) {
-                    position->Move(slideMovement);
+                    transform->position = Vector3Add(transform->position, slideMovement);
                 }
             }
         }
     }
 
     // Update collidable bounds
-    collidable->UpdateBoundsFromPosition(position->GetPosition());
+    collidable->UpdateBoundsFromPosition(transform->position);
 }
 
 void PhysicsSystem::HandleCollisionResponse(Entity* entity, const Vector3& movement, const Vector3& surfaceNormal) {
@@ -440,17 +474,17 @@ void PhysicsSystem::HandleCollisionResponse(Entity* entity, const Vector3& movem
     velocity->SetVelocity(slidVel);
 }
 
-std::vector<CollisionEvent> PhysicsSystem::GetAllCollisions(Entity* entity, const Vector3& position) const {
-    std::vector<CollisionEvent> collisions;
+void PhysicsSystem::GetAllCollisions(Entity* entity, const Vector3& position, std::vector<CollisionEvent>& outCollisions) const {
+    outCollisions.clear();
     auto* collidable = entity->GetComponent<Collidable>();
     if (!collidable || !collisionSystem_) {
-        return collisions;
+        return;
     }
 
     // Cast to CollisionSystem to access BSP tree
     auto collisionSys = dynamic_cast<CollisionSystem*>(collisionSystem_);
     if (!collisionSys) {
-        return collisions;
+        return;
     }
 
     // Create AABB from position and size
@@ -464,7 +498,7 @@ std::vector<CollisionEvent> PhysicsSystem::GetAllCollisions(Entity* entity, cons
     playerBounds.max.z = position.z + size.z / 2.0f;
 
     // Check collision against all faces in the BSP tree
-    const auto& faces = collisionSys->GetBSPTree()->GetAllFaces();
+    const auto& faces = collisionSys->GetWorld()->surfaces;
     for (const auto& face : faces) {
         // Skip non-collidable faces
         if (!HasFlag(face.flags, FaceFlags::Collidable)) continue;
@@ -477,11 +511,9 @@ std::vector<CollisionEvent> PhysicsSystem::GetAllCollisions(Entity* entity, cons
 
             
             // Add to collision list
-            collisions.emplace_back(nullptr, nullptr, position, face.normal, penetrationDepth);
+            outCollisions.emplace_back(nullptr, nullptr, position, face.normal, penetrationDepth);
         }
     }
-
-    return collisions;
 }
 
 CollisionEvent PhysicsSystem::GetDetailedCollision(Entity* entity, const Vector3& position, const Vector3& movement) const {
@@ -506,21 +538,22 @@ Vector3 PhysicsSystem::ResolveCollisionsSequentially(Entity* entity, const Vecto
     Vector3 currentPos = startPos;
 
     // Check for collisions at target position
-    std::vector<CollisionEvent> collisions = GetAllCollisions(entity, Vector3Add(startPos, intendedMovement));
+    collisionsCache_.clear();
+    GetAllCollisions(entity, Vector3Add(startPos, intendedMovement), collisionsCache_);
 
-    if (collisions.empty()) {
+    if (collisionsCache_.empty()) {
         // No collisions, apply full movement
         return Vector3Add(startPos, intendedMovement);
     }
 
     // Sort collisions by penetration depth
-    std::sort(collisions.begin(), collisions.end(),
+    std::sort(collisionsCache_.begin(), collisionsCache_.end(),
         [](const CollisionEvent& a, const CollisionEvent& b) {
             return a.penetrationDepth > b.penetrationDepth;
         });
 
     // Handle the deepest collision first
-    const CollisionEvent& collision = collisions[0];
+    const CollisionEvent& collision = collisionsCache_[0];
 
     // Apply position correction
     Vector3 correction = Vector3Scale(collision.normal, collision.penetrationDepth + 0.001f);
@@ -552,13 +585,13 @@ Vector3 PhysicsSystem::ResolveCollisionsSequentially(Entity* entity, const Vecto
 void PhysicsSystem::HandleMultipleCollisions(Entity* entity, const Vector3& intendedMovement, const std::vector<CollisionEvent>& collisions) {
     // This function is now deprecated - sequential resolution is handled in ResolveCollisionsSequentially
     // Keep for backward compatibility but delegate to the new system
-    auto* position = entity->GetComponent<Position>();
+    auto* transform = entity->GetComponent<TransformComponent>();
     auto* collidable = entity->GetComponent<Collidable>();
 
-    if (!position || !collidable || collisions.empty()) return;
+    if (!transform || !collidable || collisions.empty()) return;
 
-    Vector3 resolvedPos = ResolveCollisionsSequentially(entity, position->GetPosition(), intendedMovement);
-    position->SetPosition(resolvedPos);
+    Vector3 resolvedPos = ResolveCollisionsSequentially(entity, transform->position, intendedMovement);
+    transform->position = resolvedPos;
     collidable->UpdateBoundsFromPosition(resolvedPos);
 }
 
@@ -593,30 +626,30 @@ bool PhysicsSystem::WouldCollideWithAny(Entity* entity, const Vector3& position,
 }
 
 void PhysicsSystem::TryHorizontalMovement(Entity* entity, const Vector3& intendedMovement) {
-    auto* position = entity->GetComponent<Position>();
+    auto* transform = entity->GetComponent<TransformComponent>();
 
-    if (!position) return;
+    if (!transform) return;
 
     // Try to move horizontally, allowing sliding along surfaces
     Vector3 horizontalMovement = {intendedMovement.x, 0.0f, intendedMovement.z};
 
     if (Vector3Length(horizontalMovement) > 0.001f) {
-        Vector3 testPos = Vector3Add(position->GetPosition(), horizontalMovement);
+        Vector3 testPos = Vector3Add(transform->position, horizontalMovement);
         if (!CheckCollisionAtPosition(entity, testPos)) {
-            position->Move(horizontalMovement);
+            transform->position = Vector3Add(transform->position, horizontalMovement);
         } else {
             // Try sliding - move only in X direction
             Vector3 slideX = {intendedMovement.x, 0.0f, 0.0f};
-            Vector3 testPosX = Vector3Add(position->GetPosition(), slideX);
+            Vector3 testPosX = Vector3Add(transform->position, slideX);
             if (!CheckCollisionAtPosition(entity, testPosX)) {
-                position->Move(slideX);
+                transform->position = Vector3Add(transform->position, slideX);
             }
 
             // Try sliding - move only in Z direction
             Vector3 slideZ = {0.0f, 0.0f, intendedMovement.z};
-            Vector3 testPosZ = Vector3Add(position->GetPosition(), slideZ);
+            Vector3 testPosZ = Vector3Add(transform->position, slideZ);
             if (!CheckCollisionAtPosition(entity, testPosZ)) {
-                position->Move(slideZ);
+                transform->position = Vector3Add(transform->position, slideZ);
             }
         }
     }
@@ -631,13 +664,8 @@ float PhysicsSystem::GetSurfaceHeightAtPosition(const Vector3& position) const {
     Vector3 rayDirection = {0, -1, 0}; // Downward ray
 
     // Get BSP tree for raycasting
-    const BSPTree* bspTree = nullptr;
-    if (collisionSystem_) {
-        bspTree = dynamic_cast<CollisionSystem*>(collisionSystem_)->GetBSPTree();
-    }
-
-    if (bspTree) {
-        float distance = bspTree->CastRay(rayStart, rayDirection, RAY_LENGTH);
+    if (worldSystem_) {
+        float distance = worldSystem_->CastRay(rayStart, rayDirection, RAY_LENGTH);
         if (distance > 0 && distance < RAY_LENGTH) {
             return rayStart.y - distance; // Surface height
         }
@@ -649,23 +677,36 @@ float PhysicsSystem::GetSurfaceHeightAtPosition(const Vector3& position) const {
 
 bool PhysicsSystem::CheckCollisionAtPosition(Entity* entity, const Vector3& position) const {
     auto* collidable = entity->GetComponent<Collidable>();
-    if (!collidable || !collisionSystem_) return false;
+    if (!collidable || !collisionSystem_) {
+        LOG_INFO("CheckCollisionAtPosition: No collidable or collision system");
+        return false;
+    }
 
     // Cast to CollisionSystem to access the method
     auto collisionSys = dynamic_cast<class CollisionSystem*>(collisionSystem_);
-    return collisionSys && collisionSys->CheckCollisionWithWorld(*collidable, position);
+    if (!collisionSys) {
+        LOG_INFO("CheckCollisionAtPosition: Could not cast to CollisionSystem");
+        return false;
+    }
+
+    bool result = collisionSys->CheckCollisionWithWorld(*collidable, position);
+    LOG_INFO("CheckCollisionAtPosition: Position (" + std::to_string(position.x) + "," +
+             std::to_string(position.y) + "," + std::to_string(position.z) + ") collision: " +
+             std::string(result ? "YES" : "NO"));
+
+    return result;
 }
 
 
 void PhysicsSystem::UpdatePlayerState(Entity* playerEntity) {
     auto* player = playerEntity->GetComponent<Player>();
-    auto* position = playerEntity->GetComponent<Position>();
+    auto* transform = playerEntity->GetComponent<TransformComponent>();
     auto* collidable = playerEntity->GetComponent<Collidable>();
     auto* velocity = playerEntity->GetComponent<Velocity>();
 
-    if (!player || !position || !collidable || !velocity) return;
+    if (!player || !transform || !collidable || !velocity) return;
 
-    Vector3 playerPos = position->GetPosition();
+    Vector3 playerPos = transform->position;
     Vector3 playerSize = collidable->GetBounds().GetSize();
     Vector3 currentVel = velocity->GetVelocity();
 
@@ -772,14 +813,14 @@ Vector3 PhysicsSystem::ClampVelocity(const Vector3& velocity, float maxSpeed) co
 }
 
 bool PhysicsSystem::IsOnGround(const Vector3& position, const Vector3& size) const {
-    // Check if we have a collision system with BSP tree
-    const BSPTree* bspTree = nullptr;
+    // Check if we have a collision system with world geometry
+    const World* world = nullptr;
     if (collisionSystem_) {
-        bspTree = dynamic_cast<CollisionSystem*>(collisionSystem_)->GetBSPTree();
+        world = dynamic_cast<CollisionSystem*>(collisionSystem_)->GetWorld();
     }
 
-    if (!bspTree) {
-        // Fallback: If no BSP tree, assume player is on ground at Y=0
+    if (!world) {
+        // Fallback: If no world geometry, assume player is on ground at Y=0
         // This prevents infinite falling in test scenarios
         float groundThreshold = size.y/2.0f + 0.1f;
         bool onGround = position.y <= groundThreshold;
@@ -823,9 +864,11 @@ bool PhysicsSystem::IsOnGround(const Vector3& position, const Vector3& size) con
         float highestSurfaceY = -FLT_MAX;
         bool foundSurface = false;
 
-        const auto& faces = collisionSystem_ ?
-            dynamic_cast<CollisionSystem*>(collisionSystem_)->GetBSPTree()->GetAllFaces() :
-            std::vector<Face>();
+        if (!collisionSystem_) {
+            return 0.0f; // No collision system available
+        }
+
+        const auto& faces = dynamic_cast<CollisionSystem*>(collisionSystem_)->GetWorld()->surfaces;
 
         for (const auto& face : faces) {
             if (!HasFlag(face.flags, FaceFlags::Collidable)) continue;
@@ -880,9 +923,9 @@ Vector3 PhysicsSystem::GetGroundNormal(const Vector3& position) const {
         return {0.0f, 1.0f, 0.0f};
     }
 
-    const BSPTree* bspTree = collisionSys->GetBSPTree();
-    if (!bspTree) {
-        LOG_INFO("GROUND NORMAL: No BSP tree available, using default up vector");
+    const World* world = collisionSys->GetWorld();
+    if (!world) {
+        LOG_INFO("GROUND NORMAL: No world geometry available, using default up vector");
         return {0.0f, 1.0f, 0.0f};
     }
 
@@ -897,7 +940,9 @@ Vector3 PhysicsSystem::GetGroundNormal(const Vector3& position) const {
     LOG_INFO("GROUND NORMAL: Casting ray from (" + std::to_string(rayStart.x) + "," + std::to_string(rayStart.y) + "," + std::to_string(rayStart.z) +
              ") downward " + std::to_string(RAY_LENGTH) + " units");
 
-    float hitDistance = bspTree->CastRayWithNormal(rayStart, rayDirection, RAY_LENGTH, hitNormal);
+    // TODO: Use CollisionSystem for ray casting instead of direct BSPTree access
+    float hitDistance = RAY_LENGTH; // Placeholder
+    hitNormal = {0, 1, 0}; // Default up normal
 
     LOG_INFO("GROUND NORMAL: Raycast result - distance: " + std::to_string(hitDistance) +
              ", max distance: " + std::to_string(RAY_LENGTH) +
@@ -1019,13 +1064,13 @@ Vector3 PhysicsSystem::ResolveConstrainedMovement(Entity* entity, const Vector3&
 }
 
 void PhysicsSystem::ApplyUnstuckCorrection(Entity* entity, float deltaTime) {
-    auto* position = entity->GetComponent<Position>();
+    auto* transform = entity->GetComponent<TransformComponent>();
     auto* collidable = entity->GetComponent<Collidable>();
     auto* velocity = entity->GetComponent<Velocity>();
-    
-    if (!position || !collidable || !velocity) return;
-    
-    Vector3 currentPos = position->GetPosition();
+
+    if (!transform || !collidable || !velocity) return;
+
+    Vector3 currentPos = transform->position;
     
     // Check if player is currently inside geometry
     if (!CheckCollisionAtPosition(entity, currentPos)) {
@@ -1078,7 +1123,7 @@ void PhysicsSystem::ApplyUnstuckCorrection(Entity* entity, float deltaTime) {
             newPos = Vector3Add(currentPos, gradualMovement);
         }
         
-        position->SetPosition(newPos);
+        transform->position = newPos;
         collidable->UpdateBoundsFromPosition(newPos);
         
         LOG_INFO("UNSTUCK: Applied correction (" + std::to_string(correctionMovement.x) + "," + 
@@ -1090,13 +1135,13 @@ void PhysicsSystem::ApplyUnstuckCorrection(Entity* entity, float deltaTime) {
 
 
 bool PhysicsSystem::TryStepUp(Entity* entity, const Vector3& intendedMovement) {
-    auto* position = entity->GetComponent<Position>();
+    auto* transform = entity->GetComponent<TransformComponent>();
     auto* collidable = entity->GetComponent<Collidable>();
     auto* velocity = entity->GetComponent<Velocity>();
 
-    if (!position || !collidable || !velocity) return false;
+    if (!transform || !collidable || !velocity) return false;
 
-    Vector3 currentPos = position->GetPosition();
+    Vector3 currentPos = transform->position;
 
     // Only attempt step-up for horizontal movement
     Vector3 horizontalMovement = {intendedMovement.x, 0, intendedMovement.z};
@@ -1132,7 +1177,7 @@ bool PhysicsSystem::TryStepUp(Entity* entity, const Vector3& intendedMovement) {
         LOG_INFO("STEP-UP: Found ground below lifted position - successful step up");
         
         // Move to lifted position
-        position->SetPosition(liftedPos);
+        transform->position = liftedPos;
         collidable->UpdateBoundsFromPosition(liftedPos);
         
         // Reset vertical velocity to prevent bouncing
@@ -1154,7 +1199,7 @@ bool PhysicsSystem::TryStepUp(Entity* entity, const Vector3& intendedMovement) {
                 LOG_INFO("STEP-UP: Found step surface at height " + std::to_string(testPos.y) + 
                          " (drop: " + std::to_string(dropHeight) + ")");
                 
-                position->SetPosition(testPos);
+                transform->position = testPos;
                 collidable->UpdateBoundsFromPosition(testPos);
                 velocity->SetY(0.0f);
                 
@@ -1168,19 +1213,19 @@ bool PhysicsSystem::TryStepUp(Entity* entity, const Vector3& intendedMovement) {
 }
 
 std::vector<CollisionPlane> PhysicsSystem::GatherCollisionPlanes(Entity* entity, const Vector3& position) {
-    std::vector<CollisionPlane> planes;
-    
-    auto collisions = GetAllCollisions(entity, position);
-    for (const auto& collision : collisions) {
+    collisionEventsCache_.clear();
+
+    GetAllCollisions(entity, position, collisionEventsCache_);
+    for (const auto& collision : collisionEventsCache_) {
         CollisionPlane plane;
         plane.normal = collision.normal;
         plane.distance = collision.penetrationDepth;
         plane.contactPoint = collision.contactPoint;
         plane.isContact = collision.penetrationDepth <= PENETRATION_SLOP;
-        planes.push_back(plane);
+        collisionPlanesCache_.push_back(plane);
     }
-    
-    return planes;
+
+    return collisionPlanesCache_;
 }
 
 // Slope detection and handling methods

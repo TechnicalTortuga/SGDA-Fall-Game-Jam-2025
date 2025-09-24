@@ -9,50 +9,195 @@ texture: devtextures/Dark/proto_wall_dark.png 0
 texture: devtextures/Light/proto_1024_light.png 1
 texture: devtextures/Green/proto_1024_green.png 2
 texture: skyboxcubemaps/cubemap_cloudy&blue.png 3
+texture: devtextures/Orange/proto_1024_orange.png 4
 
 # Floor height and ceiling height
 floor: 0.0
 ceiling: 8.0
 
 # Room 1 - Starting area (10x10 units, open ceiling)
-# North wall
-surface: -5.0,0.0,-5.0 -5.0,8.0,5.0 8.0 0 135,135,135
-# South wall
-surface: -5.0,0.0,5.0 -5.0,8.0,-5.0 8.0 0 135,135,135
-# East wall (with corridor opening on north side)
-surface: 5.0,0.0,-5.0 5.0,8.0,2.0 8.0 0 135,135,135
-# East wall (south part, no opening)
-surface: 5.0,0.0,2.0 5.0,8.0,5.0 8.0 0 135,135,135
-# West wall
-surface: -5.0,0.0,-5.0 -5.0,8.0,5.0 8.0 0 135,135,135
-# Floor
-surface: -5.0,0.0,-5.0 5.0,0.0,5.0 0.0 1 169,169,169
+# North wall (Z=-5, X=-5 to 5)
+surface: -5.0,0.0,-5.0 5.0,0.0,-5.0 8.0 0 135,135,135
+# South wall (Z=5, X=-5 to 5)
+surface: -5.0,0.0,5.0 5.0,0.0,5.0 8.0 0 135,135,135
+# East wall north part (X=5, Z=-5 to -2)
+surface: 5.0,0.0,-5.0 5.0,0.0,-2.0 8.0 0 135,135,135
+# East wall south part (X=5, Z=2 to 5)
+surface: 5.0,0.0,2.0 5.0,0.0,5.0 8.0 0 135,135,135
+# West wall north part (X=-5, Z=-2 to -5)
+surface: -5.0,0.0,-2.0 -5.0,0.0,-5.0 8.0 0 135,135,135
+# West wall south part (X=-5, Z=5 to 2)
+surface: -5.0,0.0,5.0 -5.0,0.0,2.0 8.0 0 135,135,135
+# Floor (orange for testing)
+surface: -5.0,0.0,-5.0 5.0,0.0,5.0 0.0 3 255,255,255
 # NO CEILING - open to sky!
 
-# Corridor (connecting rooms, from X=5 to X=15)
-# North wall (connects to room 1 opening)
-surface: 5.0,0.0,-2.0 5.0,8.0,2.0 8.0 0 160,160,160
-# South wall
-surface: 15.0,0.0,-2.0 15.0,8.0,2.0 8.0 0 160,160,160
-# East wall
-surface: 5.0,0.0,2.0 15.0,8.0,2.0 8.0 0 160,160,160
-# West wall (connects to room 2)
-surface: 5.0,0.0,-2.0 15.0,8.0,-2.0 8.0 0 160,160,160
+# Corridor (connecting rooms, from X=5 to X=15, Z=-2 to 2)
 # Floor
 surface: 5.0,0.0,-2.0 15.0,0.0,2.0 0.0 1 169,169,169
+# North wall (Z=2, X=5 to 15)
+surface: 5.0,0.0,2.0 15.0,0.0,2.0 8.0 0 160,160,160
+# South wall (Z=-2, X=5 to 15)
+surface: 15.0,0.0,-2.0 5.0,0.0,-2.0 8.0 0 160,160,160
 # Ceiling
 surface: 5.0,8.0,-2.0 15.0,8.0,2.0 0.0 2 200,200,200
 
-# Room 2 - Destination area (12x12 units, open roof for skybox)
-# North wall
-surface: 15.0,0.0,-6.0 27.0,8.0,-6.0 8.0 0 135,135,135
-# South wall
-surface: 15.0,0.0,6.0 27.0,8.0,6.0 8.0 0 135,135,135
-# East wall
-surface: 27.0,0.0,-6.0 27.0,8.0,6.0 8.0 0 135,135,135
-# West wall (corridor entrance - opening in middle)
-surface: 15.0,0.0,-6.0 15.0,8.0,-2.0 8.0 0 135,135,135
-surface: 15.0,0.0,2.0 15.0,8.0,6.0 8.0 0 135,135,135
+# Room 2 - Destination area (X=15 to 27, Z=-6 to 6)
 # Floor
 surface: 15.0,0.0,-6.0 27.0,0.0,6.0 0.0 1 169,169,169
-# No ceiling - open to sky!
+# North wall (Z=-6, X=15 to 27)
+surface: 15.0,0.0,-6.0 27.0,0.0,-6.0 8.0 0 135,135,135
+# South wall (Z=6, X=15 to 27)
+surface: 27.0,0.0,6.0 15.0,0.0,6.0 8.0 0 135,135,135
+# East wall north part (X=27, Z=-6 to -2)
+surface: 27.0,0.0,-6.0 27.0,0.0,-2.0 8.0 0 135,135,135
+# East wall south part (X=27, Z=2 to 6)
+surface: 27.0,0.0,2.0 27.0,0.0,6.0 8.0 0 135,135,135
+# West wall south part (X=15, Z=6 to 2)
+surface: 15.0,0.0,6.0 15.0,0.0,2.0 8.0 0 135,135,135
+# West wall north part (X=15, Z=-2 to -6)
+surface: 15.0,0.0,-2.0 15.0,0.0,-6.0 8.0 0 135,135,135
+# Ceiling
+surface: 15.0,8.0,-6.0 27.0,8.0,6.0 0.0 2 200,200,200
+
+# Corridor 2 (Room 2 to Room 3, X=27 to 37, Z=-2 to 2)
+# Floor
+surface: 27.0,0.0,-2.0 37.0,0.0,2.0 0.0 1 169,169,169
+# North wall (Z=2, X=27 to 37)
+surface: 27.0,0.0,2.0 37.0,0.0,2.0 8.0 0 135,135,135
+# South wall (Z=-2, X=27 to 37)
+surface: 37.0,0.0,-2.0 27.0,0.0,-2.0 8.0 0 135,135,135
+# Ceiling
+surface: 27.0,8.0,-2.0 37.0,8.0,2.0 0.0 2 200,200,200
+
+# Room 3 (Large Testing Area, X=37 to 55, Z=-12 to 12)
+# Floor
+surface: 37.0,0.0,-12.0 55.0,0.0,12.0 0.0 1 169,169,169
+# North wall (Z=-12, X=37 to 55)
+surface: 37.0,0.0,-12.0 55.0,0.0,-12.0 8.0 0 135,135,135
+# South wall (Z=12, X=37 to 55)
+surface: 55.0,0.0,12.0 37.0,0.0,12.0 8.0 0 135,135,135
+# East wall (X=55, Z=-12 to 12)
+surface: 55.0,0.0,-12.0 55.0,0.0,12.0 8.0 0 135,135,135
+# West wall north part (X=37, Z=12 to 2)
+surface: 37.0,0.0,12.0 37.0,0.0,2.0 8.0 0 135,135,135
+# West wall south part (X=37, Z=-2 to -12)
+surface: 37.0,0.0,-2.0 37.0,0.0,-12.0 8.0 0 135,135,135
+
+# Testing Platforms in Room 3 (solid boxes with correct orientations)
+# Platform 1: X=40-43, Z=8-11, Y=0-1
+# Top surface (horizontal, +Y normal)
+surface: 40.0,1.0,8.0 43.0,1.0,11.0 0.0 0 135,135,135
+# North face (Z=11, vertical wall, +Z normal outward)
+surface: 40.0,0.0,11.0 43.0,1.0,11.0 1.0 0 135,135,135
+# South face (Z=8, vertical wall, -Z normal outward)
+surface: 43.0,1.0,8.0 40.0,0.0,8.0 1.0 0 135,135,135
+# East face (X=43, vertical wall, +X normal outward)
+surface: 43.0,0.0,8.0 43.0,1.0,11.0 1.0 0 135,135,135
+# West face (X=40, vertical wall, -X normal outward)
+surface: 40.0,1.0,11.0 40.0,0.0,8.0 1.0 0 135,135,135
+
+# Platform 2: X=46-49, Z=8-11, Y=0-2
+# Top surface
+surface: 46.0,2.0,8.0 49.0,2.0,11.0 0.0 0 135,135,135
+# North face (Z=11)
+surface: 46.0,0.0,11.0 49.0,2.0,11.0 2.0 0 135,135,135
+# South face (Z=8)
+surface: 49.0,2.0,8.0 46.0,0.0,8.0 2.0 0 135,135,135
+# East face (X=49)
+surface: 49.0,0.0,8.0 49.0,2.0,11.0 2.0 0 135,135,135
+# West face (X=46)
+surface: 46.0,2.0,11.0 46.0,0.0,8.0 2.0 0 135,135,135
+
+# Platform 3: X=52-55, Z=8-11, Y=0-3.5
+# Top surface
+surface: 52.0,3.5,8.0 55.0,3.5,11.0 0.0 0 135,135,135
+# North face (Z=11)
+surface: 52.0,0.0,11.0 55.0,3.5,11.0 3.5 0 135,135,135
+# South face (Z=8)
+surface: 55.0,3.5,8.0 52.0,0.0,8.0 3.5 0 135,135,135
+# East face (X=55)
+surface: 55.0,0.0,8.0 55.0,3.5,11.0 3.5 0 135,135,135
+# West face (X=52)
+surface: 52.0,3.5,11.0 52.0,0.0,8.0 3.5 0 135,135,135
+
+# Slope Testing Area in Room 3 (AddSolidBox creates 6 faces per step)
+# Step 1 (X=40-42, Z=-11 to -8, Y=0-0.5, material 3)
+surface: 40.0,0.5,-11.0 42.0,0.5,-8.0 0.5 3 255,165,0
+surface: 40.0,0.0,-11.0 42.0,0.0,-8.0 0.0 3 255,165,0
+surface: 40.0,0.0,-8.0 42.0,0.5,-8.0 0.0 3 255,165,0
+surface: 42.0,0.0,-11.0 40.0,0.5,-11.0 0.0 3 255,165,0
+surface: 42.0,0.0,-11.0 42.0,0.5,-8.0 0.0 3 255,165,0
+surface: 40.0,0.0,-11.0 40.0,0.5,-8.0 0.0 3 255,165,0
+
+# Step 2 (X=42-44, Z=-11 to -8, Y=0.5-1.0, material 3)
+surface: 42.0,1.0,-11.0 44.0,1.0,-8.0 1.0 3 255,165,0
+surface: 42.0,0.5,-11.0 44.0,0.5,-8.0 0.5 3 255,165,0
+surface: 42.0,0.5,-8.0 44.0,1.0,-8.0 0.5 3 255,165,0
+surface: 44.0,0.5,-11.0 42.0,1.0,-11.0 0.5 3 255,165,0
+surface: 44.0,0.5,-11.0 44.0,1.0,-8.0 0.5 3 255,165,0
+surface: 42.0,0.5,-11.0 42.0,1.0,-8.0 0.5 3 255,165,0
+
+# Step 3 (X=44-46, Z=-11 to -8, Y=1.0-1.5, material 3)
+surface: 44.0,1.5,-11.0 46.0,1.5,-8.0 1.5 3 255,165,0
+surface: 44.0,1.0,-11.0 46.0,1.0,-8.0 1.0 3 255,165,0
+surface: 44.0,1.0,-8.0 46.0,1.5,-8.0 1.0 3 255,165,0
+surface: 46.0,1.0,-11.0 44.0,1.5,-11.0 1.0 3 255,165,0
+surface: 46.0,1.0,-11.0 46.0,1.5,-8.0 1.0 3 255,165,0
+surface: 44.0,1.0,-11.0 44.0,1.5,-8.0 1.0 3 255,165,0
+
+# Step 4 (X=46-48, Z=-11 to -8, Y=1.5-2.0, material 3)
+surface: 46.0,2.0,-11.0 48.0,2.0,-8.0 2.0 3 255,165,0
+surface: 46.0,1.5,-11.0 48.0,1.5,-8.0 1.5 3 255,165,0
+surface: 46.0,1.5,-8.0 48.0,2.0,-8.0 1.5 3 255,165,0
+surface: 48.0,1.5,-11.0 46.0,2.0,-11.0 1.5 3 255,165,0
+surface: 48.0,1.5,-11.0 48.0,2.0,-8.0 1.5 3 255,165,0
+surface: 46.0,1.5,-11.0 46.0,2.0,-8.0 1.5 3 255,165,0
+
+# Step 5 (X=48-50, Z=-11 to -8, Y=2.0-2.5, material 3)
+surface: 48.0,2.5,-11.0 50.0,2.5,-8.0 2.5 3 255,165,0
+surface: 48.0,2.0,-11.0 50.0,2.0,-8.0 2.0 3 255,165,0
+surface: 48.0,2.0,-8.0 50.0,2.5,-8.0 2.0 3 255,165,0
+surface: 50.0,2.0,-11.0 48.0,2.5,-11.0 2.0 3 255,165,0
+surface: 50.0,2.0,-11.0 50.0,2.5,-8.0 2.0 3 255,165,0
+surface: 48.0,2.0,-11.0 48.0,2.5,-8.0 2.0 3 255,165,0
+
+# Step 6 (X=50-52, Z=-11 to -8, Y=2.5-3.0, material 3)
+surface: 50.0,3.0,-11.0 52.0,3.0,-8.0 3.0 3 255,165,0
+surface: 50.0,2.5,-11.0 52.0,2.5,-8.0 2.5 3 255,165,0
+surface: 50.0,2.5,-8.0 52.0,3.0,-8.0 2.5 3 255,165,0
+surface: 52.0,2.5,-11.0 50.0,3.0,-11.0 2.5 3 255,165,0
+surface: 52.0,2.5,-11.0 52.0,3.0,-8.0 2.5 3 255,165,0
+surface: 50.0,2.5,-11.0 50.0,3.0,-8.0 2.5 3 255,165,0
+
+# Smooth Slope (X=40-52, Z=5-8, Y=0-2.5, material 3) - Approximated as quads
+# Main slope surface
+surface: 40.0,0.0,5.0 52.0,2.5,8.0 0.0 3 255,165,0
+# Back wall (X=52, Y=0-2.5, Z=5-8)
+surface: 52.0,0.0,5.0 52.0,2.5,8.0 0.0 0 135,135,135
+# Left side (X=40, Y=0-2.5, Z=5-8)
+surface: 40.0,0.0,5.0 40.0,2.5,8.0 0.0 0 135,135,135
+
+# Extra Corridor (X=-10 to -5, Z=-2 to 2)
+# North wall (Z=2, X=-10 to -5)
+surface: -10.0,0.0,2.0 -5.0,0.0,2.0 8.0 0 135,135,135
+# South wall (Z=-2, X=-10 to -5)
+surface: -5.0,0.0,-2.0 -10.0,0.0,-2.0 8.0 0 135,135,135
+# Floor
+surface: -10.0,0.0,-2.0 -5.0,0.0,2.0 0.0 1 169,169,169
+# Ceiling
+surface: -10.0,8.0,-2.0 -5.0,8.0,2.0 8.0 2 200,200,200
+
+# Extra Room (X=-20 to -10, Z=-5 to 5)
+# North wall (Z=-5, X=-20 to -10)
+surface: -20.0,0.0,-5.0 -10.0,0.0,-5.0 8.0 0 135,135,135
+# South wall (Z=5, X=-20 to -10)
+surface: -10.0,0.0,5.0 -20.0,0.0,5.0 8.0 0 135,135,135
+# East wall north part (X=-10, Z=-5 to -2)
+surface: -10.0,0.0,-5.0 -10.0,0.0,-2.0 8.0 0 135,135,135
+# East wall south part (X=-10, Z=2 to 5)
+surface: -10.0,0.0,2.0 -10.0,0.0,5.0 8.0 0 135,135,135
+# West wall (X=-20, Z=-5 to 5)
+surface: -20.0,0.0,-5.0 -20.0,0.0,5.0 8.0 0 135,135,135
+# Floor
+surface: -20.0,0.0,-5.0 -10.0,0.0,5.0 0.0 1 169,169,169

@@ -1,0 +1,33 @@
+# PaintSplash Test Level - YAML Format with Game Objects
+# This demonstrates the new YAML map format with entity support
+
+version: 2.1
+name: "YAML Test Level with Game Objects"
+
+# Global settings
+settings:
+    gravity: 0.0, -980.0, 0.0
+    sky: "skyboxcubemaps/cubemap_cloudy&blue.png"
+    fog:
+        color: 135, 206, 235
+        start: 1000.0
+        end: 5000.0
+
+# Materials library - matches CreateTestMap() materials
+materials:
+    - id: 0
+      name: "textures/devtextures/Dark/proto_wall_dark.png"
+      type: "basic"
+    - id: 1
+      name: "textures/devtextures/Light/proto_1024_light.png"
+      type: "basic"
+    - id: 2
+      name: "textures/devtextures/Green/proto_1024_green.png"
+      type: "basic"
+    - id: 3
+      name: "textures/devtextures/Orange/proto_1024_orange.png"
+      type: "basic"
+
+# World geometry - all faces from CreateTestMap()
+world:
+    brushes:

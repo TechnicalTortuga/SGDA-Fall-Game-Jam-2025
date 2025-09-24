@@ -20,6 +20,7 @@ struct MeshTriangle {
     unsigned int v1, v2, v3;
 };
 
+
 /*
 MeshComponent - Pure data mesh component for ECS
 
@@ -49,38 +50,22 @@ struct MeshComponent : public Component {
     // Mesh metadata (pure data)
     std::string meshName = "default";
 
+    // Primitive shape information (for Raylib integration)
+    enum class MeshType { MODEL, PRIMITIVE, COMPOSITE };
+    MeshType meshType = MeshType::PRIMITIVE;
+    std::string primitiveShape = "cube";
+    
+    // Composite mesh reference (lightweight - just an ID)
+    uint64_t compositeMeshId = 0;     // References composite mesh definition in MeshSystem
+
     // Simple state flags (pure data)
     bool isActive = true;
     bool needsRebuild = false;
     bool isStatic = false;                // For optimization (static meshes don't change)
 
-    // Legacy compatibility fields (to be removed after MeshSystem integration)
-    // These maintain compatibility during transition to MeshSystem
-    float rotationAngle = 0.0f;
-    Vector3 rotationAxis = {0, 1, 0};
-    int materialId = 0;
-    Texture2D texture = {0, 0, 0, 0, 0};  // id, width, height, mipmaps, format
-
-    // Legacy compatibility methods (temporary - delegate to MeshSystem when available)
-    // These maintain compatibility with existing rendering code
-    float GetRotationAngle() const { return rotationAngle; }
-    Vector3 GetRotationAxis() const { return rotationAxis; }
-    void SetRotation(float angle, const Vector3& axis) { rotationAngle = angle; rotationAxis = axis; }
-
-    int GetMaterial() const { return materialId; }
-    void SetMaterial(int id) { materialId = id; }
-
-    Texture2D GetTexture() const { return texture; }
-    void SetTexture(Texture2D tex) { texture = tex; }
-
-    void Clear() { vertices.clear(); triangles.clear(); }
-    size_t GetVertexCount() const { return vertices.size(); }
-    size_t GetTriangleCount() const { return triangles.size(); }
-    const std::vector<MeshVertex>& GetVertices() const { return vertices; }
-    const std::vector<MeshTriangle>& GetTriangles() const { return triangles; }
-
-    // Legacy mesh creation methods (temporary)
-    void CreateCube(float size = 1.0f, const Color& color = WHITE);
-    void CreatePyramid(float baseSize = 1.0f, float height = 1.5f,
-                      const std::vector<Color>& faceColors = {RED, GREEN, BLUE, YELLOW});
+    // Instancing support (temporary override for instanced rendering)
+    bool isInstanced = false;
+    Vector3 instancePosition = {0.0f, 0.0f, 0.0f};
+    Quaternion instanceRotation = {0.0f, 0.0f, 0.0f, 1.0f};
+    Vector3 instanceScale = {1.0f, 1.0f, 1.0f};
 };

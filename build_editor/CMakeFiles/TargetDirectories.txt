@@ -1,0 +1,7 @@
+/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build_editor/CMakeFiles/paintstrike_editor.dir
+/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build_editor/CMakeFiles/edit_cache.dir
+/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build_editor/CMakeFiles/rebuild_cache.dir
+/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build_editor/CMakeFiles/list_install_components.dir
+/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build_editor/CMakeFiles/install.dir
+/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build_editor/CMakeFiles/install/local.dir
+/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/build_editor/CMakeFiles/install/strip.dir

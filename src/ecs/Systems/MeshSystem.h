@@ -1,10 +1,44 @@
-#pragma once
+ #pragma once
 
 #include "../System.h"
 #include "../Components/MeshComponent.h"
 #include "../Entity.h"
+#include "../Systems/WorldSystem.h"
+#include "../../core/Engine.h"
 #include <unordered_map>
 #include <vector>
+
+/*
+SubMesh - Defines a single part of a composite mesh
+Contains the primitive type and relative transform for general composite rendering
+*/
+struct SubMesh {
+    std::string primitiveType;     // "sphere", "cylinder", "cube", etc.
+    Vector3 relativePosition;      // Position relative to parent mesh
+    Vector3 relativeScale;         // Scale relative to parent mesh  
+    Quaternion relativeRotation;   // Rotation relative to parent mesh
+    
+    // Primitive-specific parameters (stored as flexible data)
+    float radius = 1.0f;           // For spheres, cylinders
+    float height = 1.0f;           // For cylinders, capsules
+    Vector3 size = {1,1,1};        // For cubes, boxes
+    
+    SubMesh() : relativePosition{0,0,0}, relativeScale{1,1,1}, relativeRotation{0,0,0,1} {}
+    SubMesh(const std::string& type, const Vector3& pos, const Vector3& scale = {1,1,1}) 
+        : primitiveType(type), relativePosition(pos), relativeScale(scale), relativeRotation{0,0,0,1} {}
+};
+
+/*
+CompositeMeshDefinition - Lightweight registry entry for composite mesh types
+Stores the sub-mesh definitions for reuse across multiple entities
+*/
+struct CompositeMeshDefinition {
+    std::string name;
+    std::vector<SubMesh> subMeshes;
+    
+    CompositeMeshDefinition() = default;
+    CompositeMeshDefinition(const std::string& meshName) : name(meshName) {}
+};
 
 /*
 MeshSystem - Handles all mesh operations for ECS
@@ -34,6 +68,9 @@ public:
 
     // Mesh creation operations
     void CreateCube(Entity* entity, float size = 1.0f, const Color& color = WHITE);
+    void CreateSphere(Entity* entity, float radius = 1.0f);
+    void CreateCapsule(Entity* entity, float radius = 0.5f, float height = 2.0f);
+    void CreateCylinder(Entity* entity, float radius = 1.0f, float height = 2.0f);
     void CreatePyramid(Entity* entity, float baseSize = 1.0f, float height = 1.5f,
                       const std::vector<Color>& faceColors = {RED, GREEN, BLUE, YELLOW});
     void CreateCustomMesh(Entity* entity, const std::vector<MeshVertex>& vertices,
@@ -73,29 +110,22 @@ public:
     Vector3 GetRotationAxis(Entity* entity) const;
     void SetRotation(Entity* entity, float angle, const Vector3& axis);
 
-    // Legacy transform operations
-    float GetRotationAngle(const MeshComponent& mesh) const { return mesh.rotationAngle; }
-    Vector3 GetRotationAxis(const MeshComponent& mesh) const { return mesh.rotationAxis; }
-    void SetRotation(MeshComponent& mesh, float angle, const Vector3& axis) {
-        mesh.rotationAngle = angle;
-        mesh.rotationAxis = axis;
-    }
+    // Material operations removed - now handled by MaterialSystem
 
-    // Material operations (temporary - should use MaterialComponent)
-    int GetMaterial(Entity* entity) const;
-    void SetMaterial(Entity* entity, int materialId);
+    // Gradient color generation helpers
+    std::vector<Color> GenerateLinearGradientColors(Color primary, Color secondary, int numFaces);
+    std::vector<Color> GenerateRadialGradientColors(Color primary, Color secondary, int numFaces);
 
-    // Legacy material operations
-    int GetMaterial(const MeshComponent& mesh) const { return mesh.materialId; }
-    void SetMaterial(MeshComponent& mesh, int materialId) { mesh.materialId = materialId; }
-
-    // Texture operations (temporary - should use TextureComponent)
+    // Texture operations (use AssetSystem integration)
     Texture2D GetTexture(Entity* entity) const;
     void SetTexture(Entity* entity, Texture2D texture);
 
-    // Legacy texture operations
-    Texture2D GetTexture(const MeshComponent& mesh) const { return mesh.texture; }
-    void SetTexture(MeshComponent& mesh, Texture2D texture) { mesh.texture = texture; }
+    // Resolve textures for meshes that have material IDs set
+    void ResolvePendingTextures();
+    
+    // Composite mesh management (data-oriented)
+    uint64_t RegisterCompositeMesh(const std::string& name, const std::vector<SubMesh>& subMeshes);
+    const CompositeMeshDefinition* GetCompositeMeshDefinition(uint64_t compositeMeshId) const;
 
 private:
     // Internal mesh creation helpers
@@ -103,10 +133,27 @@ private:
                            float size, const Color& color);
     void CreatePyramidGeometry(std::vector<MeshVertex>& vertices, std::vector<MeshTriangle>& triangles,
                               float baseSize, float height, const std::vector<Color>& faceColors);
+    void CreatePyramidWithGradient(MeshComponent& mesh, float baseSize, float height,
+                                 const Color& gradientStart, const Color& gradientEnd,
+                                 const Vector3& gradientDirection);
 
     // Helper to get MeshComponent from entity
     MeshComponent* GetMeshComponent(Entity* entity) const;
+    
+    // Cache invalidation support
+    void InvalidateEntityCache(Entity* entity) const;
 
     // System state
     bool initialized_;
+    
+    // Composite mesh registry (data-oriented storage)
+    std::unordered_map<uint64_t, CompositeMeshDefinition> compositeMeshRegistry_;
+    uint64_t nextCompositeMeshId_;
+    
+    // Mesh cache (similar to MaterialSystem's material cache)
+    std::unordered_map<std::string, Mesh> meshCache_;
+    
+    // Helper methods for mesh creation
+    Mesh CreatePrimitiveMesh(const std::string& primitiveType, float size = 1.0f, float radius = 1.0f, float height = 2.0f) const;
+    Mesh ConvertCustomMesh(const MeshComponent& meshComponent) const;
 };

@@ -16,8 +16,8 @@ private:
     void Update(float deltaTime);
     void Render();
 
-    // Core engine
-    Engine* engine_;
+    // Core engine (singleton)
+    Engine& engine_;
 
     // Window settings
     const int screenWidth_ = 1280;

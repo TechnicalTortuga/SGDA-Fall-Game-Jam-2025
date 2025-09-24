@@ -3,7 +3,7 @@
 #include "utils/Logger.h"
 
 Game::Game()
-    : engine_(nullptr)
+    : engine_(Engine::GetInstance())
     , initialized_(false)
 {
 }
@@ -30,24 +30,15 @@ bool Game::Initialize()
     // Initialize audio device
     InitAudioDevice();
 
-    // Create the engine (it will handle all internal systems)
-    engine_ = new Engine();
-
-    if (!engine_) {
-        LOG_ERROR("Failed to create engine");
+    // Initialize the engine (singleton - it handles all internal systems)
+    if (!engine_.Initialize()) {
+        LOG_ERROR("Failed to initialize engine");
         Shutdown();
         return false;
     }
 
-        // Initialize the engine (this creates and initializes all systems)
-        if (!engine_->Initialize()) {
-            LOG_ERROR("Failed to initialize engine");
-            Shutdown();
-            return false;
-        }
-
         // Start the game (set state to GAME)
-        engine_->GetStateManager()->StartGame();
+        engine_.GetStateManager()->StartGame();
 
     // Enable FPS-style mouse capture
     SetWindowFocused();
@@ -95,12 +86,8 @@ void Game::Shutdown()
 
     LOG_INFO("Shutting down PaintSplash");
 
-    // Shutdown the engine (it will handle all internal cleanup)
-    if (engine_) {
-        engine_->Shutdown();
-        delete engine_;
-        engine_ = nullptr;
-    }
+    // Shutdown the engine (singleton - it will handle all internal cleanup)
+    engine_.Shutdown();
 
     // Cleanup raylib
     CloseAudioDevice();
@@ -113,15 +100,11 @@ void Game::Shutdown()
 void Game::Update(float deltaTime)
 {
     // Update the engine (it handles all systems, events, and state management)
-    if (engine_) {
-        engine_->Update(deltaTime);
-    }
+    engine_.Update(deltaTime);
 }
 
 void Game::Render()
 {
     // Render through the engine (it handles all rendering, including state-specific overlays)
-    if (engine_) {
-        engine_->Render();
-    }
+    engine_.Render();
 }

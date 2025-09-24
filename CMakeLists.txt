@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(PaintSplash VERSION 0.1.0 LANGUAGES CXX)
+project(PaintStrike VERSION 0.1.0 LANGUAGES CXX)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -51,7 +51,7 @@ enable_testing()
 
 # Add subdirectories
 add_subdirectory(src)
-# add_subdirectory(editor)  # Skip editor for Phase 1
+add_subdirectory(editor)  # Enable editor for development
 
 # Assets are copied by the src/CMakeLists.txt target
 
@@ -63,8 +63,8 @@ add_subdirectory(src)
 # )
 
 # Package configuration
-set(CPACK_PACKAGE_NAME "PaintSplash")
+set(CPACK_PACKAGE_NAME "PaintStrike")
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "P2P Pseudo-3D Paint-Shooter Prototype")
-set(CPACK_PACKAGE_VENDOR "PaintSplash Team")
+set(CPACK_PACKAGE_VENDOR "PaintStrike Team")
 include(CPack)

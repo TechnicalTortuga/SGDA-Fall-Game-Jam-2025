@@ -7,16 +7,18 @@
 #include "ecs/Systems/PlayerSystem.h"
 #include "ecs/Systems/WorldSystem.h"
 #include "ecs/Systems/InputSystem.h"
-#include "rendering/WorldRenderer.h"
+#include "ecs/Systems/AssetSystem.h"
+#include "ecs/Systems/MaterialSystem.h"
+#include "shaders/ShaderSystem.h"
+
 #include "ecs/Systems/CollisionSystem.h"
 #include "physics/PhysicsSystem.h"
 #include "ui/ConsoleSystem.h"
-#include "ecs/Systems/MeshSystem.h"
-#include "ecs/Systems/AssetSystem.h"
-#include "ecs/ComponentRegistry.h"
-#include "ecs/Components/MaterialComponent.h"
-#include "ecs/Components/TextureComponent.h"
-#include "ecs/Components/MeshComponent.h"
+#include "world/EntityFactory.h"
+#include "world/BSPTreeSystem.h"
+#include "ecs/Systems/GameObjectSystem.h"
+#include "ecs/Systems/LODSystem.h"
+#include "ecs/Systems/LightSystem.h"
 #include "utils/Logger.h"
 
 Engine::Engine()
@@ -40,20 +42,23 @@ bool Engine::Initialize() {
         InitializeStateManager();
 
         // Create core systems
+        auto assetSystem = AddSystem<AssetSystem>();
+        auto materialSystem = AddSystem<MaterialSystem>(); // Flyweight material management
+        auto shaderSystem = AddSystem<ShaderSystem>(); // Shader management
         auto renderSystem = AddSystem<RenderSystem>();
+        auto meshSystem = AddSystem<MeshSystem>();
         auto inputSystem = AddSystem<InputSystem>();
         auto playerSystem = AddSystem<PlayerSystem>();
+        auto gameObjectSystem = AddSystem<GameObjectSystem>(); // Must come before WorldSystem
+        auto lodSystem = AddSystem<LODSystem>();
+        auto lightSystem = AddSystem<LightSystem>(); // Lighting system for dynamic lighting
+        auto bspTreeSystem = AddSystem<BSPTreeSystem>(); // Core BSP system for world geometry
         auto worldSystem = AddSystem<WorldSystem>();
         auto collisionSystem = AddSystem<CollisionSystem>();
         auto physicsSystem = AddSystem<PhysicsSystem>();
-        AddSystem<MeshSystem>();
-        auto assetSystem = AddSystem<AssetSystem>();
         auto consoleSystem = AddSystem<ConsoleSystem>();
 
         // NOTE: MovementSystem removed - PhysicsSystem handles all movement now
-
-        // Register essential ECR components with ComponentRegistry
-        RegisterEssentialComponents();
 
         // Initialize systems
         for (auto& system : systems_) {
@@ -77,12 +82,36 @@ bool Engine::Initialize() {
             physicsSystem->SetCollisionSystem(collisionSystem);
         }
 
+        if (worldSystem && physicsSystem) {
+            physicsSystem->SetWorldSystem(worldSystem);
+        }
+
         if (collisionSystem && worldSystem) {
             worldSystem->ConnectCollisionSystem(collisionSystem);
         }
 
+        if (renderSystem && worldSystem) {
+            worldSystem->ConnectRenderSystem(renderSystem);
+        }
+
+        // Connect BSPTreeSystem to CollisionSystem
+        if (renderSystem && collisionSystem) {
+            // TODO: Set up world system integration for collision system
+        }
+
         if (inputSystem && playerSystem) {
             playerSystem->SetInputSystem(inputSystem);
+        }
+
+        if (collisionSystem && playerSystem) {
+            playerSystem->SetCollisionSystem(collisionSystem);
+        }
+
+        // Set up LOD system connections
+        if (lodSystem && renderSystem) {
+            // LOD system needs camera position updates from render system
+            lodSystem->EnableLOD(true);
+            lodSystem->SetGlobalLODDistances(10.0f, 25.0f, 50.0f); // Near, medium, far distances
         }
 
         LOG_INFO("Engine initialization completed successfully");
@@ -150,63 +179,9 @@ void Engine::Render()
         LOG_INFO("Engine::Render called (frame " + std::to_string(frameCount) + ")");
     }
 
-    // Step 1: Find and call WorldRenderer for static world geometry
+    // Call render on all systems that have rendering capability
     for (auto& system : systems_) {
-        WorldSystem* worldSystem = dynamic_cast<WorldSystem*>(system.get());
-        if (worldSystem && worldSystem->GetWorldRenderer()) {
-            if (frameCount % 60 == 0) {
-                LOG_INFO("Found WorldRenderer; rendering static world geometry");
-            }
-
-            // Get the camera from the first available camera source
-            Camera3D camera = {0};
-            bool cameraFound = false;
-
-            // Try to get camera from RenderSystem first
-            for (auto& sys : systems_) {
-                RenderSystem* renderSys = dynamic_cast<RenderSystem*>(sys.get());
-                if (renderSys) {
-                    camera = {
-                        renderSys->GetRenderer()->GetCameraPosition(),
-                        renderSys->GetRenderer()->GetCameraTarget(),
-                        {0.0f, 1.0f, 0.0f},  // Up vector
-                        renderSys->GetRenderer()->GetCameraZoom(),
-                        CAMERA_PERSPECTIVE
-                    };
-                    cameraFound = true;
-                    break;
-                }
-            }
-
-            if (cameraFound) {
-                worldSystem->GetWorldRenderer()->Render(camera);
-                if (frameCount % 60 == 0) {
-                    LOG_INFO("WorldRenderer completed static geometry rendering");
-                }
-            } else {
-                if (frameCount % 60 == 0) {
-                    LOG_WARNING("Could not find camera for WorldRenderer");
-                }
-            }
-            break;
-        }
-    }
-
-    // Step 2: Find and call RenderSystem for dynamic entities
-    for (auto& system : systems_) {
-        // Check if this is a RenderSystem by trying to cast
-        RenderSystem* renderSystem = dynamic_cast<RenderSystem*>(system.get());
-        if (renderSystem) {
-            if (frameCount % 60 == 0) {
-                LOG_INFO("Found RenderSystem; rendering dynamic entities");
-            }
-            // Call the Render method which handles the actual rendering
-            renderSystem->Render();
-            if (frameCount % 60 == 0) {
-                LOG_INFO("RenderSystem completed dynamic entity rendering");
-            }
-            break;  // Only one render system should exist
-        }
+        system->Render();
     }
 
     // Render state manager overlays (menus, HUD, etc.)
@@ -298,25 +273,6 @@ void Engine::InitializeStateManager()
     }
 }
 
-void Engine::RegisterEssentialComponents()
-{
-    LOG_INFO("Registering essential ECR components...");
-
-    // Get the ComponentRegistry instance
-    ComponentRegistry& registry = ComponentRegistry::GetInstance();
-
-    // Register MaterialComponent (network-serializable for multiplayer)
-    registry.RegisterComponent<MaterialComponent>("MaterialComponent", true);
-
-    // Register TextureComponent (network-serializable for multiplayer)
-    registry.RegisterComponent<TextureComponent>("TextureComponent", true);
-
-    // Register MeshComponent (network-serializable for multiplayer)
-    registry.RegisterComponent<MeshComponent>("MeshComponent", true);
-
-    LOG_INFO("Essential ECR components registered successfully");
-}
-
 
 void Engine::RemoveSystem(System* system)
 {
@@ -355,3 +311,4 @@ void Engine::UpdateEntityRegistration(Entity* entity)
 
     LOG_INFO("Entity " + std::to_string(entity->GetId()) + " registration completed");
 }
+

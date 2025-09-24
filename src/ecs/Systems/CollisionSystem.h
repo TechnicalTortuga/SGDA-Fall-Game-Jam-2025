@@ -4,7 +4,7 @@
 #include "../Components/Collidable.h"
 #include "../Components/Position.h"
 #include "../Components/Velocity.h"
-#include "../../world/BSPTree.h"
+#include "../../world/WorldGeometry.h"
 #include "../../utils/Logger.h"
 #include <vector>
 #include <unordered_map>
@@ -46,8 +46,10 @@ public:
     void Initialize() override;
     void Shutdown() override;
 
-    // BSP integration
-    void SetBSPTree(BSPTree* bspTree) { bspTree_ = bspTree; }
+    // World geometry integration (replaces old BSP integration)
+    void SetWorld(const World* world) { world_ = world; }
+    bool HasWorldGeometry() const { return world_ != nullptr; }
+    const World* GetWorld() const { return world_; }
 
     // Collision queries
     bool CheckCollision(const Collidable& a, const Collidable& b) const;
@@ -63,9 +65,6 @@ public:
                 Vector3& hitPoint, Vector3& hitNormal, Entity*& hitEntity) const;
     bool CastRayWorldOnly(const Vector3& origin, const Vector3& direction, float maxDistance,
                          Vector3& hitPoint, Vector3& hitNormal) const;
-
-    // BSP Tree access (for physics system)
-    const BSPTree* GetBSPTree() const { return bspTree_; }
 
     // Collision detection helpers (public access for physics system)
     bool CheckAABBIntersectsTriangle(const AABB& aabb, const std::vector<Vector3>& triangle) const {
@@ -87,7 +86,7 @@ public:
     void OnCollisionExit(const CollisionEvent& event);
 
 private:
-    BSPTree* bspTree_;
+    const World* world_;  // New World structure instead of old BSPTree
     bool debugBoundsVisible_;
 
     // Cached collision data for optimization

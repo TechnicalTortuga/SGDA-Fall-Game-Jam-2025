@@ -7,12 +7,13 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/CMakeLists.txt"
+  "/Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/CMakeLists.txt"
   "CMakeFiles/4.0.0/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.0.0/CMakeSystem.cmake"
   "CMakeFiles/VerifyGlobs.cmake"
   "CMakeFiles/cmake.verify_globs"
-  "/Users/aimac/Development/paintsplash/SGDA-Fall-Game-Jam-2025/src/CMakeLists.txt"
+  "/Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/editor/CMakeLists.txt"
+  "/Users/aimac/Development/paintstrike/SGDA-Fall-Game-Jam-2025/src/CMakeLists.txt"
   "/opt/homebrew/lib/cmake/raylib/raylib-config-version.cmake"
   "/opt/homebrew/lib/cmake/raylib/raylib-config.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeCXXInformation.cmake"
@@ -63,9 +64,13 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CPackSourceConfig.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "_deps/imgui-subbuild/CMakeLists.txt"
+  "_deps/rlimgui-subbuild/CMakeLists.txt"
+  "editor/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "src/CMakeFiles/paintsplash.dir/DependInfo.cmake"
+  "editor/CMakeFiles/paintstrike_editor.dir/DependInfo.cmake"
   )

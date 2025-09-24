@@ -53,6 +53,12 @@ struct AABB {
                (min.z <= other.max.z && max.z >= other.min.z);
     }
 
+    bool Contains(const Vector3& point) const {
+        return (point.x >= min.x && point.x <= max.x) &&
+               (point.y >= min.y && point.y <= max.y) &&
+               (point.z >= min.z && point.z <= max.z);
+    }
+
     Vector3 GetCenter() const {
         return Vector3{ (min.x + max.x) * 0.5f,
                         (min.y + max.y) * 0.5f,
